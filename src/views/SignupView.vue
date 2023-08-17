@@ -158,7 +158,6 @@ export default {
   src: url("@/assets/fonts/SpoqaHanSansNeo-Regular.ttf");
 }
 .small-text-checkbox label {
-  text-
   font-size: 14px;
 }
 </style>
