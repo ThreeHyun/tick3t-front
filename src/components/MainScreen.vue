@@ -4,7 +4,7 @@
       <v-col v-for="n in 3" :key="n" cols="12" md="4">
         <div>
           <v-card class="mx-auto" max-height="800" v-bind="props">
-            <v-parallax src="@/assets/star.jpg" max-height="400"></v-parallax>
+            <v-parallax src="@/assets/poster.jpg" max-height="400"></v-parallax>
 
             <v-card-text>
               <h3 class="text-h6 mb-3">2023 TESTAR 10th CONCERT</h3>
