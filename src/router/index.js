@@ -1,7 +1,5 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
-import LoginView from '@/views/LoginView.vue'
-import SignupView from '@/views/SignupView.vue'
 
 const routes = [
   {
@@ -9,24 +7,26 @@ const routes = [
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
-        path: '',
-        name: 'Home',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "home" */ '@/views/MainHome.vue'),
+        path: '/',
+        name: 'main',
+        component: () => import('@/views/MainView.vue'),
+      },
+      {
+        path: '/performance',
+        name: 'performance',
+        component: () => import('@/views/PerformanceView.vue'),
+      },
+      {
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/LoginView.vue'),
+      },
+      {
+        path: '/signup',
+        name: 'signup',
+        component: () => import('@/views/SignupView.vue'),
       },
     ],
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginView,
-  },
-  {
-    path: '/signup',
-    name: 'signup',
-    component: SignupView,
   },
 ]
 

@@ -8,3 +8,11 @@
 // @use 'vuetify/settings' with (
 //   $color-pack: false
 // );
+@font-face {
+    font-family: SpoqaHanSansNeo-Regular;
+    src: url("@/assets/fonts/SpoqaHanSansNeo-Regular.ttf");
+  }
+  
+  body {
+    font-family: SpoqaHanSansNeo-Regular;
+  }

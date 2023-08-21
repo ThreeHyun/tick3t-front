@@ -1,7 +1,12 @@
 <template>
-  <div class="NavBar">
-    <v-breadcrumbs :items="items" divider="-"></v-breadcrumbs>
-  </div>
+  <header>
+    <div id="logo">
+      <router-link to="/">
+        <img src="@/assets/logo.png" alt="logo" class="logo-img" />
+      </router-link>
+    </div>
+    <v-breadcrumbs class="NavBar" :items="items" divider="-"> </v-breadcrumbs>
+  </header>
 </template>
 
 <script>
@@ -26,10 +31,19 @@ export default {
 </script>
 
 <style scoped>
-.NavBar {
+.logo-img {
+  max-width: 20%;
+}
+/* .NavBar {
   font-family: SpoqaHanSansNeo-Regular;
   display: flex;
   justify-content: right;
   align-items: right;
+} */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
 }
 </style>
