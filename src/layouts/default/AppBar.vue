@@ -23,7 +23,7 @@ export default {
         title: "회원가입",
         disabled: false,
         href: "/signup",
-        color: "#ff5252",
+        color: "primary",
       },
     ],
   }),
@@ -34,12 +34,9 @@ export default {
 .logo-img {
   max-width: 20%;
 }
-/* .NavBar {
+.NavBar {
   font-family: SpoqaHanSansNeo-Regular;
-  display: flex;
-  justify-content: right;
-  align-items: right;
-} */
+}
 header {
   display: flex;
   justify-content: space-between;

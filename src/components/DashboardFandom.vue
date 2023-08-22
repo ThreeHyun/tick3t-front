@@ -1,9 +1,9 @@
 <template>
-  <v-container class="fill-height" padding="60px">
+  <v-container class="" padding="60px">
     <v-responsive class="fill-height">
-      <v-row>
-        <v-col cols="12" sm="6" md="6">
-          <div class="d-flex align-center">
+      <v-row class="justify-center pt-3">
+        <v-col cols="6">
+          <div class="d-flex align-start">
             <span class="text">팬덤</span>
             <v-autocomplete
               density="compact"
@@ -24,18 +24,17 @@
           >
         </v-col>
       </v-row>
-
-      <v-container>
-        <v-table class="table">
-          <tbody>
-            <tr v-for="item in desserts" :key="item.name">
-              <td>{{ item.name }}</td>
-              <td>{{ item.calories }}</td>
-            </tr>
-          </tbody>
-        </v-table>
-      </v-container>
     </v-responsive>
+  </v-container>
+  <v-container class="d-flex justify-center">
+    <v-table class="table">
+      <tbody>
+        <tr v-for="item in desserts" :key="item.name">
+          <td>{{ item.name }}</td>
+          <td>{{ item.calories }}</td>
+        </tr>
+      </tbody>
+    </v-table>
   </v-container>
 </template>
 
@@ -66,18 +65,4 @@ export default {
 };
 </script>
 
-<style>
-.text {
-  margin-right: 20px;
-  font-size: 35px;
-}
-.check {
-  font-size: large;
-  background-color: #ff5252;
-  color: white;
-}
-.table {
-  width: 60%;
-  font-size: 20px;
-}
-</style>
+<style></style>

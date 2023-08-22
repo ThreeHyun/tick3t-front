@@ -1,15 +1,15 @@
 <template>
-  <v-container class="fill-height" padding="60px">
+  <v-container class="" padding="60px">
     <v-responsive class="fill-height">
-      <v-row>
-        <v-col cols="12" sm="6" md="6">
-          <div class="d-flex align-center">
+      <v-row class="justify-center pt-3">
+        <v-col cols="8">
+          <div class="d-flex align-start">
             <span class="text">티켓 판매율</span>
             <v-autocomplete
               density="compact"
               ref="star"
               v-model="star"
-              prepend-inner-icon="mdi-star-outline"
+              prepend-inner-icon="mdi-ticket-outline"
               :items="stars"
               label="공연명"
               variant="outlined"
@@ -24,24 +24,24 @@
           >
         </v-col>
       </v-row>
-
-      <v-container class="d-flex">
-        <v-progress-circular
-          color="#ff5252"
-          model-value="60"
-          :size="200"
-          :width="30"
-        ></v-progress-circular>
-        <v-table class="table">
-          <tbody>
-            <tr v-for="item in desserts" :key="item.name">
-              <td>{{ item.name }}</td>
-              <td>{{ item.calories }}</td>
-            </tr>
-          </tbody>
-        </v-table>
-      </v-container>
     </v-responsive>
+  </v-container>
+  <v-container class="d-flex justify-center">
+    <v-progress-circular
+      color="primary"
+      model-value="60"
+      :size="200"
+      :width="30"
+    ></v-progress-circular>
+    <div class="space-between"></div>
+    <v-table class="table">
+      <tbody>
+        <tr v-for="item in desserts" :key="item.name">
+          <td>{{ item.name }}</td>
+          <td>{{ item.calories }}</td>
+        </tr>
+      </tbody>
+    </v-table>
   </v-container>
 </template>
 
@@ -67,20 +67,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.text {
-  margin-right: 20px;
-  font-size: 35px;
-}
-.check {
-  font-size: large;
-  background-color: #ff5252;
-  color: white;
-}
-.table {
-  width: 60%;
-  font-size: 20px;
-  margin-left: 40px;
-}
-</style>

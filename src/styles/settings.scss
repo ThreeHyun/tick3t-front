@@ -1,18 +1,80 @@
-/**
- * src/styles/settings.scss
- *
- * Configures SASS variables and Vuetify overwrites
- */
-
-// https://vuetifyjs.com/features/sass-variables/`
-// @use 'vuetify/settings' with (
-//   $color-pack: false
-// );
-@font-face {
+ @font-face {
+    font-family: SpoqaHanSansNeo-light;
+    src: url("@/assets/fonts/SpoqaHanSansNeo-light.ttf");
+  }
+  @font-face {
     font-family: SpoqaHanSansNeo-Regular;
     src: url("@/assets/fonts/SpoqaHanSansNeo-Regular.ttf");
   }
-  
-  body {
-    font-family: SpoqaHanSansNeo-Regular;
+  @font-face {
+    font-family: SpoqaHanSansNeo-Medium;
+    src: url("@/assets/fonts/SpoqaHanSansNeo-Medium.ttf");
   }
+  @font-face {
+    font-family: SpoqaHanSansNeo-Bold;
+    src: url("@/assets/fonts/SpoqaHanSansNeo-Bold.ttf");
+  }
+.mb-8 {
+  font-family: SpoqaHanSansNeo-Regular;
+  font-size: large;
+}
+.title {
+  font-family: SpoqaHanSansNeo-Bold;
+  margin-bottom: 30px;
+}
+.poster {
+  margin-bottom: 20px;
+}
+.text1 {
+  font-family: SpoqaHanSansNeo-Bold;
+  font-size: x-large;
+  margin-bottom: 10px;
+}
+.text2 {
+  font-family: SpoqaHanSansNeo-Medium;
+  font-size: x-large;
+  margin-bottom: 10px;
+}
+.text3 {
+  font-family: SpoqaHanSansNeo-light;
+  font-size: small;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.calendar {
+  margin-bottom: 30px;
+}
+.time {
+  font-family: SpoqaHanSansNeo-Bold;
+  background-color: #ff5252;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+.reserve {
+  font-family: SpoqaHanSansNeo-Regular;
+  font-size: x-large;
+  background-color: #ff5252;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+.text {
+  font-family: SpoqaHanSansNeo-Bold;
+  margin-right: 20px;
+  font-size: 35px;
+}
+.check {
+  font-family: SpoqaHanSansNeo-Regular;
+  font-size: large;
+  background-color: #ff5252;
+  color: white;
+}
+.table {
+  font-family: SpoqaHanSansNeo-Regular;
+  width: 60%;
+  font-size: 20px;
+}
+.space-between {
+  width: 5%;
+}

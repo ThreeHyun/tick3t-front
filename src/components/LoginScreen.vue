@@ -48,7 +48,7 @@
       <v-btn
         block
         class="text-white mb-8"
-        color="#ff5252"
+        color="primary"
         size="large"
         variant="flat"
       >

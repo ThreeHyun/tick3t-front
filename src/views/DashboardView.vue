@@ -1,5 +1,8 @@
 <template>
   <DashboardFandom />
+  <v-container>
+    <hr />
+  </v-container>
   <DashboardTicket />
 </template>
 

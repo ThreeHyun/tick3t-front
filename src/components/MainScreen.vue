@@ -36,18 +36,10 @@
 export default {
   methods: {
     goToPerformance() {
-      this.$router.push("/performance");
+      this.$router.push("/concert");
     },
   },
 };
 </script>
 
-<style>
-.reserve {
-  font-size: x-large;
-  background-color: #ff5252;
-  color: white;
-  margin-top: 10px;
-  margin-bottom: 40px;
-}
-</style>
+<style></style>

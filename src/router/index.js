@@ -12,9 +12,9 @@ const routes = [
         component: () => import('@/views/MainView.vue'),
       },
       {
-        path: '/performance',
-        name: 'performance',
-        component: () => import('@/views/PerformanceView.vue'),
+        path: '/concert',
+        name: 'concert',
+        component: () => import('@/views/ConcertView.vue'),
       },
       {
         path: '/login',
@@ -30,6 +30,16 @@ const routes = [
         path: '/dashboard',
         name: 'dashboard',
         component: () => import('@/views/DashboardView.vue'),
+      },
+      {
+        path: '/usermgmt',
+        name: 'usermgmt',
+        component: () => import('@/views/UserManagementView.vue'),
+      },
+      {
+        path: '/usermgmt/details',
+        name: 'userdetails',
+        component: () => import('@/views/UserDetailsView.vue'),
       },
     ],
   },
