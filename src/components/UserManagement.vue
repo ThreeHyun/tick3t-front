@@ -45,13 +45,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in userlist" :key="user.id">
+        <tr v-for="user in userList" :key="user.id">
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.fandom }}</td>
-          <td>{{ user.connection }}</td>
-          <td>{{ user.signup }}</td>
+          <td>{{ user.fanCode }}</td>
+          <td>{{ user.statusCode }}</td>
+          <td>{{ user.createDate }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -63,11 +63,22 @@
 </template>
 
 <script>
+import USERLIST_URL from "@/api/board.js";
+
 export default {
   data() {
     return {
       page: 1,
     };
+  },
+  mounted() {
+    USERLIST_URL.getUserList(1)
+      .then(function (response) {
+        console.log("getUserList", response.data);
+      })
+      .catch(function (e) {
+        console.log(e);
+      });
   },
 };
 </script>
