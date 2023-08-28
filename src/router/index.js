@@ -46,6 +46,16 @@ const routes = [
         name: "apitest",
         component: () => import("@/views/ApiTest.vue"),
       },
+      {
+        path: "/mypage",
+        name: "mypage",
+        component: () => import("@/views/MyPageView.vue"),
+      },
+      {
+        path: "/reserved",
+        name: "reserved",
+        component: () => import("@/views/ReservedView.vue"),
+      },
     ],
   },
 ];

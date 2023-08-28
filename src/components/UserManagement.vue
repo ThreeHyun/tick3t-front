@@ -63,7 +63,6 @@ export default {
   methods: {
     ...mapActions(useUserStore, ["fetchUserList"]),
     moveToUserDetail(userId) {
-      console.log('userId: ' + userId)
       this.$router.push(`/usermgmt/${userId}`);
     },
   },
