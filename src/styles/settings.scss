@@ -1,19 +1,22 @@
- @font-face {
-    font-family: SpoqaHanSansNeo-light;
-    src: url("@/assets/fonts/SpoqaHanSansNeo-light.ttf");
-  }
-  @font-face {
-    font-family: SpoqaHanSansNeo-Regular;
-    src: url("@/assets/fonts/SpoqaHanSansNeo-Regular.ttf");
-  }
-  @font-face {
-    font-family: SpoqaHanSansNeo-Medium;
-    src: url("@/assets/fonts/SpoqaHanSansNeo-Medium.ttf");
-  }
-  @font-face {
-    font-family: SpoqaHanSansNeo-Bold;
-    src: url("@/assets/fonts/SpoqaHanSansNeo-Bold.ttf");
-  }
+@font-face {
+  font-family: SpoqaHanSansNeo-light;
+  src: url("@/assets/fonts/SpoqaHanSansNeo-light.ttf");
+}
+@font-face {
+  font-family: SpoqaHanSansNeo-Regular;
+  src: url("@/assets/fonts/SpoqaHanSansNeo-Regular.ttf");
+}
+@font-face {
+  font-family: SpoqaHanSansNeo-Medium;
+  src: url("@/assets/fonts/SpoqaHanSansNeo-Medium.ttf");
+}
+@font-face {
+  font-family: SpoqaHanSansNeo-Bold;
+  src: url("@/assets/fonts/SpoqaHanSansNeo-Bold.ttf");
+}
+.v-breadcrumbs {
+  font-family: SpoqaHanSansNeo-Regular;
+}
 .mb-8 {
   font-family: SpoqaHanSansNeo-Regular;
   font-size: large;
@@ -77,4 +80,19 @@
 }
 .space-between {
   width: 5%;
+}
+.user-table {
+  width: 100%;
+  font-size: 20px;
+  --v-border-opacity: 0;
+  tr {
+    height: 80px;
+  }
+}
+
+.user-list-table {
+  width: 100%;
+  tr {
+    cursor: pointer;
+  }
 }

@@ -5,7 +5,7 @@
         <img src="@/assets/logo.png" alt="logo" class="logo-img" />
       </router-link>
     </div>
-    <v-breadcrumbs class="NavBar" :items="items" divider="-"> </v-breadcrumbs>
+    <v-breadcrumbs :items="items" divider="-"> </v-breadcrumbs>
   </header>
 </template>
 
@@ -32,11 +32,12 @@ export default {
 
 <style scoped>
 .logo-img {
-  max-width: 20%;
+  max-width: 10%;
+  padding-bottom: 40px;
 }
-.NavBar {
-  font-family: SpoqaHanSansNeo-Regular;
-}
+
+
+
 header {
   display: flex;
   justify-content: space-between;

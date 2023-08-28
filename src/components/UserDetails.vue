@@ -4,50 +4,57 @@
     <hr class="line" />
   </v-container>
   <v-container class="d-flex justify-center">
-    <v-list class="mr-10" lines="two">
-      <v-list-item v-for="n in 7" :key="n" :title="'Item ' + n"></v-list-item>
-    </v-list>
-    <v-list class="ml-10" lines="two">
-      <v-list-item v-for="n in 7" :key="n" :title="'Item ' + n"></v-list-item>
-    </v-list>
+    <v-table class="user-table">
+      <tbody>
+        <tr class="text-center">
+          <td class="text-center">이메일</td>
+          <td>{{ user.email }}</td>
+        </tr>
+        <tr class="text-center">
+          <td class="text-center">이름</td>
+          <td>{{ user.name }}</td>
+        </tr>
+        <tr class="text-center">
+          <td class="text-center">생년월일</td>
+          <td>{{ user.birth }}</td>
+        </tr>
+        <tr class="text-center">
+          <td class="text-center">팬클럽 회원 번호</td>
+          <td>{{ user.fanId }}</td>
+        </tr>
+        <tr class="text-center">
+          <td class="text-center">팬덤 코드</td>
+          <td>{{ user.fanCd }}</td>
+        </tr>
+        <tr class="text-center">
+          <td class="text-center">가입일</td>
+          <td>{{ user.createDate }}</td>
+        </tr>
+        <tr class="text-center">
+          <td class="text-center">회원상태</td>
+          <td>{{ user.statusCd }}</td>
+        </tr>
+      </tbody>
+    </v-table>
   </v-container>
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
+import { useUserStore } from "@/store";
+
 export default {
   data() {
-    return {
-      desserts: [
-        {
-          name: "이메일",
-          calories: "zhzheldeld00@gmail.com",
-        },
-        {
-          name: "이름",
-          calories: "박정현",
-        },
-        {
-          name: "생년월일",
-          calories: "97.05.11",
-        },
-        {
-          name: "팬클럽 회원 번호",
-          calories: 305,
-        },
-        {
-          name: "팬덤 코드",
-          calories: 305,
-        },
-        {
-          name: "가입일",
-          calories: "23.08.02",
-        },
-        {
-          name: "회원 상태",
-          calories: "로그인",
-        },
-      ],
-    };
+    return {};
+  },
+  computed: {
+    ...mapState(useUserStore, ["user"]),
+  },
+  methods: {
+    ...mapActions(useUserStore, ["fetchUserData"]),
+  },
+  mounted() {
+    this.fetchUserData(this.$route.params.userId);
   },
 };
 </script>
@@ -56,13 +63,12 @@ export default {
 .v-container {
   max-width: 500px;
 }
+
 .text1 {
   color: #ff5252;
 }
+
 .line {
   border-color: #ff5252;
-}
-.table {
-  font-size: 20px;
 }
 </style>
