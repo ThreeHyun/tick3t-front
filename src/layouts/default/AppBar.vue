@@ -5,7 +5,7 @@
         <img src="@/assets/logo.png" alt="logo" class="logo-img" />
       </router-link>
     </div>
-    <v-breadcrumbs :items="items" divider="-"> </v-breadcrumbs>
+    <v-breadcrumbs :items="items" divider=" "> </v-breadcrumbs>
   </header>
 </template>
 
@@ -23,7 +23,7 @@ export default {
         title: "회원가입",
         disabled: false,
         href: "/signup",
-        color: "primary",
+        
       },
     ],
   }),
@@ -35,7 +35,6 @@ export default {
   max-width: 10%;
   padding-bottom: 40px;
 }
-
 
 
 header {
