@@ -5,14 +5,14 @@
     <v-card class="mx-auto pa-12 pb-8" elevation="8" max-width="448" rounded="lg">
       <div class="text-subtitle-1 text-medium-emphasis"></div>
 
-      <v-text-field density="compact" prepend-inner-icon="mdi-email-outline" variant="outlined"
+      <v-text-field v-model="email" density="compact" prepend-inner-icon="mdi-email-outline" variant="outlined"
         label="이메일"></v-text-field>
 
       <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
         <a class="text-caption text-decoration-none text-blue" href="#" rel="noopener noreferrer" target="_blank"></a>
       </div>
 
-      <v-text-field :type="visible ? 'text' : 'password'" density="compact" label="비밀번호"
+      <v-text-field v-model="password" :type="visible ? 'text' : 'password'" density="compact" label="비밀번호"
         prepend-inner-icon="mdi-lock-outline" variant="outlined" @click:append-inner="visible = !visible"></v-text-field>
 
       <!-- <v-card class="mb-12" color="surface-variant" variant="tonal">
@@ -23,7 +23,7 @@
           </v-card-text>
         </v-card> -->
 
-      <v-btn block class="text-white mb-8" color="primary" size="large" variant="flat">
+      <v-btn @click="sendLogin" block class="text-white mb-8" color="primary" size="large" variant="flat">
         로그인
       </v-btn>
       <!-- <v-row>
@@ -56,8 +56,13 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
+import { useAuthStore } from "@/store";
+
 export default {
   data: () => ({
+    email: "",
+    password: "",
     visible: false,
     items: [
       {
@@ -72,6 +77,20 @@ export default {
       },
     ],
   }),
+  computed: {
+    ...mapState(useAuthStore, ["token"]),
+  },
+  methods: {
+    ...mapActions(useAuthStore, ["login"]),
+    sendLogin() {
+      this.login(this.email, this.password)
+    }
+  },
+  mounted() {
+    // 이미 로그인한 유저일경우 메인으로 이동
+    // token의 유무로 판단한다.
+    console.log(this.token)
+  }
 };
 </script>
 <style></style>
