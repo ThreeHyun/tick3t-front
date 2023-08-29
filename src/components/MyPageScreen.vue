@@ -70,16 +70,16 @@
                                 <tbody>
                                     <tr>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">이메일</td>
-                                        <td style="border-bottom: none; text-align: start; font-size: 30px;">1234@naver.com
+                                        <td style="border-bottom: none; text-align: start; font-size: 30px;">{{ user.email }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">이름</td>
-                                        <td style="border-bottom: none; text-align: start; font-size: 30px;">김영현</td>
+                                        <td style="border-bottom: none; text-align: start; font-size: 30px;">{{ user.name }}</td>
                                     </tr>
                                     <tr>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">생년월일</td>
-                                        <td style="border-bottom: none; text-align: start; font-size: 30px;">1999-03-20</td>
+                                        <td style="border-bottom: none; text-align: start; font-size: 30px;">{{user.birth}}</td>
                                     </tr>
                                     <tr>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">비밀번호</td>
@@ -133,7 +133,7 @@
                                     <tr>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">팬클럽 회원번호</td>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">
-                                            <v-btn>회원 번호</v-btn>
+                                            <v-btn>{{ user.fanId }}</v-btn>
                                         </td>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">
                                             <v-dialog v-model="dialog2" persistent width="1024">
@@ -237,6 +237,10 @@
 </style>
 
 <script>
+import { mapActions, mapState } from "pinia";
+import { useProfile } from "@/store";
+
+
 export default {
     data: () => ({
         tab: null,
@@ -247,7 +251,9 @@ export default {
         dialog3: false,
         page: 1
     }),
-
+    computed: {
+    ...mapState(useProfile, ["user"]),
+    },
     methods: {
         onClick() {
             this.loading = true
@@ -260,11 +266,16 @@ export default {
         handlePage() {
             console.log("----------------------" + this.page + "----------------------");
         },
-
+        
         goToReserved() {
             this.$router.push("/reserved");
         },
-
+        ...mapActions(useProfile, ["fetchUserData"]),
+            
     },
+
+    mounted() {
+        this.fetchUserData(this);
+  },
 };
 </script>
