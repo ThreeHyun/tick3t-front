@@ -20,4 +20,8 @@ export default {
   getUserDetails: function (userId) {
     return api.get(`admin/user/${userId}`);
   },
+  getProfile: function(){
+    
+    return axios.get(API_URL + `profile`);
+  }
 };
