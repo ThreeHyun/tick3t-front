@@ -21,7 +21,7 @@ export const useUserStore = defineStore("user", {
         .getUserDetails(params)
         .then((res) => {
           console.log(res);
-          this.user = { ...res.data.data.infoDetails[0] };
+          this.user = { ...res.data.data };
         })
         .catch((err) => {
           console.log(err);
@@ -31,6 +31,7 @@ export const useUserStore = defineStore("user", {
       api
         .getUserList(pageNo)
         .then((res) => {
+          console.log(res);
           this.userList = [...res.data.data.userList];
         })
         .catch((err) => {

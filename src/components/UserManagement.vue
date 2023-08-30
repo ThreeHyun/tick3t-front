@@ -3,6 +3,7 @@
     <v-responsive class="fill-height">
       <v-row class="justify-center pt-3">
         <v-col cols="2">
+          <button @click="moveToUserDetail(1)">dkdd</button>
           <div class="d-flex align-start">
             <v-autocomplete density="compact" ref="star" v-model="star" prepend-inner-icon="mdi-star-outline"
               :items="stars" label="가수명" variant="outlined" required></v-autocomplete>
