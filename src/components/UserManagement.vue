@@ -3,7 +3,6 @@
     <v-responsive class="fill-height">
       <v-row class="justify-center pt-3">
         <v-col cols="2">
-          <button @click="moveToUserDetail(1)">dkdd</button>
           <div class="d-flex align-start">
             <v-autocomplete density="compact" ref="star" v-model="star" prepend-inner-icon="mdi-star-outline"
               :items="stars" label="가수명" variant="outlined" required></v-autocomplete>
@@ -44,7 +43,7 @@
   </v-container>
 
   <div class="text-center">
-    <v-pagination v-model="page" :length="4"></v-pagination>
+    <v-pagination v-model="pageNo" :length="4" @click="handlePage"></v-pagination>
   </div>
 </template>
 
@@ -55,7 +54,7 @@ import { useUserStore } from "@/store";
 export default {
   data() {
     return {
-      page: 1,
+      pageNo: 1,
     };
   },
   computed: {
@@ -66,9 +65,13 @@ export default {
     moveToUserDetail(userId) {
       this.$router.push(`/usermgmt/${userId}`);
     },
+    handlePage() {
+      this.fetchUserList(this.pageNo);
+
+    }
   },
   mounted() {
-    this.fetchUserList(this.page);
+    this.fetchUserList(this.pageNo);
   },
 };
 </script>
