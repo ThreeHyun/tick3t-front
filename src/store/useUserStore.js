@@ -12,21 +12,15 @@ export const useUserStore = defineStore("user", {
       userId: "",
       name: "",
       statusCd: "",
+      logId: "",
+      accessIP: "",
+      logCreateDate: "",
+      statusCode: "",
     },
     userList: [],
+    logs: [],
   }),
   actions: {
-    fetchUserData(params) {
-      api
-        .getUserDetails(params)
-        .then((res) => {
-          console.log(res);
-          this.user = { ...res.data.data };
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
     fetchUserList(pageNo) {
       api
         .getUserList(pageNo)
@@ -38,9 +32,34 @@ export const useUserStore = defineStore("user", {
           console.log(err);
         });
     },
+    fetchUserData(params) {
+      api
+        .getUserDetails(params)
+        .then((res) => {
+          console.log(res);
+          this.user = { ...res.data.data };
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    fetchUserLog(params) {
+      api
+        .getUserLog(params)
+        .then((res) => {
+          console.log(res);
+          this.logs = { ...res.data.data.logs };
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   getters: {
     getUserDetails(state) {
+      return state.user;
+    },
+    getUserLog(state) {
       return state.user;
     },
   },

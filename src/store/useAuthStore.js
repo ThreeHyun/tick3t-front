@@ -17,9 +17,9 @@ export const useAuthStore = defineStore("user", {
           console.log(err);
         });
     },
-    login(email, password) {
+    login(email, userPwd) {
       api
-        .login(email, password)
+        .login(email, userPwd)
         .then((res) => {
           console.log(res);
           this.token = res.data.Authorization;
@@ -28,11 +28,6 @@ export const useAuthStore = defineStore("user", {
         .catch((err) => {
           console.log(err);
         });
-    },
-  },
-  getters: {
-    getUserDetails(state) {
-      return state.user;
     },
   },
 });

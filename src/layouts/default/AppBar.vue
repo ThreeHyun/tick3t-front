@@ -23,7 +23,7 @@ export default {
         title: "회원가입",
         disabled: false,
         href: "/signup",
-        
+
       },
     ],
   }),
@@ -36,11 +36,10 @@ export default {
   padding-bottom: 40px;
 }
 
-
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
+  padding: 25px;
 }
 </style>

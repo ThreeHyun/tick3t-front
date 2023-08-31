@@ -15,11 +15,9 @@
       </div>
       <span class="text3">A석 80,000 원 (70석)</span>
 
-      <v-row align="center" justify="center">
+      <v-row justify="center">
         <v-col cols="12" sm="15" md="20">
-          <v-btn class="reserve" block rounded="lg" center size="x-large"
-            >예매하기</v-btn
-          >
+          <v-btn class="reserve" block rounded="lg" center size="x-large">예매하기</v-btn>
         </v-col>
       </v-row>
     </v-responsive>
