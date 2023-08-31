@@ -25,5 +25,5 @@ export default {
   },
   getUserLog: function (userId) {
     return api.get(`admin/log /${userId}`);
-  },
+  }
 };

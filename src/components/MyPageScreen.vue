@@ -12,20 +12,21 @@
                 <v-window v-model="tab">
                     <v-window-item :value="1">
                         <v-row class="justify-end mt-6">
-                            <v-col cols="2">
+                            <v-col cols="2" class="pb-0 d-flex align-center">
                                 <v-select label="결제상태" density="compact" :items="['결제 대기', '결제 완료', '예매 취소', '결제 취소']"
-                                    variant="outlined"></v-select>
+                                        variant="outlined"></v-select>
                             </v-col>
 
-                            <v-col cols="3">
-
+                            <v-col cols="3" class="pb-6 d-flex align-center">
                                 <v-text-field :loading="loading" density="compact" variant="solo" label="공연명을 입력해주세요"
-                                    append-inner-icon="mdi-magnify" single-line hide-details @click:append-inner="onClick"
+                                     single-line hide-details
                                     v-model="search"></v-text-field>
                             </v-col>
+                            <v-col cols="1" class="pb-6 d-flex align-center"> 
+                                <v-btn style="background-color: #ff5252; color: #ffffff">검색</v-btn> 
+                            </v-col>
                         </v-row>
-
-                        <v-container class="list mb-10" @click="goToReserved" v-for="i in   3  " :key=i>
+                        <v-container class="list mb-10" @click="goToReserved" v-for="i in 3" :key=i>
                             <v-row class="justify-start">
                                 <v-col cols="4">
                                     <v-img src="@/assets/poster.png" height="300px"></v-img>
@@ -35,11 +36,8 @@
                                         <v-col cols="2">
                                             <v-btn class="clickButton" block rounded="0" size="large">결제 대기</v-btn>
                                         </v-col>
-
                                     </v-row>
-
                                     <v-row>
-
                                         <v-col cols="8">
                                             <h1 style="font-size:40px;" class="concertTitle mb-8">2023 TESTAR 10th CONCERT
                                             </h1>
@@ -47,7 +45,6 @@
                                         <v-col cols="4">
                                             <p class="d-flex justify-end pt-5" style="font-size:20px;">예매 번호: REP1LFK6 </p>
                                         </v-col>
-
                                     </v-row>
 
                                     <v-row class="justify-start">
@@ -89,27 +86,27 @@
                                                     <v-btn class="clickButton" v-bind="props"> 변경하기 </v-btn>
                                                 </template>
                                                 <v-card>
-                                                    <v-card-title>
+                                                    <v-card-title class="ma-5">
                                                         <span class="text-h5">비밀번호 재설정</span>
                                                     </v-card-title>
                                                     <v-card-text>
                                                         <v-container>
                                                             <v-row>
-                                                                <v-col cols="4"> 기존 비밀번호 </v-col>
+                                                                <v-col class="pt-5" cols="4"> 기존 비밀번호 </v-col>
+                                                                <v-col cols="8">
+                                                                    <v-text-field variant="outlined" label="Password"
+                                                                        type="password"></v-text-field>
+                                                                </v-col>
+                                                            </v-row>
+                                                            <v-row> 
+                                                                <v-col class="pt-5" cols="4"> 새 비밀번호 </v-col>
                                                                 <v-col cols="8">
                                                                     <v-text-field variant="outlined" label="Password"
                                                                         type="password"></v-text-field>
                                                                 </v-col>
                                                             </v-row>
                                                             <v-row>
-                                                                <v-col cols="4"> 새 비밀번호 </v-col>
-                                                                <v-col cols="8">
-                                                                    <v-text-field variant="outlined" label="Password"
-                                                                        type="password"></v-text-field>
-                                                                </v-col>
-                                                            </v-row>
-                                                            <v-row>
-                                                                <v-col cols="4"> 새 비밀번호 확인 </v-col>
+                                                                <v-col class="pt-5" cols="4"> 새 비밀번호 확인 </v-col>
                                                                 <v-col cols="8">
                                                                     <v-text-field variant="outlined" label="Password"
                                                                         type="password"></v-text-field>
@@ -122,7 +119,7 @@
                                                         <v-btn color="#000000" variant="text" @click="dialog1 = false">
                                                             취소
                                                         </v-btn>
-                                                        <v-btn color="#ff5252" variant="text" @click="dialog1 = false">
+                                                        <v-btn color="#ff5252" variant="text" @click="pwdCheck">
                                                             변경
                                                         </v-btn>
                                                     </v-card-actions>
@@ -133,7 +130,7 @@
                                     <tr>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">팬클럽 회원번호</td>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">
-                                            <v-btn>{{ user.fanId }}</v-btn>
+                                            {{ user.fanId }}
                                         </td>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">
                                             <v-dialog v-model="dialog2" persistent width="1024">
@@ -141,13 +138,13 @@
                                                     <v-btn class="clickButton" v-bind="props"> 인증하기 </v-btn>
                                                 </template>
                                                 <v-card>
-                                                    <v-card-title>
+                                                    <v-card-title class="ma-5">
                                                         <span class="text-h5">팬클럽 회원 인증</span>
                                                     </v-card-title>
                                                     <v-card-text>
                                                         <v-container>
                                                             <v-row>
-                                                                <v-col cols="4"> 회원 번호 </v-col>
+                                                                <v-col cols="4" class="pt-5"> 회원 번호 </v-col>
                                                                 <v-col cols="8">
                                                                     <v-text-field variant="outlined"
                                                                         label="회원번호를 입력해주세요."></v-text-field>
@@ -177,22 +174,25 @@
                                                     <v-btn class="clickButton" v-bind="props"> 탈퇴하기 </v-btn>
                                                 </template>
                                                 <v-card>
-                                                    <v-card-title>
+                                                    <v-card-title class="ma-5">
                                                         <span class="text-h5">탈퇴 안내</span>
                                                     </v-card-title>
                                                     <v-card-text>
+                                                        <v-container>
                                                         <v-row>
-                                                            <v-col cols="4">비밀번호 확인</v-col>
+                                                            <v-col cols="4" class="pt-5">비밀번호 확인</v-col>
                                                             <v-col cols="8">
                                                                 <v-text-field variant="outlined" label="Password"
                                                                     type="password"></v-text-field>
                                                             </v-col>
                                                         </v-row>
-
-                                                        <p class="ma-5">사용하고 계신 이메일은 탈퇴할 경우 재사용 및 복구가 불가능합니다.</p>
-                                                        <p class="ma-5">탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.</p>
-                                                        <v-checkbox style="color:red; margin: 5px;"
+                                
+                                                        <v-row><v-col style="font-weight:bolder">사용하고 계신 이메일은 탈퇴할 경우 재사용 및 복구가 불가능합니다.</v-col></v-row>
+                                                        <v-row><v-col style="font-weight:bolder">탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.</v-col></v-row>
+                                                        <v-row><v-checkbox style="color:red; margin-top: 5px;"
                                                             label="안내 사항을 모두 확인하였으며, 정말 탈퇴하시겠습니까?"></v-checkbox>
+                                                        </v-row>
+                                                        </v-container>
 
                                                     </v-card-text>
                                                     <v-card-actions>
@@ -238,7 +238,7 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { useProfile } from "@/store";
+import { useProfileStore } from "@/store";
 
 
 export default {
@@ -252,7 +252,7 @@ export default {
         page: 1
     }),
     computed: {
-    ...mapState(useProfile, ["user"]),
+    ...mapState(useProfileStore, ["user"]),
     },
     methods: {
         onClick() {
@@ -270,12 +270,17 @@ export default {
         goToReserved() {
             this.$router.push("/reserved");
         },
-        ...mapActions(useProfile, ["fetchUserData"]),
-            
+        ...mapActions(useProfileStore, ["fetchUserData"]),
+
+     
     },
 
     mounted() {
         this.fetchUserData(this);
-  },
+        this.fetchUpdatePwd();
+    },
+    
+
+
 };
 </script>

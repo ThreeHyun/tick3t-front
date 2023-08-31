@@ -17,7 +17,7 @@ export default {
       userPwd: userPwd,
       name: name,
       birth: birth,
-      fanCd: fanCd,
+      fanCd: fanCd, 
     });
   },
   login: function (email, userPwd) {
