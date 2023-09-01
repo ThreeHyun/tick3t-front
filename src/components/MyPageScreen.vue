@@ -14,16 +14,15 @@
                         <v-row class="justify-end mt-6">
                             <v-col cols="2" class="pb-0 d-flex align-center">
                                 <v-select label="결제상태" density="compact" :items="['결제 대기', '결제 완료', '예매 취소', '결제 취소']"
-                                        variant="outlined"></v-select>
+                                    variant="outlined"></v-select>
                             </v-col>
 
                             <v-col cols="3" class="pb-6 d-flex align-center">
                                 <v-text-field :loading="loading" density="compact" variant="solo" label="공연명을 입력해주세요"
-                                     single-line hide-details
-                                    v-model="search"></v-text-field>
+                                    single-line hide-details v-model="search"></v-text-field>
                             </v-col>
-                            <v-col cols="1" class="pb-6 d-flex align-center"> 
-                                <v-btn style="background-color: #ff5252; color: #ffffff">검색</v-btn> 
+                            <v-col cols="1" class="pb-6 d-flex align-center">
+                                <v-btn style="background-color: #ff5252; color: #ffffff">검색</v-btn>
                             </v-col>
                         </v-row>
                         <v-container class="list mb-10" @click="goToReserved" v-for="i in 3" :key=i>
@@ -67,16 +66,19 @@
                                 <tbody>
                                     <tr>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">이메일</td>
-                                        <td style="border-bottom: none; text-align: start; font-size: 30px;">{{ user.email }}
+                                        <td style="border-bottom: none; text-align: start; font-size: 30px;">{{ user.email
+                                        }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">이름</td>
-                                        <td style="border-bottom: none; text-align: start; font-size: 30px;">{{ user.name }}</td>
+                                        <td style="border-bottom: none; text-align: start; font-size: 30px;">{{ user.name }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">생년월일</td>
-                                        <td style="border-bottom: none; text-align: start; font-size: 30px;">{{user.birth}}</td>
+                                        <td style="border-bottom: none; text-align: start; font-size: 30px;">{{ user.birth }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td style="border-bottom: none; text-align: start; font-size: 30px;">비밀번호</td>
@@ -98,7 +100,7 @@
                                                                         type="password"></v-text-field>
                                                                 </v-col>
                                                             </v-row>
-                                                            <v-row> 
+                                                            <v-row>
                                                                 <v-col class="pt-5" cols="4"> 새 비밀번호 </v-col>
                                                                 <v-col cols="8">
                                                                     <v-text-field variant="outlined" label="Password"
@@ -179,19 +181,21 @@
                                                     </v-card-title>
                                                     <v-card-text>
                                                         <v-container>
-                                                        <v-row>
-                                                            <v-col cols="4" class="pt-5">비밀번호 확인</v-col>
-                                                            <v-col cols="8">
-                                                                <v-text-field variant="outlined" label="Password"
-                                                                    type="password"></v-text-field>
-                                                            </v-col>
-                                                        </v-row>
-                                
-                                                        <v-row><v-col style="font-weight:bolder">사용하고 계신 이메일은 탈퇴할 경우 재사용 및 복구가 불가능합니다.</v-col></v-row>
-                                                        <v-row><v-col style="font-weight:bolder">탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.</v-col></v-row>
-                                                        <v-row><v-checkbox style="color:red; margin-top: 5px;"
-                                                            label="안내 사항을 모두 확인하였으며, 정말 탈퇴하시겠습니까?"></v-checkbox>
-                                                        </v-row>
+                                                            <v-row>
+                                                                <v-col cols="4" class="pt-5">비밀번호 확인</v-col>
+                                                                <v-col cols="8">
+                                                                    <v-text-field variant="outlined" label="Password"
+                                                                        type="password"></v-text-field>
+                                                                </v-col>
+                                                            </v-row>
+
+                                                            <v-row><v-col style="font-weight:bolder">사용하고 계신 이메일은 탈퇴할 경우 재사용
+                                                                    및 복구가 불가능합니다.</v-col></v-row>
+                                                            <v-row><v-col style="font-weight:bolder">탈퇴 후 회원정보 및 개인형 서비스
+                                                                    이용기록은 모두 삭제됩니다.</v-col></v-row>
+                                                            <v-row><v-checkbox style="color:red; margin-top: 5px;"
+                                                                    label="안내 사항을 모두 확인하였으며, 정말 탈퇴하시겠습니까?"></v-checkbox>
+                                                            </v-row>
                                                         </v-container>
 
                                                     </v-card-text>
@@ -252,7 +256,7 @@ export default {
         page: 1
     }),
     computed: {
-    ...mapState(useProfileStore, ["user"]),
+        ...mapState(useProfileStore, ["user"]),
     },
     methods: {
         onClick() {
@@ -266,20 +270,20 @@ export default {
         handlePage() {
             console.log("----------------------" + this.page + "----------------------");
         },
-        
+
         goToReserved() {
             this.$router.push("/reserved");
         },
         ...mapActions(useProfileStore, ["fetchUserData"]),
 
-     
+
     },
 
     mounted() {
         this.fetchUserData(this);
-        this.fetchUpdatePwd();
+        // this.fetchUpdatePwd();
     },
-    
+
 
 
 };

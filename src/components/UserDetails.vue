@@ -53,11 +53,9 @@
           <td>{{ log.accessIp }}</td>
           <td>{{ log.statusCode }}</td>
           <td>{{ log.logCreateDate }}</td>
-
         </tr>
       </tbody>
     </v-table>
-
   </v-container>
 </template>
 

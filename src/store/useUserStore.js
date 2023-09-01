@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import api from "@/api/board";
+import api from "@/api/user";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
@@ -16,11 +16,42 @@ export const useUserStore = defineStore("user", {
       accessIP: "",
       logCreateDate: "",
       statusCode: "",
+      joinUser: "",
+      withdrawUser: "",
+      nowUser: "",
+      weekUser: "",
+      ID: "",
+      totalSeat: "",
+      soldSeat: "",
+      remainSeat: "",
+      salesRateL: "",
     },
     userList: [],
     logs: [],
   }),
   actions: {
+    fetchFanTable(fanCd) {
+      api
+        .getFanTable(fanCd)
+        .then((res) => {
+          console.log(res);
+          this.user = [...res.data.data];
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    fetchTicketTable(ID) {
+      api
+        .getTicketTable(ID)
+        .then((res) => {
+          console.log(res);
+          this.user = [...res.data.data];
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     fetchUserList(pageNo) {
       api
         .getUserList(pageNo)

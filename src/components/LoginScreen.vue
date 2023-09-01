@@ -55,13 +55,21 @@ export default {
   },
   methods: {
     ...mapActions(useAuthStore, ["login"]),
-    sendLogin() {
-      this.login(this.email, this.userPwd)
-    }
+    async sendLogin() {
+      await this.login(this.email, this.userPwd);
+
+      if (this.token) {
+        this.$router.push("/");
+      }
+    },
+
   },
   mounted() {
     // 이미 로그인한 유저일경우 메인으로 이동
     // token의 유무로 판단한다.
+    if (this.token) {
+      this.$router.push("/");
+    }
     console.log(this.token)
   }
 };

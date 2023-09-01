@@ -1,4 +1,6 @@
-<template>안냥</template>
+<template>
+  안냥
+</template>
 
 <script>
 import apiBoard from "@/api/board.js";
@@ -16,3 +18,4 @@ export default {
   },
 };
 </script>
+@/api/user.js
