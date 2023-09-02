@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const API_URL = "https://7f6e3e61-64b1-41dd-bb49-bf59df779508.mock.pstmn.io/";
-const API_URL = "http://192.168.0.124:4000/";
+const API_URL = "http://192.168.0.69:4000/";
 
 const api = axios.create({
   baseURL: API_URL,

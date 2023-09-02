@@ -4,19 +4,21 @@ import api from "@/api/mypage";
 export const useProfileStore = defineStore("user", {
   state: () => ({
     user: {
-        id: "",
+      id: "",
       email: "",
       name: "",
       birth: "",
       fanId: "",
       oldPassword:"",
       newPassword: "",
-      newPasswordCheck: ""
+      newPasswordCheck: "",
+      password:"",
+      message:"",
+      resultCode:""
     },
   }),
   actions: {
     fetchUserData(id) {
-      //회원 정보 api 요청 보내기
       api
         .getProfile(id)
         .then((res) => {
@@ -27,16 +29,44 @@ export const useProfileStore = defineStore("user", {
           console.log(err);
         });
     },
-    fetchUpdatePwd(){
+    fetchUpdatePwd(oldPassword, newPassword, newPasswordCheck){
       api
-      .Password('password1!', 'password2!', 'password2!')
+      .Password(oldPassword, newPassword, newPasswordCheck)
       .then((res) => {
-      console.log(res.status);
+        // alert(res.data.resultCode);
+        console.log(res);
+        this.user.message = res.data.message  
+        this.user.resultCode = res.data.resultCode  
+       
       })
       .catch((err) => {
           console.log(err);
       });
-  }
+  },
+    fetchAuthFanId(fanId){
+      api
+      .AuthFan(fanId)
+      .then((res) => {
+      console.log(res);
+      this.user.message = res.data.message  
+      this.user.resultCode = res.data.resultCode  
+      })
+      .catch((err) => {
+          console.log(err);
+      });
+  },
+  fetchWithdraw(password){
+    api
+    .withdraw(password)
+    .then((res) => {
+    console.log(res);
+    this.user.message = res.data.message  
+    this.user.resultCode = res.data.resultCode  
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+}
 },
   getters: {
     getProfile(state) {
