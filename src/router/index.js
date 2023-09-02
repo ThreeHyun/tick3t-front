@@ -52,7 +52,7 @@ const routes = [
         component: () => import("@/views/MyPageView.vue"),
       },
       {
-        path: "/reserved",
+        path: "/reserved/:ticketId",
         name: "reserved",
         component: () => import("@/views/ReservedView.vue"),
       },
