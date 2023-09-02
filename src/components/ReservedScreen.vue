@@ -27,7 +27,7 @@
         <v-btn
           class="check2"
           size="small"
-          v-if="ticket.payState === '1'"
+          v-if="ticket.payState === '1' || ticket.payState == '0'"
           @click="goToCancel"
         >
           취소하기
@@ -97,9 +97,11 @@ export default {
     },
     goToPay() {
       this.payment(this.ticket.ticketId);
+      this.ticket.payState = "1";
     },
     goToCancel() {
       this.cancel(this.ticket.ticketId);
+      this.ticket.payState = "3";
     },
   },
   mounted() {
