@@ -3,13 +3,17 @@
     <h2 style="padding: 15px">예매 내역</h2>
     <hr style="border: 2px double" />
   </v-container>
-  <v-container>
+  <v-container v-if="resultCode !== '0000'" style="text-align: center">
+    <h1>{{ message }}</h1>
+  </v-container>
+  <v-container v-else>
     <div class="flex-container">
       <div class="flex-item1">
         <v-img class="poster" src="@/assets/poster.jpg" />
       </div>
       <div class="flex-item2">
         <h4>예매번호</h4>
+
         <br />
         <h4>상품명</h4>
         <br />
@@ -28,10 +32,12 @@
           class="check2"
           size="small"
           v-if="ticket.payState === '1' || ticket.payState == '0'"
-          @click="goToCancel"
+          @click="confirmCancel"
         >
           취소하기
         </v-btn>
+        <br />
+        <h4>예매 상태</h4>
       </div>
       <div class="flex-item3">
         <p>{{ ticket.ticketId }}</p>
@@ -50,15 +56,19 @@
         <div
           style="background-color: lightgray; padding: 10px; margin-right: 40px"
         >
-          <p>결제 기한 : {{ ticket.payDtm }}</p>
+          <p style="padding-bottom: 5px">결제 기한 : {{ ticket.payDtm }}</p>
         </div>
         <hr style="border: 5px" />
         <p>{{ ticket.cancelDate }}</p>
         <br />
+        <p v-if="ticket.payState === '0'">결제대기</p>
+        <p v-if="ticket.payState === '1'">예매완료</p>
+        <p v-if="ticket.payState === '2'">예매취소</p>
+        <p v-if="ticket.payState === '3'">결제취소</p>
       </div>
       <div class="flex-item4">
         <p>총 결제 금액</p>
-        <h1 style="color: ff5252">{{ ticket.price }} 원</h1>
+        <h1 style="color: #ff5252">{{ ticket.price }} 원</h1>
         <br />
         <hr />
         <br />
@@ -69,10 +79,70 @@
           class="check"
           center
           size="large"
-          @click="goToPay"
+          @click="openPaymentDialog"
           v-if="ticket.payState === '0'"
-          >결제하기</v-btn
         >
+          결제하기
+        </v-btn>
+        <v-dialog v-model="paymentDialog" max-width="600px">
+          <v-card>
+            <v-card-title>TICK3T pay</v-card-title>
+            <v-card-text>
+              <br />
+              <h4 style="display: flex; justify-content: space-between">
+                <span>결제 내용 확인</span>
+                <span>결제 금액 : {{ ticket.price }} 원</span>
+              </h4>
+              <br />
+              <hr />
+              <br />
+              <table style="border-collapse: separate; border-spacing: 0 10px">
+                <tr style="margin-bottom: 10px">
+                  <td class="text-left" width="20%">결제 카드</td>
+                  <td class="text-left" width="80%">우리카드</td>
+                </tr>
+                <tr>
+                  <td class="text-left" width="20%">할부 개월</td>
+                  <td class="text-left" width="80%">일시불</td>
+                </tr>
+                <tr>
+                  <td class="text-left" width="20%">카드 번호</td>
+                  <td class="text-center" width="80%">
+                    <div style="display: flex; justify-content: left">
+                      <input
+                        style="width: 10%; border: 1px solid"
+                        maxlength="4"
+                        type="text"
+                      />-
+                      <input
+                        style="width: 10%; border: 1px solid"
+                        maxlength="4"
+                        type="text"
+                      />-
+                      <input
+                        style="width: 10%; border: 1px solid"
+                        maxlength="4"
+                        type="text"
+                      />-
+                      <input
+                        style="width: 10%; border: 1px solid"
+                        maxlength="4"
+                        type="text"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </table>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="closePaymentDialog">
+                  취소
+                </v-btn>
+                <v-btn color="blue darken-1" @click="goToPay"> 확인 </v-btn>
+              </v-card-actions>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
       </div>
     </div>
   </v-container>
@@ -84,20 +154,37 @@ import { useOrderStore } from "@/store";
 import { useUserStore } from "@/store";
 export default {
   data() {
-    return {};
+    return {
+      paymentDialog: false,
+    };
   },
   computed: {
     ...mapState(useUserStore, ["user"]),
     ...mapState(useOrderStore, ["ticket"]),
+    ...mapState(useOrderStore, ["resultCode"]),
+    ...mapState(useOrderStore, ["message"]),
   },
   methods: {
     ...mapActions(useOrderStore, ["detailOrder", "cancel", "payment"]),
     goToMypage() {
       this.$router.push("/mypage");
     },
+    confirmCancel() {
+      if (confirm("예매를 취소하시겠습니까?")) {
+        this.goToCancel();
+      }
+    },
+    openPaymentDialog() {
+      this.paymentDialog = true;
+    },
+
+    closePaymentDialog() {
+      this.paymentDialog = false;
+    },
     goToPay() {
       this.payment(this.ticket.ticketId);
       this.ticket.payState = "1";
+      this.paymentDialog = false;
     },
     goToCancel() {
       this.cancel(this.ticket.ticketId);

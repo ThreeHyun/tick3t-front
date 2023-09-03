@@ -14,6 +14,8 @@ export const useOrderStore = defineStore("order", {
       payDate: "",
       payState: 0,
     },
+    resultCode: "",
+    message: "",
   }),
   actions: {
     detailOrder(ticketId) {
@@ -22,6 +24,8 @@ export const useOrderStore = defineStore("order", {
         .then((res) => {
           console.log(res);
           this.ticket = { ...res.data.data };
+          this.resultCode = res.data.resultCode;
+          this.message = res.data.message;
         })
         .catch((err) => {
           console.log(err);
@@ -31,8 +35,9 @@ export const useOrderStore = defineStore("order", {
       api
         .cancel(ticketId)
         .then((res) => {
-          console.log("취소 성공");
           console.log(res);
+          this.resultCode = res.data.resultCode;
+          this.message = res.data.message;
         })
         .catch((err) => {
           console.log(err);
@@ -42,8 +47,9 @@ export const useOrderStore = defineStore("order", {
       api
         .payment(ticketId)
         .then((res) => {
-          console.log("결제 성공!!");
           console.log(res);
+          this.resultCode = res.data.resultCode;
+          this.message = res.data.message;
         })
         .catch((err) => {
           console.log(err);
