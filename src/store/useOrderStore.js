@@ -4,14 +4,14 @@ import api from "@/api/mypage";
 export const useOrderStore = defineStore("order", {
   state: () => ({
     order: {
-        ticketId:0,
-        title:"",
-        datetime:"",
-        location:"",
-        payState:"",
-        totalPage:0
-          },
-    orderList: []
+      ticketId: 0,
+      title: "",
+      datetime: "",
+      location: "",
+      payState: "",
+      totalPage: 0,
+    },
+    orderList: [],
   }),
   actions: {
     fetchOrderList(pageNo) {
@@ -20,12 +20,11 @@ export const useOrderStore = defineStore("order", {
         .then((res) => {
           console.log(res);
           this.orderList = [...res.data.data.orders];
-          this.order.totalPage=res.data.data.totalPage;
+          this.order.totalPage = res.data.data.totalPage;
         })
         .catch((err) => {
           console.log(err);
         });
-    }
-  }
- 
+    },
+  },
 });

@@ -1,7 +1,7 @@
 <template>
   <header>
     <v-app-bar flat>
-      <img src="@/assets/logo.png" alt="logo" class="logo-img" id="logo" />
+      <img src="@/assets/logo.png" alt="logo" class="logo-img" id="logo" @click="goToHomePage" />
       <div>
         <div class="nav-bar-button" v-if="!isMobile">
           <v-btn v-for="menuItem in menuItems.filter(({ isMenu }) => isMenu())" :key="menuItem.name" size="x-large"
@@ -55,7 +55,11 @@ export default {
         this.isMobile = false;
       }
     },
+    goToHomePage() {
+      this.$router.push("/");
+    },
   },
+
   mounted() {
     console.log(this.token);
     window.addEventListener('resize', this.handleResize);
@@ -72,6 +76,8 @@ export default {
   width: calc(80px + 5%);
   max-width: 130px;
   padding-bottom: 10px;
+  cursor: pointer;
+
 }
 
 header {

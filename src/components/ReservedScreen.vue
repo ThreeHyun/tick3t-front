@@ -28,12 +28,8 @@
         <h4>결제 수단</h4>
         <br /><br />
         <h4>취소 가능 일시</h4>
-        <v-btn
-          class="check2"
-          size="small"
-          v-if="ticket.payState === '1' || ticket.payState == '0'"
-          @click="confirmCancel"
-        >
+        <v-btn class="check2" size="small" v-if="ticket.payState === '1' || ticket.payState == '0'"
+          @click="confirmCancel">
           취소하기
         </v-btn>
         <br />
@@ -53,9 +49,7 @@
         <p>현장 수령</p>
         <br />
         <p>카드 결제</p>
-        <div
-          style="background-color: lightgray; padding: 10px; margin-right: 40px"
-        >
+        <div style="background-color: lightgray; padding: 10px; margin-right: 40px">
           <p style="padding-bottom: 5px">결제 기한 : {{ ticket.payDtm }}</p>
         </div>
         <hr style="border: 5px" />
@@ -72,16 +66,8 @@
         <br />
         <hr />
         <br />
-        <v-btn class="check" center size="large" @click="goToMypage"
-          >마이페이지</v-btn
-        ><br /><br />
-        <v-btn
-          class="check"
-          center
-          size="large"
-          @click="openPaymentDialog"
-          v-if="ticket.payState === '0'"
-        >
+        <v-btn class="check" center size="large" @click="goToMypage">마이페이지</v-btn><br /><br />
+        <v-btn class="check" center size="large" @click="openPaymentDialog" v-if="ticket.payState === '0'">
           결제하기
         </v-btn>
         <v-dialog v-model="paymentDialog" max-width="600px">
@@ -109,26 +95,10 @@
                   <td class="text-left" width="20%">카드 번호</td>
                   <td class="text-center" width="80%">
                     <div style="display: flex; justify-content: left">
-                      <input
-                        style="width: 10%; border: 1px solid"
-                        maxlength="4"
-                        type="text"
-                      />-
-                      <input
-                        style="width: 10%; border: 1px solid"
-                        maxlength="4"
-                        type="text"
-                      />-
-                      <input
-                        style="width: 10%; border: 1px solid"
-                        maxlength="4"
-                        type="text"
-                      />-
-                      <input
-                        style="width: 10%; border: 1px solid"
-                        maxlength="4"
-                        type="text"
-                      />
+                      <input style="width: 10%; border: 1px solid" maxlength="4" type="text" />-
+                      <input style="width: 10%; border: 1px solid" maxlength="4" type="text" />-
+                      <input style="width: 10%; border: 1px solid" maxlength="4" type="text" />-
+                      <input style="width: 10%; border: 1px solid" maxlength="4" type="text" />
                     </div>
                   </td>
                 </tr>
@@ -202,21 +172,26 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+
 .flex-item1 {
   width: 25%;
 }
+
 .flex-item2 {
   width: 10%;
   text-align: center;
 }
+
 .flex-item3 {
   width: 30%;
   border-right: thin solid darkgray;
 }
+
 .flex-item4 {
   width: 20%;
   text-align: center;
 }
+
 .clickButton {
   background-color: #ff5252;
   color: white;
