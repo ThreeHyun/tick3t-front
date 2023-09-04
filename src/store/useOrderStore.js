@@ -1,64 +1,31 @@
 import { defineStore } from "pinia";
-import api from "@/api/order";
+import api from "@/api/mypage";
 
 export const useOrderStore = defineStore("order", {
   state: () => ({
-    ticket: {
-      ticketId: 0,
-      title: "",
-      location: "",
-      datetime: "",
-      seat: "",
-      price: 0,
-      cancelDate: "",
-      payDate: "",
-      payState: 0,
-    },
-    resultCode: "",
-    message: "",
+    order: {
+        ticketId:0,
+        title:"",
+        datetime:"",
+        location:"",
+        payState:"",
+        totalPage:0
+          },
+    orderList: []
   }),
   actions: {
-    detailOrder(ticketId) {
+    fetchOrderList(pageNo) {
       api
-        .detailOrder(ticketId)
+        .getMyorder(pageNo)
         .then((res) => {
           console.log(res);
-          this.ticket = { ...res.data.data };
-          this.resultCode = res.data.resultCode;
-          this.message = res.data.message;
+          this.orderList = [...res.data.data.orders];
+          this.order.totalPage=res.data.data.totalPage;
         })
         .catch((err) => {
           console.log(err);
         });
-    },
-    cancel(ticketId) {
-      api
-        .cancel(ticketId)
-        .then((res) => {
-          console.log(res);
-          this.resultCode = res.data.resultCode;
-          this.message = res.data.message;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    payment(ticketId) {
-      api
-        .payment(ticketId)
-        .then((res) => {
-          console.log(res);
-          this.resultCode = res.data.resultCode;
-          this.message = res.data.message;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-  },
-  getters: {
-    getTicketDetails(state) {
-      return state.ticket;
-    },
-  },
+    }
+  }
+ 
 });

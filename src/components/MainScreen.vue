@@ -15,7 +15,15 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer />
-              <v-btn class="reserve" block rounded="lg" center size="x-large" @click="goToConcert">상세보기</v-btn>
+              <v-btn
+                class="reserve"
+                block
+                rounded="lg"
+                center
+                size="x-large"
+                @click="goToConcert"
+                >상세보기</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-slide-item>
@@ -33,9 +41,8 @@ export default {
     goToConcert() {
       this.$router.push("/concert");
     },
-  }
-}
-
+  },
+};
 </script>
 
 <style></style>

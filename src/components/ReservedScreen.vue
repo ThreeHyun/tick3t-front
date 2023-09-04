@@ -150,7 +150,7 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { useOrderStore } from "@/store";
+import { useTicketStore } from "@/store";
 import { useUserStore } from "@/store";
 export default {
   data() {
@@ -160,12 +160,12 @@ export default {
   },
   computed: {
     ...mapState(useUserStore, ["user"]),
-    ...mapState(useOrderStore, ["ticket"]),
-    ...mapState(useOrderStore, ["resultCode"]),
-    ...mapState(useOrderStore, ["message"]),
+    ...mapState(useTicketStore, ["ticket"]),
+    ...mapState(useTicketStore, ["resultCode"]),
+    ...mapState(useTicketStore, ["message"]),
   },
   methods: {
-    ...mapActions(useOrderStore, ["detailOrder", "cancel", "payment"]),
+    ...mapActions(useTicketStore, ["detailOrder", "cancel", "payment"]),
     goToMypage() {
       this.$router.push("/mypage");
     },
