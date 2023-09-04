@@ -4,15 +4,16 @@
       <v-row class="justify-center pt-3">
         <v-col cols="2">
           <div class="d-flex align-start">
-            <v-autocomplete density="compact" ref="star" v-model="star" prepend-inner-icon="mdi-star-outline"
-              :items="stars" label="가수명" variant="outlined" required></v-autocomplete>
+            <v-autocomplete density="compact" ref="star" v-model="searchCategory" prepend-inner-icon="mdi-star-outline"
+              :items="categorieList" label="카테고리" variant="outlined" required></v-autocomplete>
           </div>
         </v-col>
         <v-col cols="5">
-          <v-text-field density="compact" prepend-inner-icon="mdi-magnify" variant="outlined" label="검색"></v-text-field>
+          <v-text-field v-model="searchWord" density="compact" prepend-inner-icon="mdi-magnify" variant="outlined"
+            label="검색" />
         </v-col>
         <v-col cols="12" sm="6" md="2">
-          <v-btn class="check" block rounded="lg" center size="large">조회하기</v-btn>
+          <v-btn @click="hadleSearch" class="check" block rounded="lg" center size="large">조회하기</v-btn>
         </v-col>
       </v-row>
     </v-responsive>
@@ -43,7 +44,7 @@
   </v-container>
 
   <div class="text-center">
-    <v-pagination v-model="pageNo" :length="4" @click="handlePage"></v-pagination>
+    <v-pagination v-model="pageNo" :length="totalPage" @click="handlePage"></v-pagination>
   </div>
 </template>
 
@@ -55,10 +56,17 @@ export default {
   data() {
     return {
       pageNo: 1,
+      searchWord: "",
+      searchCategory: "",
+      categorieList: [
+        { title: "이름", value: "name" },
+        { title: "이메일", value: "email" },
+        { title: "팬덤 정보", value: "fanCd" },
+      ]
     };
   },
   computed: {
-    ...mapState(useUserStore, ["userList"]),
+    ...mapState(useUserStore, ["userList", "totalPage"]),
   },
   methods: {
     ...mapActions(useUserStore, ["fetchUserList"]),
@@ -66,7 +74,11 @@ export default {
       this.$router.push(`/usermgmt/${userId}`);
     },
     handlePage() {
-      this.fetchUserList(this.pageNo);
+      this.fetchUserList(this.pageNo, this.searchCategory, this.searchWord);
+    },
+    hadleSearch() {
+      this.pageNo = 1
+      this.fetchUserList(this.pageNo, this.searchCategory, this.searchWord);
     }
   },
   mounted() {

@@ -22,7 +22,26 @@
       </v-btn>
 
       <div class="d-flex justify-center">
-        <v-breadcrumbs :items="items" divider="|"></v-breadcrumbs>
+        <router-link class="navBar" to="/signup">
+          회원가입
+        </router-link>
+        <a class="pr-3 pl-3">
+          |
+        </a>
+        <v-dialog v-model="dialog" activator="parent" width="auto">
+          <router-link class="navBar" to="">
+            비밀번호 찾기
+            <v-card>
+              <v-card-text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+              </v-card-text>
+              <v-card-actions>
+                <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
+              </v-card-actions>
+            </v-card>
+          </router-link>
+        </v-dialog>
       </div>
     </v-card>
   </div>
@@ -37,40 +56,29 @@ export default {
     email: "",
     userPwd: "",
     visible: false,
-    items: [
-      {
-        title: "회원가입",
-        disabled: false,
-        href: "/signup",
-      },
-      {
-        title: "비밀번호 찾기",
-        disabled: false,
-        href: "breadcrumbs_link_1",
-      },
-    ],
+    dialog: false,
   }),
   computed: {
     ...mapState(useAuthStore, ["token"]),
   },
   methods: {
     ...mapActions(useAuthStore, ["login"]),
-    async sendLogin() {
-      await this.login(this.email, this.userPwd);
-
-      if (this.token) {
-        this.$router.push("/");
+    sendLogin() {
+      this.login(this.email, this.userPwd).then(() => {
+        if (this.token) {
+          this.$router.push("/");
+        }
       }
+      )
     },
 
   },
   mounted() {
     // 이미 로그인한 유저일경우 메인으로 이동
     // token의 유무로 판단한다.
-    if (this.token) {
-      this.$router.push("/");
-    }
-    console.log(this.token)
+    // if (this.token) {
+    //   this.$router.push("/");
+    // }
   }
 };
 </script>

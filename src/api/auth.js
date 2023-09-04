@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// const API_URL = "https://7f6e3e61-64b1-41dd-bb49-bf59df779508.mock.pstmn.io/";
-const API_URL = "http://192.168.0.69:4000/";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
   baseURL: API_URL,
@@ -23,7 +22,11 @@ export default {
   login: function (email, userPwd) {
     return api.post(`login`, { email: email, userPwd: userPwd });
   },
-  logout: function () {
-    return api.post(`logout`, {});
+  logout: function (token) {
+    return api.post(
+      `logout`,
+      {},
+      { headers: { Authorization: "Bearer " + token } }
+    );
   },
 };

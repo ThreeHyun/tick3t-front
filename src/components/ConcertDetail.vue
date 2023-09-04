@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-responsive class="fill-height">
+  <div :class="isMobile ? 'detail-container-moblie' : 'detail-container'">
+    <div :class="!isMobile && 'fill-height'">
       <v-img class="calendar" width="400px" src="@/assets/calendar.png" />
       <div class="text2">2023-09-23 (토)</div>
       <v-row>
@@ -17,13 +17,12 @@
 
       <v-row justify="center">
         <v-col cols="12" sm="15" md="20">
-          <v-btn class="reserve" block rounded="lg" center size="x-large" @click="goToSeat"
-            >예매하기</v-btn
-          >
+          <v-btn class="reserve" block rounded="lg" center size="x-large" @click="goToSeat">예매하기</v-btn>
         </v-col>
       </v-row>
-    </v-responsive>
-  </v-container>
+    </div>
+
+  </div>
 </template>
 
 <style scoped>
@@ -34,12 +33,9 @@
 
 <script>
 export default {
-  
-  methods: {
-    goToSeat() {
-      this.$router.push("/seat");
-    },
-  }
+  props: {
+    isMobile: Boolean
+  },
 }
 
 </script>

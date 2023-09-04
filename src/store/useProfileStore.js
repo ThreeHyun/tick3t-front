@@ -1,17 +1,17 @@
 import { defineStore } from "pinia";
 import api from "@/api/mypage";
 
-export const useProfileStore = defineStore("user", {
+export const useProfileStore = defineStore("profile", {
   state: () => ({
     user: {
-        id: "",
+      id: "",
       email: "",
       name: "",
       birth: "",
       fanId: "",
-      oldPassword:"",
+      oldPassword: "",
       newPassword: "",
-      newPasswordCheck: ""
+      newPasswordCheck: "",
     },
   }),
   actions: {
@@ -21,26 +21,26 @@ export const useProfileStore = defineStore("user", {
         .getProfile(id)
         .then((res) => {
           console.log(res);
-          this.user={ ...res.data.data};
+          this.user = { ...res.data.data };
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    fetchUpdatePwd(){
+    fetchUpdatePwd() {
       api
-      .Password('password1!', 'password2!', 'password2!')
-      .then((res) => {
-      console.log(res.status);
-      })
-      .catch((err) => {
+        .Password("password1!", "password2!", "password2!")
+        .then((res) => {
+          console.log(res.status);
+        })
+        .catch((err) => {
           console.log(err);
-      });
-  }
-},
+        });
+    },
+  },
   getters: {
     getProfile(state) {
       return state.user;
     },
-  }
+  },
 });

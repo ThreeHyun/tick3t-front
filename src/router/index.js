@@ -17,16 +17,6 @@ const routes = [
         component: () => import("@/views/ConcertView.vue"),
       },
       {
-        path: "/login",
-        name: "login",
-        component: () => import("@/views/LoginView.vue"),
-      },
-      {
-        path: "/signup",
-        name: "signup",
-        component: () => import("@/views/SignupView.vue"),
-      },
-      {
         path: "/dashboard",
         name: "dashboard",
         component: () => import("@/views/DashboardView.vue"),
@@ -40,11 +30,6 @@ const routes = [
         path: "/usermgmt/:userId",
         name: "userdetails",
         component: () => import("@/views/UserDetailsView.vue"),
-      },
-      {
-        path: "/apitest",
-        name: "apitest",
-        component: () => import("@/views/ApiTest.vue"),
       },
       {
         path: "/mypage",
@@ -61,7 +46,22 @@ const routes = [
         name: "seat",
         component: () => import("@/views/SeatView.vue"),
       },
-
+    ],
+  },
+  {
+    path: "/",
+    component: () => import("@/layouts/auth/AuthLayout.vue"),
+    children: [
+      {
+        path: "/login",
+        name: "login",
+        component: () => import("@/views/LoginView.vue"),
+      },
+      {
+        path: "/signup",
+        name: "signup",
+        component: () => import("@/views/SignupView.vue"),
+      },
     ],
   },
 ];
