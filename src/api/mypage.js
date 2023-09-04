@@ -15,7 +15,20 @@ export default {
   getProfile: function () {
     return api.get(API_URL + `profile`);
   },
-  Password: function () {
-    return api.post(API_URL + `profile/password`);
+  Password: function (oldPassword, newPassword, newPasswordCheck) {
+    return api.post(API_URL + `profile/password`, {
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+      newPasswordCheck: newPasswordCheck,
+    });
+  },
+  AuthFan: function (fanId) {
+    return api.post(API_URL + `profile/fanId`, { fanId: fanId });
+  },
+  withdraw: function (password) {
+    return api.post(API_URL + `profile/withdraw`, { password: password });
+  },
+  getMyorder: function (pageNo) {
+    return api.get(API_URL + `myorder?page=${pageNo}`);
   },
 };

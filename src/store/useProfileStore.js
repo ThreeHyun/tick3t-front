@@ -12,6 +12,9 @@ export const useProfileStore = defineStore("profile", {
       oldPassword: "",
       newPassword: "",
       newPasswordCheck: "",
+      password: "",
+      message: "",
+      resultCode: "",
     },
   }),
   actions: {
@@ -27,11 +30,39 @@ export const useProfileStore = defineStore("profile", {
           console.log(err);
         });
     },
-    fetchUpdatePwd() {
+    fetchUpdatePwd(oldPassword, newPassword, newPasswordCheck) {
       api
-        .Password("password1!", "password2!", "password2!")
+        .Password(oldPassword, newPassword, newPasswordCheck)
         .then((res) => {
           console.log(res.status);
+          // alert(res.data.resultCode);
+          console.log(res);
+          this.user.message = res.data.message;
+          this.user.resultCode = res.data.resultCode;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    fetchAuthFanId(fanId) {
+      api
+        .AuthFan(fanId)
+        .then((res) => {
+          console.log(res);
+          this.user.message = res.data.message;
+          this.user.resultCode = res.data.resultCode;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    fetchWithdraw(password) {
+      api
+        .withdraw(password)
+        .then((res) => {
+          console.log(res);
+          this.user.message = res.data.message;
+          this.user.resultCode = res.data.resultCode;
         })
         .catch((err) => {
           console.log(err);
