@@ -1,77 +1,77 @@
 <template>
   <header>
-    <div id="logo">
-      <router-link to="/">
-        <img src="@/assets/logo.png" alt="logo" class="logo-img" />
-      </router-link>
-    </div>
-    <v-breadcrumbs :items="before" divider=" "></v-breadcrumbs>
+    <v-app-bar flat>
+      <img src="@/assets/logo.png" alt="logo" class="logo-img" id="logo" />
+      <div>
+        <div class="nav-bar-button" v-if="!isMobile">
+          <v-btn v-for="menuItem in menuItems.filter(({ isMenu }) => isMenu())" :key="menuItem.name" size="x-large"
+            variant="text" @click="menuItem.function">
+            {{ menuItem.name }}
+          </v-btn>
+        </div>
+        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" v-else></v-app-bar-nav-icon>
+      </div>
+    </v-app-bar>
+    <v-navigation-drawer v-model="drawer" :v-if="isMobile" location="top"
+      style="top: 114px; height: inherit; box-shadow: none" temporary>
+      <v-list>
+        <v-list-item v-for="menuItem in menuItems.filter(({ isMenu }) => isMenu())" :key="menuItem.name">
+          <v-btn size="x-large" variant="text" width="100%">
+            {{ menuItem.name }}
+          </v-btn>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </header>
 </template>
 
 <script>
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 import { useAuthStore } from "@/store";
 
 export default {
-  name: "NavBar",
+  data() {
+    return {
+      drawer: false,
+      isMobile: false,
+      menuItems: [
+        { name: "로그인", function: () => { this.$router.push("/login"); }, isMenu: () => !this.token },
+        { name: "회원가입", function: () => { this.$router.push("/signup"); }, isMenu: () => !this.token },
+        { name: "마이페이지", function: () => { this.$router.push("/mypage"); }, isMenu: () => !!this.token },
+        { name: "로그아웃", function: () => this.logout(), isMenu: () => !!this.token },
+      ]
+    };
+  },
   computed: {
     ...mapState(useAuthStore, ["token"]),
-    breadcrumbs() {
-      if (this.token) {
-        // 로그인한 경우
-        return [
-          {
-            title: "마이페이지",
-            disabled: false,
-            href: "/mypage",
-          },
-          {
-            title: "로그아웃",
-            disabled: false,
-            href: "/logout",
-          },
-        ];
+  },
+  methods: {
+    ...mapActions(useAuthStore, ["logout"]),
+    handleResize() {
+      let width = window.innerWidth;
+      if (width < 768) {
+        this.isMobile = true;
       } else {
-        // 로그인하지 않은 경우
-        return [
-          {
-            title: "로그인",
-            disabled: false,
-            href: "/login",
-          },
-          {
-            title: "회원가입",
-            disabled: false,
-            href: "/signup",
-          },
-        ];
+        this.isMobile = false;
       }
     },
   },
-};
-  // data: () => ({
-  //   before: [
-  //     {
-  //       title: "로그인",
-  //       disabled: false,
-  //       href: "/login",
-  //     },
-  //     {
-  //       title: "회원가입",
-  //       disabled: false,
-  //       href: "/signup",
-
-  //     },
-  //   ],
-  // }),
-// };
+  mounted() {
+    console.log(this.token);
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+  },
+  destroy() {
+    window.removeEventListener('resize', this.handleResize);
+  },
+}
 </script>
 
 <style scoped>
 .logo-img {
-  max-width: 10%;
-  padding-bottom: 40px;
+  width: calc(80px + 5%);
+  max-width: 130px;
+  padding-bottom: 10px;
 }
 
 header {
@@ -79,5 +79,11 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 25px;
+}
+
+.nav-bar-button {
+  font-family: SpoqaHanSansNeo-Medium;
+  font-size: 30px;
+  color: black;
 }
 </style>

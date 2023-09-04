@@ -28,6 +28,7 @@ export const useUserStore = defineStore("user", {
     },
     userList: [],
     logs: [],
+    totalPage: 5,
   }),
   actions: {
     fetchFanTable(fanCd) {
@@ -52,12 +53,13 @@ export const useUserStore = defineStore("user", {
           console.log(err);
         });
     },
-    fetchUserList(pageNo) {
+    fetchUserList(pageNo, category = "", word = "") {
       api
-        .getUserList(pageNo)
+        .getUserList(pageNo, category, word)
         .then((res) => {
           console.log(res);
           this.userList = [...res.data.data.userList];
+          this.totalPage = res.data.data.totalPage;
         })
         .catch((err) => {
           console.log(err);

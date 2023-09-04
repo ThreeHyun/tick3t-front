@@ -14,9 +14,7 @@
   font-family: SpoqaHanSansNeo-Bold;
   src: url("@/assets/fonts/SpoqaHanSansNeo-Bold.ttf");
 }
-.v-breadcrumbs {
-  font-family: SpoqaHanSansNeo-Regular;
-}
+
 .mb-8 {
   font-family: SpoqaHanSansNeo-Regular;
   font-size: large;
@@ -95,4 +93,7 @@
   tr {
     cursor: pointer;
   }
+}
+.v-toolbar__content {
+  justify-content: space-between;
 }

@@ -12,7 +12,6 @@ import { createPinia } from "pinia";
 
 // Plugins
 import { registerPlugins } from "@/plugins";
-
 const app = createApp(App);
 const pinia = createPinia();
 
