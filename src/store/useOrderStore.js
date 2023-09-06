@@ -9,18 +9,20 @@ export const useOrderStore = defineStore("order", {
       datetime: "",
       location: "",
       payState: "",
-      totalPage: 0,
+      
+      
     },
     orderList: [],
+    totalPage: 0
   }),
   actions: {
-    fetchOrderList(pageNo) {
+    fetchOrderList(pageNo, category="", word="") {
       api
-        .getMyorder(pageNo)
+        .getMyorder(pageNo,category, word)
         .then((res) => {
           console.log(res);
           this.orderList = [...res.data.data.orders];
-          this.order.totalPage = res.data.data.totalPage;
+          this.totalPage = res.data.data.totalPage;
         })
         .catch((err) => {
           console.log(err);

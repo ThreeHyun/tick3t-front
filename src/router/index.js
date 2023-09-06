@@ -32,9 +32,11 @@ const routes = [
         component: () => import("@/views/UserDetailsView.vue"),
       },
       {
+        //path: "/mypage/:pageNo/:category/:word",
         path: "/mypage",
         name: "mypage",
         component: () => import("@/views/MyPageView.vue"),
+        props: true,
       },
       {
         path: "/reserved/:ticketId",

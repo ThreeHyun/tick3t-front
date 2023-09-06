@@ -11,7 +11,7 @@ const api = axios.create({
 });
 
 export default {
-  detailOrder: function (ticketId) {
+  detailOrder: function (ticketId) { 
     return api.get(`myorder/${ticketId}`);
   },
   cancel: function (ticketId) {

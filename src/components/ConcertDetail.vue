@@ -17,11 +17,18 @@
 
       <v-row justify="center">
         <v-col cols="12" sm="15" md="20">
-          <v-btn class="reserve" block rounded="lg" center size="x-large" @click="goToSeat">예매하기</v-btn>
+          <v-btn
+            class="reserve"
+            block
+            rounded="lg"
+            center
+            size="x-large"
+            @click="goToSeat"
+            >예매하기</v-btn
+          >
         </v-col>
       </v-row>
     </div>
-
   </div>
 </template>
 
@@ -34,8 +41,13 @@
 <script>
 export default {
   props: {
-    isMobile: Boolean
+    isMobile: Boolean,
   },
-}
 
+  methods: {
+    goToSeat() {
+      this.$router.push("/seat");
+    },
+  },
+};
 </script>
