@@ -5,8 +5,9 @@
         <v-col cols="6">
           <div class="d-flex align-start">
             <span class="text">티켓 판매율</span>
-            <v-autocomplete density="compact" ref="star" v-model="star" prepend-inner-icon="mdi-ticket-outline"
-              :items="stars" label="공연명" variant="outlined" required>
+            <v-autocomplete density="compact" ref="star" v-model="searchCategory" prepend-inner-icon="mdi-ticket-outline"
+              v-for="concert in concerts" :key="concert.concertId" label="공연명" variant="outlined" required>
+              {{ concert.title }}
             </v-autocomplete>
           </div>
         </v-col>
@@ -44,16 +45,22 @@ import { useUserStore } from "@/store";
 
 export default {
   data() {
-    return {};
+    return {
+      searchCategory: "",
+      categorieList: [
+
+      ]
+    };
   },
   computed: {
-    ...mapState(useUserStore, ["user"])
+    ...mapState(useUserStore, ["user", "concerts"])
   },
   methods: {
+    ...mapActions(useUserStore, ["fetchTicketList"]),
     ...mapActions(useUserStore, ["fetchTicketTable"])
   },
   mounted() {
-    this.fetchTicketTable(this.ID);
+    this.fetchTicketTable(this.concertId);
   },
 };
 </script>

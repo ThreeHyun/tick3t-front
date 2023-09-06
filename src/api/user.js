@@ -15,8 +15,11 @@ export default {
   getFanTable: function (fanCd) {
     return api.get(`admin/fan/${fanCd}`);
   },
-  getTicketTable: function (ID) {
-    return api.get(`admin/ticket/${ID}`);
+  getTicketList: function () {
+    return api.get(`admin/ticket`);
+  },
+  getTicketTable: function (concertId) {
+    return api.get(`admin/ticket/${concertId}`);
   },
   getUserList: function (pageNo, category, word) {
     return api.get(

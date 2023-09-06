@@ -12,10 +12,11 @@
       <div class="text3" style="display: flex; justify-content: space-between">
         <span>R석 140,000 원 (30석)</span>
         <span>S석 110,000 원 (50석)</span>
+        <span style="color: white;"></span>
       </div>
       <span class="text3">A석 80,000 원 (70석)</span>
 
-      <v-row justify="center">
+      <v-row justify="center" class="pt-5">
         <v-col cols="12" sm="15" md="20">
           <v-btn class="reserve" block rounded="lg" center size="x-large" @click="goToSeat">예매하기</v-btn>
         </v-col>
@@ -25,17 +26,23 @@
   </div>
 </template>
 
+<script>
+
+export default {
+  props: {
+    isMobile: Boolean
+  },
+  methods: {
+    goToSeat() {
+      this.$router.push("/seat");
+    },
+  }
+}
+
+</script>
+
 <style scoped>
 .fill-height {
   position: fixed;
 }
 </style>
-
-<script>
-export default {
-  props: {
-    isMobile: Boolean
-  },
-}
-
-</script>
