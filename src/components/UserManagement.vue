@@ -4,7 +4,7 @@
       <v-row class="justify-center pt-3">
         <v-col cols="2">
           <div class="d-flex align-start">
-            <v-autocomplete density="compact" ref="star" v-model="searchCategory" prepend-inner-icon="mdi-star-outline"
+            <v-autocomplete density="compact" v-model="searchCategory" prepend-inner-icon="mdi-star-outline"
               :items="categorieList" label="카테고리" variant="outlined" required></v-autocomplete>
           </div>
         </v-col>

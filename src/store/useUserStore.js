@@ -33,40 +33,8 @@ export const useUserStore = defineStore("user", {
     concerts: [],
     totalPage: 5,
   }),
+
   actions: {
-    fetchFanTable(fanCd) {
-      api
-        .getFanTable(fanCd)
-        .then((res) => {
-          console.log(res);
-          this.user = { ...res.data.data };
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    fetchTicketList() {
-      api
-        .getTicketList()
-        .then((res) => {
-          console.log(res);
-          this.user = [...res.data.data.concerts];
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    fetchTicketTable(concertId) {
-      api
-        .getTicketTable(concertId)
-        .then((res) => {
-          console.log(res);
-          this.user = { ...res.data.data };
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
     fetchUserList(pageNo, category = "", word = "") {
       api
         .getUserList(pageNo, category, word)

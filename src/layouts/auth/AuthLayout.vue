@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <!-- <img src="@/assets/logo.png" alt="logo" class="logo-img" id="logo" @click="goToHomePage" /> -->
     <default-view />
   </v-app>
 </template>
@@ -21,6 +22,11 @@ export default {
     if (this.token) {
       this.$router.push("/");
     }
+  },
+  methods: {
+    goToHomePage() {
+      this.$router.push("/");
+    },
   }
 }
 </script>

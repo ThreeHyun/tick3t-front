@@ -20,6 +20,16 @@
             {{ menuItem.name }}
           </v-btn>
         </v-list-item>
+        <v-dialog v-model="logoutDialog" max-width="400px">
+          <v-card class="text2" style="font-size: large; align-items: center">
+            <v-card-title></v-card-title>
+            <v-card-text>로그아웃 하시겠습니까?</v-card-text>
+            <v-card-actions>
+              <v-btn class="pr-15 pl-15" @click="logoutDialog = false">취소</v-btn>
+              <v-btn class="pr-15 pl-15" @click="goToLogout" style="color: #ff5252;">확인</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-list>
     </v-navigation-drawer>
   </header>
@@ -34,11 +44,12 @@ export default {
     return {
       drawer: false,
       isMobile: false,
+      logoutDialog: false,
       menuItems: [
         { name: "로그인", function: () => { this.$router.push("/login"); }, isMenu: () => !this.token },
         { name: "회원가입", function: () => { this.$router.push("/signup"); }, isMenu: () => !this.token },
         { name: "마이페이지", function: () => { this.$router.push("/mypage"); }, isMenu: () => !!this.token },
-        { name: "로그아웃", function: () => this.logout(), isMenu: () => !!this.token },
+        { name: "로그아웃", function: () => { this.confirmLogout(); }, isMenu: () => !!this.token },
       ]
     };
   },
@@ -58,16 +69,25 @@ export default {
     goToHomePage() {
       this.$router.push("/");
     },
-  },
+    goToLogout() {
+      this.logout();
+      this.logoutDialog = false;
+      this.$router.push("/");
 
-  mounted() {
-    console.log(this.token);
-    window.addEventListener('resize', this.handleResize);
-    this.handleResize();
-  },
-  destroy() {
-    window.removeEventListener('resize', this.handleResize);
-  },
+    },
+    confirmLogout() {
+      this.logoutDialog = true;
+    },
+
+    mounted() {
+      console.log(this.token);
+      window.addEventListener('resize', this.handleResize);
+      this.handleResize();
+    },
+    destroy() {
+      window.removeEventListener('resize', this.handleResize);
+    },
+  }
 }
 </script>
 

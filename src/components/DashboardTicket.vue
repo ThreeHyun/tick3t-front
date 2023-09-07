@@ -5,14 +5,13 @@
         <v-col cols="6">
           <div class="d-flex align-start">
             <span class="text">티켓 판매율</span>
-            <v-autocomplete density="compact" ref="star" v-model="searchCategory" prepend-inner-icon="mdi-ticket-outline"
-              v-for="concert in concerts" :key="concert.concertId" label="공연명" variant="outlined" required>
-              {{ concert.title }}
-            </v-autocomplete>
+            <v-select v-model="concertId" :items="concerts" item-title="title" item-value="concertId" density="compact"
+              prepend-inner-icon="mdi-ticket-outline" variant="outlined" required>
+            </v-select>
           </div>
         </v-col>
         <v-col cols="12" sm="6" md="2">
-          <v-btn class="check" block rounded="lg" center size="large">조회하기</v-btn>
+          <v-btn class="check" block rounded="lg" center size="large" @click="handleTicketClick">조회하기</v-btn>
         </v-col>
       </v-row>
     </v-responsive>
@@ -24,15 +23,15 @@
       <tbody>
         <tr class="text-center">
           <td class="text-center">전체 좌석 수</td>
-          <td>{{ user.totalSeat }}</td>
+          <td>{{ dashboard.totalSeat }}</td>
         </tr>
         <tr class="text-center">
           <td class="text-center">판매된 좌석 수</td>
-          <td>{{ user.soldSeat }}</td>
+          <td>{{ dashboard.soldSeat }}</td>
         </tr>
         <tr class="text-center">
           <td class="text-center">잔여석 수</td>
-          <td>{{ user.remainSeat }}</td>
+          <td>{{ dashboard.remainSeat }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -41,26 +40,25 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { useUserStore } from "@/store";
+import { useDashboardStore } from "@/store";
 
 export default {
   data() {
     return {
-      searchCategory: "",
-      categorieList: [
-
-      ]
+      concertId: ""
     };
   },
   computed: {
-    ...mapState(useUserStore, ["user", "concerts"])
+    ...mapState(useDashboardStore, ["dashboard", "concerts"])
   },
   methods: {
-    ...mapActions(useUserStore, ["fetchTicketList"]),
-    ...mapActions(useUserStore, ["fetchTicketTable"])
+    ...mapActions(useDashboardStore, ["fetchTicketList", "fetchTicketTable"]),
+    handleTicketClick() {
+      this.fetchTicketTable(this.concertId)
+    }
   },
   mounted() {
-    this.fetchTicketTable(this.concertId);
+    this.fetchTicketList();
   },
 };
 </script>

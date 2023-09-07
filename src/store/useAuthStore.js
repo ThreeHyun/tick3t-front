@@ -3,6 +3,13 @@ import api from "@/api/auth";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
+    auth: {
+      name: "",
+      email: "",
+      birth: "",
+      message: "",
+      resultCode: "",
+    },
     token: window.sessionStorage.getItem("token") || "",
   }),
   actions: {
@@ -40,6 +47,18 @@ export const useAuthStore = defineStore("auth", {
       //   .catch((err) => {
       //     console.log(err);
       //   });
+    },
+    findPwd(email, name, birth) {
+      api
+        .findPwd(email, name, birth)
+        .then((res) => {
+          console.log(res);
+          this.auth.message = res.data.message;
+          this.auth.resultCode = res.data.resultCode;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 });
