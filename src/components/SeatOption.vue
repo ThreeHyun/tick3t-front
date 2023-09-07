@@ -15,43 +15,37 @@
       <v-col cols="3">
         <div class="mt-10 pt-5">
           <v-row class="mb-3">
-            <v-col cols="3"><p class="pt-2">R석</p></v-col>
-            <v-col cols="4"><p class="pt-2">90,000원</p></v-col>
-            <v-col cols="3"
-              ><v-btn
-                :key="R"
-                style="background-color: #ff5252; color: white"
-                @click="goToReserved()"
-              >
+            <v-col cols="3">
+              <p class="pt-2">R석</p>
+            </v-col>
+            <v-col cols="4">
+              <p class="pt-2">90,000원</p>
+            </v-col>
+            <v-col cols="3"><v-btn :key="R" style="background-color: #ff5252; color: white" @click="goToReserved()">
                 예매하기
-              </v-btn></v-col
-            >
+              </v-btn></v-col>
           </v-row>
           <v-row class="mb-3">
-            <v-col cols="3"><p class="pt-2">S석</p></v-col>
-            <v-col cols="4"><p class="pt-2">150,000원</p></v-col>
-            <v-col cols="3"
-              ><v-btn
-                :key="S"
-                style="background-color: #9c7d7d; color: white"
-                @click="goToReserved()"
-              >
+            <v-col cols="3">
+              <p class="pt-2">S석</p>
+            </v-col>
+            <v-col cols="4">
+              <p class="pt-2">150,000원</p>
+            </v-col>
+            <v-col cols="3"><v-btn :key="S" style="background-color: #9c7d7d; color: white" @click="goToReserved()">
                 예매하기
-              </v-btn></v-col
-            >
+              </v-btn></v-col>
           </v-row>
           <v-row class="mb-3">
-            <v-col cols="3"><p class="pt-2">A석</p></v-col>
-            <v-col cols="4"><p class="pt-2">110,000원</p></v-col>
-            <v-col cols="3"
-              ><v-btn
-                :key="A"
-                style="background-color: #ecef68; color: white"
-                @click="goToReserved()"
-              >
+            <v-col cols="3">
+              <p class="pt-2">A석</p>
+            </v-col>
+            <v-col cols="4">
+              <p class="pt-2">110,000원</p>
+            </v-col>
+            <v-col cols="3"><v-btn :key="A" style="background-color: #ecef68; color: white" @click="goToReserved()">
                 예매하기
-              </v-btn></v-col
-            >
+              </v-btn></v-col>
           </v-row>
 
           <v-row> </v-row>

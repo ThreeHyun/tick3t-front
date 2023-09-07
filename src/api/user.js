@@ -12,12 +12,6 @@ const api = axios.create({
 });
 
 export default {
-  getFanTable: function (fanCd) {
-    return api.get(`admin/fan/${fanCd}`);
-  },
-  getTicketTable: function (ID) {
-    return api.get(`admin/ticket/${ID}`);
-  },
   getUserList: function (pageNo, category, word) {
     return api.get(
       +`admin/user?page=${pageNo}&category=${category}&word=${word}`

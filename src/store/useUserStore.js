@@ -20,39 +20,21 @@ export const useUserStore = defineStore("user", {
       withdrawUser: "",
       nowUser: "",
       weekUser: "",
-      ID: "",
+      concertId: "",
       totalSeat: "",
       soldSeat: "",
       remainSeat: "",
       salesRateL: "",
+      rowNum: "",
+      title: "",
     },
     userList: [],
     logs: [],
+    concerts: [],
     totalPage: 5,
   }),
+
   actions: {
-    fetchFanTable(fanCd) {
-      api
-        .getFanTable(fanCd)
-        .then((res) => {
-          console.log(res);
-          this.user = [...res.data.data];
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    fetchTicketTable(ID) {
-      api
-        .getTicketTable(ID)
-        .then((res) => {
-          console.log(res);
-          this.user = [...res.data.data];
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
     fetchUserList(pageNo, category = "", word = "") {
       api
         .getUserList(pageNo, category, word)
@@ -81,7 +63,7 @@ export const useUserStore = defineStore("user", {
         .getUserLog(params)
         .then((res) => {
           console.log(res);
-          this.logs = { ...res.data.data.logs };
+          this.logs = [...res.data.data.logs];
         })
         .catch((err) => {
           console.log(err);

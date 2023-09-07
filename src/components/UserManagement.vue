@@ -4,37 +4,16 @@
       <v-row class="justify-center pt-3">
         <v-col cols="2">
           <div class="d-flex align-start">
-            <v-autocomplete
-              density="compact"
-              ref="star"
-              v-model="searchCategory"
-              prepend-inner-icon="mdi-star-outline"
-              :items="categorieList"
-              label="카테고리"
-              variant="outlined"
-              required
-            ></v-autocomplete>
+            <v-autocomplete density="compact" v-model="searchCategory" prepend-inner-icon="mdi-star-outline"
+              :items="categorieList" label="카테고리" variant="outlined" required></v-autocomplete>
           </div>
         </v-col>
         <v-col cols="5">
-          <v-text-field
-            v-model="searchWord"
-            density="compact"
-            prepend-inner-icon="mdi-magnify"
-            variant="outlined"
-            label="검색"
-          />
+          <v-text-field v-model="searchWord" density="compact" prepend-inner-icon="mdi-magnify" variant="outlined"
+            label="검색" />
         </v-col>
         <v-col cols="12" sm="6" md="2">
-          <v-btn
-            @click="hadleSearch"
-            class="check"
-            block
-            rounded="lg"
-            center
-            size="large"
-            >조회하기</v-btn
-          >
+          <v-btn @click="hadleSearch" class="check" block rounded="lg" center size="large">조회하기</v-btn>
         </v-col>
       </v-row>
     </v-responsive>
@@ -52,12 +31,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          class="text-center"
-          @click="moveToUserDetail(user.userId)"
-          v-for="user in userList"
-          :key="user.userId"
-        >
+        <tr class="text-center" @click="moveToUserDetail(user.userId)" v-for="user in userList" :key="user.userId">
           <td>{{ user.userId }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
@@ -70,11 +44,7 @@
   </v-container>
 
   <div class="text-center">
-    <v-pagination
-      v-model="pageNo"
-      :length="4"
-      @click="handlePage"
-    ></v-pagination>
+    <v-pagination v-model="pageNo" :length="4" @click="handlePage"></v-pagination>
   </div>
 </template>
 

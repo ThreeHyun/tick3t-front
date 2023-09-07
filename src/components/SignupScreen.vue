@@ -128,6 +128,8 @@ export default {
     ...mapActions(useAuthStore, ["signup"]),
     sendSignup() {
       this.signup(this.email, this.userPwd, this.name, this.birth, this.fanCd)
+      this.$router.push("/");
+
     }
   },
   mounted() {

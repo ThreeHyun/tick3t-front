@@ -16,21 +16,8 @@
       </div>
       <v-row justify="center">
         <v-col cols="12" sm="15" md="20">
-          <v-btn
-            class="reserve"
-            block
-            rounded="lg"
-            center
-            size="x-large"
-            @click="orderCheck"
-            >예매하기</v-btn
-          >
-          <v-dialog
-            v-model="orderDialog"
-            width="30%"
-            height="60%"
-            v-if="orderResultCode !== '0000'"
-          >
+          <v-btn class="reserve" block rounded="lg" center size="x-large" @click="orderCheck">예매하기</v-btn>
+          <v-dialog v-model="orderDialog" width="30%" height="60%" v-if="orderResultCode !== '0000'">
             <v-card>
               <v-toolbar color="primary" title="Error"></v-toolbar>
               <v-card-text>
@@ -48,6 +35,8 @@
     </div>
   </div>
 </template>
+
+
 
 <style scoped>
 .fill-height {

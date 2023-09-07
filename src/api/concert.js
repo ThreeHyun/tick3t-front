@@ -14,7 +14,7 @@ const api = axios.create({
 
 export default {
   getConcert: function () {
-    return api.get(API_URL + `concert`);
+    return api.get(`concert`);
   },
   detailConcert: function (concertId) { 
     return api.get(API_URL+`concert/${concertId}`);

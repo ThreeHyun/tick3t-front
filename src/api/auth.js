@@ -29,4 +29,11 @@ export default {
       { headers: { Authorization: "Bearer " + token } }
     );
   },
+  findPwd: function (email, name, birth) {
+    return api.post(API_URL + `reset-password`, {
+      email: email,
+      name: name,
+      birth: birth,
+    });
+  },
 };
