@@ -13,6 +13,7 @@ export const useTicketStore = defineStore("ticket", {
       cancelDate: "",
       payDate: "",
       payState: 0,
+      imgUrl:""
     },
     resultCode: "",
     message: "",

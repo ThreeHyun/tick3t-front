@@ -2,19 +2,18 @@
   <div :class="isMobile ? 'detail-container-moblie' : 'detail-container'">
     <div :class="!isMobile && 'fill-height'">
       <v-img class="calendar" width="400px" src="@/assets/calendar.png" />
-      <div class="text2">2023-09-23 (토)</div>
+      <div class="text2">{{ concert.date }}</div>
       <v-row>
         <v-col cols="12" sm="6" md="3">
           <v-btn class="time" block rounded="0" size="small">17:00</v-btn>
         </v-col>
       </v-row>
-
-      <div class="text3" style="display: flex; justify-content: space-between">
-        <span>R석 140,000 원 (30석)</span>
-        <span>S석 110,000 원 (50석)</span>
+      <div class="text2 mb-3">잔여석</div>
+      <div class="text3" v-for="seat in seats" :key="seat.grade">
+        <span class="pr-5">{{ seat.grade }}석</span>
+        <span class="pr-5">{{ seat.price }}원</span>
+        <span>({{ seat.remainSeat }}석)</span>
       </div>
-      <span class="text3">A석 80,000 원 (70석)</span>
-
       <v-row justify="center">
         <v-col cols="12" sm="15" md="20">
           <v-btn
@@ -23,9 +22,27 @@
             rounded="lg"
             center
             size="x-large"
-            @click="goToSeat"
+            @click="orderCheck"
             >예매하기</v-btn
           >
+          <v-dialog
+            v-model="orderDialog"
+            width="30%"
+            height="60%"
+            v-if="orderResultCode !== '0000'"
+          >
+            <v-card>
+              <v-toolbar color="primary" title="Error"></v-toolbar>
+              <v-card-text>
+                <div class="pa-11" style="font-size: 30px">
+                  {{ orderMessage }}
+                </div>
+              </v-card-text>
+              <v-card-actions class="justify-end">
+                <v-btn variant="text" @click="closeDialog">Close</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-col>
       </v-row>
     </div>
@@ -39,14 +56,44 @@
 </style>
 
 <script>
+import { mapActions, mapState } from "pinia";
+import { concertStore } from "@/store";
+
 export default {
+  data: () => ({
+    orderDialog: false,
+  }),
+  computed: {
+    ...mapState(concertStore, ["concert"]),
+    ...mapState(concertStore, ["seats"]),
+    ...mapState(concertStore, ["orderResultCode"]),
+    ...mapState(concertStore, ["orderMessage"]),
+    ...mapState(concertStore, ["detailResultCode"]),
+    ...mapState(concertStore, ["detailMessage"]),
+  },
+  mounted() {
+    this.detailConcert(this.$route.params.concertId);
+    this.fetchOrderCheck(this.$route.params.concertId);
+  },
   props: {
     isMobile: Boolean,
   },
 
   methods: {
-    goToSeat() {
-      this.$router.push("/seat");
+    ...mapActions(concertStore, ["detailConcert"]),
+    ...mapActions(concertStore, ["fetchOrderCheck"]),
+
+    orderCheck() {
+      this.fetchOrderCheck(this.concert.concertId);
+      if (this.orderResultCode === "0000") {
+        this.$router.push("/seat/" + this.concert.concertId);
+      } else {
+        this.orderDialog = true;
+        console.log(this.orderMessage);
+      }
+    },
+    closeDialog() {
+      this.orderDialog = false;
     },
   },
 };

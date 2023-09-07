@@ -10,13 +10,12 @@ import ConcertPoster from "@/components/ConcertPoster.vue";
 import ConcertDetail from "@/components/ConcertDetail.vue";
 </script>
 
-
 <script>
 export default {
   data() {
     return {
       isMobile: false,
-    }
+    };
   },
   methods: {
     goToSeat() {
@@ -32,13 +31,13 @@ export default {
     },
   },
   mounted() {
-    window.addEventListener('resize', this.handleResize);
+    window.addEventListener("resize", this.handleResize);
     this.handleResize();
   },
   destroy() {
-    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener("resize", this.handleResize);
   },
-}
+};
 </script>
 <style scoped>
 .detail-container {

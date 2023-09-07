@@ -8,7 +8,7 @@ export const useProfileStore = defineStore("profile", {
       email: "",
       name: "",
       birth: "",
-      fanId: "",
+      fanId: "",  
       oldPassword: "",
       newPassword: "",
       newPasswordCheck: "",
