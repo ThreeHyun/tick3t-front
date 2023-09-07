@@ -20,7 +20,7 @@ export default {
   },
   getUserList: function (pageNo, category, word) {
     return api.get(
-      `admin/user?page=${pageNo}&category=${category}&word=${word}`
+      +`admin/user?page=${pageNo}&category=${category}&word=${word}`
     );
   },
   getUserDetails: function (userId) {

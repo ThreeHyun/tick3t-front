@@ -4,40 +4,72 @@ import api from "@/api/concert";
 export const concertStore = defineStore("concert", {
   state: () => ({
     concert: {
-      id: "",
+      concertId: 0,
       title: "",
       date: "",
       location: "",
+      hallName:"",
+      startDate:"",
+      imgUrl: "",
+
+      grade:"",
+      price:0,
+      remainSeat:0,
+      totalSeat:0
+
+
     },
     concertList: [],
+    seats:[],
+    orderResultCode: "",
+    orderMessage:"",
+    detailResultCode: "", 
+    detailMessage: "",
+    
   }),
   actions: {
-    fetchConcertData(params) {
+    fetchConcertList() {
       api
-        .getConcertDetails(params)
+        .getConcert()
+        .then((res) => {
+          console.log(res);
+          this.concertList = [...res.data.data];
+          
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    detailConcert(concertId) {
+      api
+        .detailConcert(concertId)
         .then((res) => {
           console.log(res);
           this.concert = { ...res.data.data };
+          this.detailResultCode = res.data.resultCode;
+          this.detailMessage = res.data.message;
+          this.seats={...res.data.data.seats}
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    fetchConcertList(pageNo) {
+    fetchOrderCheck(concertId){
       api
-        .getUserList(pageNo)
+        .orderCheck(concertId)
         .then((res) => {
           console.log(res);
-          this.userList = [...res.data.data.userList];
+          this.orderMessage = res.data.message;
+          this.orderResultCode = res.data.resultCode;
         })
         .catch((err) => {
           console.log(err);
         });
-    },
   },
   getters: {
     getConcertDetails(state) {
       return state.concert;
     },
   },
+}
 });

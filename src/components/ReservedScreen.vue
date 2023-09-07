@@ -9,7 +9,7 @@
   <v-container v-else>
     <div class="flex-container">
       <div class="flex-item1">
-        <v-img class="poster" src="@/assets/poster.jpg" />
+        <v-img class="poster" :src="ticket.imgUrl" />
       </div>
       <div class="flex-item2">
         <h4>예매번호</h4>
@@ -28,8 +28,12 @@
         <h4>결제 수단</h4>
         <br /><br />
         <h4>취소 가능 일시</h4>
-        <v-btn class="check2" size="small" v-if="ticket.payState === '1' || ticket.payState == '0'"
-          @click="confirmCancel">
+        <v-btn
+          class="check2"
+          size="small"
+          v-if="ticket.payState === '1' || ticket.payState == '0'"
+          @click="confirmCancel"
+        >
           취소하기
         </v-btn>
         <br />
@@ -49,7 +53,9 @@
         <p>현장 수령</p>
         <br />
         <p>카드 결제</p>
-        <div style="background-color: lightgray; padding: 10px; margin-right: 40px">
+        <div
+          style="background-color: lightgray; padding: 10px; margin-right: 40px"
+        >
           <p style="padding-bottom: 5px">결제 기한 : {{ ticket.payDtm }}</p>
         </div>
         <hr style="border: 5px" />
@@ -66,8 +72,16 @@
         <br />
         <hr />
         <br />
-        <v-btn class="check" center size="large" @click="goToMypage">마이페이지</v-btn><br /><br />
-        <v-btn class="check" center size="large" @click="openPaymentDialog" v-if="ticket.payState === '0'">
+        <v-btn class="check" center size="large" @click="goToMypage"
+          >마이페이지</v-btn
+        ><br /><br />
+        <v-btn
+          class="check"
+          center
+          size="large"
+          @click="openPaymentDialog"
+          v-if="ticket.payState === '0'"
+        >
           결제하기
         </v-btn>
         <v-dialog v-model="paymentDialog" max-width="600px">
@@ -95,10 +109,26 @@
                   <td class="text-left" width="20%">카드 번호</td>
                   <td class="text-center" width="80%">
                     <div style="display: flex; justify-content: left">
-                      <input style="width: 10%; border: 1px solid" maxlength="4" type="text" />-
-                      <input style="width: 10%; border: 1px solid" maxlength="4" type="text" />-
-                      <input style="width: 10%; border: 1px solid" maxlength="4" type="text" />-
-                      <input style="width: 10%; border: 1px solid" maxlength="4" type="text" />
+                      <input
+                        style="width: 10%; border: 1px solid"
+                        maxlength="4"
+                        type="text"
+                      />-
+                      <input
+                        style="width: 10%; border: 1px solid"
+                        maxlength="4"
+                        type="text"
+                      />-
+                      <input
+                        style="width: 10%; border: 1px solid"
+                        maxlength="4"
+                        type="text"
+                      />-
+                      <input
+                        style="width: 10%; border: 1px solid"
+                        maxlength="4"
+                        type="text"
+                      />
                     </div>
                   </td>
                 </tr>

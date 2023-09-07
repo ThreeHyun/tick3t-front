@@ -12,8 +12,8 @@ const routes = [
         component: () => import("@/views/MainView.vue"),
       },
       {
-        path: "/concert",
-        name: "concert",
+        path: "/concert/:concertId",
+        name: "concertdetails",
         component: () => import("@/views/ConcertView.vue"),
       },
       {
@@ -32,9 +32,11 @@ const routes = [
         component: () => import("@/views/UserDetailsView.vue"),
       },
       {
+        
         path: "/mypage",
         name: "mypage",
         component: () => import("@/views/MyPageView.vue"),
+        props: true,
       },
       {
         path: "/reserved/:ticketId",
@@ -42,7 +44,7 @@ const routes = [
         component: () => import("@/views/ReservedView.vue"),
       },
       {
-        path: "/seat",
+        path: "/seat/:concertId",
         name: "seat",
         component: () => import("@/views/SeatView.vue"),
       },

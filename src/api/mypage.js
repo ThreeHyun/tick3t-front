@@ -7,7 +7,8 @@ const api = axios.create({
   baseURL: API_URL,
   headers: {
     "Content-Type": "application/json",
-    Authorization: "Bearer " + sessionStorage.getItem("token"),
+    Authorization: "Bearer " + sessionStorage.getItem("token")
+    //Authorization: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwYXJrc2VyaW5fQG5hdmVyLmNvbSIsInVzZXJJZCI6NjAwMDEsInN0YXR1c0NkIjp0cnVlLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjkzODYxNjI4fQ.3v5KSiR8EYpCk8ewEN9h5r0IXRI0ANcLC52xh9m-FocS3jGcSadjbHSDxGRTGS_zvHKLbdxXHI0skpRAjz8GIQ",
   },
 });
 
@@ -17,7 +18,7 @@ export default {
   },
   Password: function (oldPassword, newPassword, newPasswordCheck) {
     return api.post(API_URL + `profile/password`, {
-      oldPassword: oldPassword,
+      oldPassword: oldPassword, 
       newPassword: newPassword,
       newPasswordCheck: newPasswordCheck,
     });
@@ -28,7 +29,7 @@ export default {
   withdraw: function (password) {
     return api.post(API_URL + `profile/withdraw`, { password: password });
   },
-  getMyorder: function (pageNo) {
-    return api.get(API_URL + `myorder?page=${pageNo}`);
+  getMyorder: function (pageNo,category, word) {
+    return api.get(API_URL + `myorder?page=${pageNo}&category=${category}&word=${word}`,{pageNo:pageNo,category:category, word:word});
   },
 };

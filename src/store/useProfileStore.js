@@ -8,7 +8,7 @@ export const useProfileStore = defineStore("profile", {
       email: "",
       name: "",
       birth: "",
-      fanId: "",
+      fanId: "",  
       oldPassword: "",
       newPassword: "",
       newPasswordCheck: "",
@@ -67,30 +67,7 @@ export const useProfileStore = defineStore("profile", {
           console.log(err);
         });
     },
-    fetchAuthFanId(fanId) {
-      api
-        .AuthFan(fanId)
-        .then((res) => {
-          console.log(res);
-          this.user.message = res.data.message;
-          this.user.resultCode = res.data.resultCode;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    fetchWithdraw(password) {
-      api
-        .withdraw(password)
-        .then((res) => {
-          console.log(res);
-          this.user.message = res.data.message;
-          this.user.resultCode = res.data.resultCode;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+   
   },
   getters: {
     getProfile(state) {
@@ -98,3 +75,6 @@ export const useProfileStore = defineStore("profile", {
     },
   },
 });
+
+
+  
