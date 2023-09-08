@@ -14,38 +14,40 @@
       <!-- <v-col cols="1"></v-col> -->
       <v-col cols="3">
         <div class="mt-10 pt-5">
-          <v-row class="mb-3">
+          <v-row class="mb-3" v-for="seat in seats" :key="seat.grade">
             <v-col cols="3">
-              <p class="pt-2">R석</p>
+              <p class="pt-2">{{ seat.grade }}석</p>
             </v-col>
             <v-col cols="4">
-              <p class="pt-2">90,000원</p>
+              <p class="pt-2">{{ seat.price }}원</p>
             </v-col>
-            <v-col cols="3"><v-btn :key="R" style="background-color: #ff5252; color: white" @click="goToReserved()">
+            <v-col cols="3"
+              ><v-btn
+                :key="seat.grade"
+                :style="getButtonStyle(seat.grade)"
+                @click="seatCheck(seat.gradeId, seat.totalSeat, seat.price)"
+              >
                 예매하기
-              </v-btn></v-col>
-          </v-row>
-          <v-row class="mb-3">
-            <v-col cols="3">
-              <p class="pt-2">S석</p>
-            </v-col>
-            <v-col cols="4">
-              <p class="pt-2">150,000원</p>
-            </v-col>
-            <v-col cols="3"><v-btn :key="S" style="background-color: #9c7d7d; color: white" @click="goToReserved()">
-                예매하기
-              </v-btn></v-col>
-          </v-row>
-          <v-row class="mb-3">
-            <v-col cols="3">
-              <p class="pt-2">A석</p>
-            </v-col>
-            <v-col cols="4">
-              <p class="pt-2">110,000원</p>
-            </v-col>
-            <v-col cols="3"><v-btn :key="A" style="background-color: #ecef68; color: white" @click="goToReserved()">
-                예매하기
-              </v-btn></v-col>
+              </v-btn></v-col
+            >
+            <v-dialog
+              v-model="seatDialog"
+              width="30%"
+              height="60%"
+              v-if="seatResultCode !== '0000'"
+            >
+              <v-card>
+                <v-toolbar color="primary" title="Error"></v-toolbar>
+                <v-card-text>
+                  <div class="pa-11" style="font-size: 30px">
+                    {{ seatMessage }}
+                  </div>
+                </v-card-text>
+                <v-card-actions class="justify-end">
+                  <v-btn variant="text" @click="closeDialog">Close</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-row>
 
           <v-row> </v-row>
@@ -57,14 +59,63 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
+import { useConcertStore } from "@/store";
+
 export default {
   data: () => ({
-    dialog: false,
+    seatDialog: false,
   }),
+  computed: {
+    ...mapState(useConcertStore, ["concert"]),
+    ...mapState(useConcertStore, ["seats"]),
+    ...mapState(useConcertStore, ["orderResultCode"]),
+    ...mapState(useConcertStore, ["orderMessage"]),
+    ...mapState(useConcertStore, ["detailResultCode"]),
+    ...mapState(useConcertStore, ["detailMessage"]),
+    ...mapState(useConcertStore, ["seatResultCode"]),
+    ...mapState(useConcertStore, ["seatMessage"]),
+  },
+  mounted() {
+    this.detailConcert(this.$route.params.concertId);
+    this.fetchOrderCheck(this.$route.params.concertId);
+  },
 
   methods: {
-    goToReserved() {
-      this.$router.push("/reserved");
+    ...mapActions(useConcertStore, ["detailConcert"]),
+    ...mapActions(useConcertStore, ["fetchOrderCheck"]),
+    ...mapActions(useConcertStore, ["fetchSeatCheck"]),
+
+    seatCheck(gradeId, totalSeat, price) {
+      this.fetchSeatCheck(this.concert.concertId, gradeId, totalSeat, price);
+      if (this.seatResultCode === "0000") {
+        this.$router.push("/reserved");
+      } else {
+        this.seatDialog = true;
+        console.log(this.seatMessage);
+      }
+    },
+    closeDialog() {
+      this.seatDialog = false;
+    },
+    getButtonStyle(grade) {
+      // seat.grade에 따라 버튼의 스타일을 동적으로 반환합니다.
+      if (grade === "R") {
+        return {
+          backgroundColor: "#ff5252", // A 등급일 때 버튼 색상
+          color: "white",
+        };
+      } else if (grade === "S") {
+        return {
+          backgroundColor: "#9C7D7D", // B 등급일 때 버튼 색상
+          color: "white",
+        };
+      } else {
+        return {
+          backgroundColor: "#ECEF68", // B 등급일 때 버튼 색상
+          color: "white",
+        }; // 기본 스타일을 사용하거나 추가 등급에 따라 스타일을 추가로 설정할 수 있습니다.
+      }
     },
   },
 };

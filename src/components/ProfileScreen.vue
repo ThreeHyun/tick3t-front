@@ -76,14 +76,14 @@
                         </v-col>
                       </v-row>
                       <v-row
-                        v-if="user.resultCode === '0000'"
+                        v-if="PwResultCode === '0000'"
                         class="justify-end"
                         style="color: blue"
                       >
-                        {{ user.message }}</v-row
+                        {{ PwMessage }}</v-row
                       >
                       <v-row v-else class="justify-end" style="color: red">
-                        {{ user.message }}</v-row
+                        {{ PwMessage }}</v-row
                       >
                     </v-container>
                   </v-card-text>
@@ -133,14 +133,14 @@
                         </v-col>
                       </v-row>
                       <v-row
-                        v-if="user.resultCode === '0000'"
+                        v-if="FanResultCode === '0000'"
                         class="justify-end"
                         style="color: blue"
                       >
-                        {{ user.message }}</v-row
+                        {{ FanMessage }}</v-row
                       >
                       <v-row v-else class="justify-end" style="color: red">
-                        {{ user.message }}</v-row
+                        {{ FanMessage }}</v-row
                       >
                     </v-container>
                   </v-card-text>
@@ -205,14 +205,14 @@
                         ></v-checkbox>
                       </v-row>
                       <v-row
-                        v-if="user.resultCode === '0000'"
+                        v-if="WDResultCode === '0000'"
                         class="justify-end"
                         style="color: blue"
                       >
-                        {{ user.message }}</v-row
+                        {{ WDMessage }}</v-row
                       >
                       <v-row v-else class="justify-end" style="color: red">
-                        {{ user.message }}</v-row
+                        {{ WDMessage }}</v-row
                       >
                     </v-container>
                   </v-card-text>
@@ -270,6 +270,12 @@ export default {
   }),
   computed: {
     ...mapState(useProfileStore, ["user"]),
+    ...mapState(useProfileStore, ["PwResultCode"]),
+    ...mapState(useProfileStore, ["PwMessage"]),
+    ...mapState(useProfileStore, ["FanResultCode"]),
+    ...mapState(useProfileStore, ["FanMessage"]),
+    ...mapState(useProfileStore, ["WDResultCode"]),
+    ...mapState(useProfileStore, ["WDMessage"]),
   },
   methods: {
     ...mapActions(useProfileStore, [

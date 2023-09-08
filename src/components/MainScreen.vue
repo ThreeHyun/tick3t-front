@@ -38,17 +38,17 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { concertStore } from "@/store";
+import { useConcertStore } from "@/store";
 
 export default {
   data: () => ({
     model: null,
   }),
   computed: {
-    ...mapState(concertStore, ["concertList"]),
+    ...mapState(useConcertStore, ["concertList"]),
   },
   methods: {
-    ...mapActions(concertStore, ["fetchConcertList"]),
+    ...mapActions(useConcertStore, ["fetchConcertList"]),
     goToConcert(concertId) {
       this.$router.push("/concert/" + concertId);
     },
