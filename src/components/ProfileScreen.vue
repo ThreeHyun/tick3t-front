@@ -1,37 +1,29 @@
 <template>
   <v-window-item :value="2">
-    <v-container class="d-flex justify-center ma-10">
-      <v-table class="table ma-10" style="text-align: start; width: 60%">
+    <v-container class="d-flex justify-center">
+      <v-table class="table" style="min-width: 60%">
         <tbody>
           <tr>
-            <td style="border-bottom: none; text-align: start; font-size: 30px">
-              이메일
-            </td>
-            <td style="border-bottom: none; text-align: start; font-size: 30px">
+            <td class="profile-text">이메일</td>
+            <td class="profile-text">
               {{ user.email }}
             </td>
           </tr>
           <tr>
-            <td style="border-bottom: none; text-align: start; font-size: 30px">
-              이름
-            </td>
-            <td style="border-bottom: none; text-align: start; font-size: 30px">
+            <td class="profile-text">이름</td>
+            <td class="profile-text">
               {{ user.name }}
             </td>
           </tr>
           <tr>
-            <td style="border-bottom: none; text-align: start; font-size: 30px">
-              생년월일
-            </td>
-            <td style="border-bottom: none; text-align: start; font-size: 30px">
+            <td class="profile-text">생년월일</td>
+            <td class="profile-text">
               {{ user.birth }}
             </td>
           </tr>
           <tr>
-            <td style="border-bottom: none; text-align: start; font-size: 30px">
-              비밀번호
-            </td>
-            <td style="border-bottom: none; text-align: start; font-size: 30px">
+            <td class="profile-text">비밀번호</td>
+            <td class="profile-text">
               <v-dialog v-model="dialog1" persistent width="1024">
                 <template v-slot:activator="{ props }">
                   <v-btn class="clickButton" v-bind="props"> 변경하기 </v-btn>
@@ -89,11 +81,7 @@
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn
-                      color="#000000"
-                      variant="text"
-                      @click="dialog1 = false"
-                    >
+                    <v-btn color="#000000" variant="text" @click="dialogFalse">
                       취소
                     </v-btn>
                     <v-btn color="#ff5252" variant="text" @click="pwdCheck">
@@ -105,13 +93,11 @@
             </td>
           </tr>
           <tr>
-            <td style="border-bottom: none; text-align: start; font-size: 30px">
-              팬클럽 회원번호
-            </td>
-            <td style="border-bottom: none; text-align: start; font-size: 30px">
+            <td class="profile-text">팬클럽 회원번호</td>
+            <td class="profile-text">
               {{ user.fanId }}
             </td>
-            <td style="border-bottom: none; text-align: start; font-size: 30px">
+            <td class="profile-text">
               <v-dialog v-model="dialog2" persistent width="1024">
                 <template v-slot:activator="{ props }">
                   <v-btn class="clickButton" v-bind="props"> 인증하기 </v-btn>
@@ -269,13 +255,15 @@ export default {
     page: 1,
   }),
   computed: {
-    ...mapState(useProfileStore, ["user"]),
-    ...mapState(useProfileStore, ["PwResultCode"]),
-    ...mapState(useProfileStore, ["PwMessage"]),
-    ...mapState(useProfileStore, ["FanResultCode"]),
-    ...mapState(useProfileStore, ["FanMessage"]),
-    ...mapState(useProfileStore, ["WDResultCode"]),
-    ...mapState(useProfileStore, ["WDMessage"]),
+    ...mapState(useProfileStore, [
+      "user",
+      "PwResultCode",
+      "PwMessage",
+      "FanResultCode",
+      "FanMessage",
+      "WDResultCode",
+      "WDMessage",
+    ]),
   },
   methods: {
     ...mapActions(useProfileStore, [
@@ -283,6 +271,8 @@ export default {
       "fetchUpdatePwd",
       "fetchAuthFanId",
       "fetchWithdraw",
+      "setPwResultCode",
+      "setPwMessage",
     ]),
 
     onClick() {
@@ -294,13 +284,38 @@ export default {
       }, 2000);
     },
 
+    dialogFalse() {
+      this.oldPassword = "";
+      this.newPassword = "";
+      this.newPasswordCheck = "";
+
+      this.setPwResultCode(""); // PwResultCode 초기화
+      this.setPwMessage(""); //// PwMessage 초기화
+
+      this.dialog1 = false;
+    },
+
+    // pwdCheck() {
+    //   this.fetchUpdatePwd(
+    //     this.oldPassword,
+    //     this.newPassword,
+    //     this.newPasswordCheck
+    //   );
+    //   this.dialogFalse();
+    // },
+
     pwdCheck() {
       this.fetchUpdatePwd(
         this.oldPassword,
         this.newPassword,
         this.newPasswordCheck
-      );
+      ).then(() => {
+        if (this.PwResultCode === "0000") {
+          setTimeout(() => this.dialogFalse(), 2000);
+        }
+      });
     },
+
     FanCheck() {
       this.fetchAuthFanId(this.fanId);
     },
@@ -313,3 +328,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.profile-text {
+  border-bottom: none !important;
+  text-align: start;
+  font-size: 20px;
+}
+</style>

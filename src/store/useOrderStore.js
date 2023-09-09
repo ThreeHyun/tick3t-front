@@ -9,7 +9,9 @@ export const useOrderStore = defineStore("order", {
       datetime: "",
       location: "",
       payState: "",
-      
+      imgUrl:"",
+      hallName:""
+
       
     },
     orderList: [],

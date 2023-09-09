@@ -25,6 +25,7 @@ export const useProfileStore = defineStore("profile", {
 
   }),
   actions: {
+
     fetchUserData(id) {
       api
         .getProfile(id)
@@ -37,7 +38,7 @@ export const useProfileStore = defineStore("profile", {
         });
     },
     fetchUpdatePwd(oldPassword, newPassword, newPasswordCheck) {
-      api
+      return api
         .Password(oldPassword, newPassword, newPasswordCheck)
         .then((res) => {
           //console.log(res.status);
@@ -75,6 +76,16 @@ export const useProfileStore = defineStore("profile", {
           console.log(err);
         });
     },
+    setPwResultCode(code) { 
+      this.PwResultCode = code;
+    },
+    setPwMessage(message) {
+      console.log("pwMessage 변경")
+      this.PwMessage = message;
+      console.log(this.PwMessage)
+    },
+
+
    
   },
   getters: {

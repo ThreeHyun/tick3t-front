@@ -37,7 +37,7 @@
     >
       <v-row class="justify-start">
         <v-col cols="4">
-          <v-img src="@/assets/poster.png" height="300px"></v-img>
+          <v-img :src="order.imgUrl" height="300px"></v-img>
         </v-col>
         <v-col cols="8">
           <v-row class="justify-start mb-8">
@@ -62,7 +62,7 @@
               <p style="font-size: 30px" class="concertDate mt-3">
                 {{ order.datetime }}
               </p>
-              <p style="font-size: 20px">{{ order.location }}</p>
+              <p style="font-size: 20px">{{ order.hallName }}</p>
             </v-col>
           </v-row>
         </v-col>
