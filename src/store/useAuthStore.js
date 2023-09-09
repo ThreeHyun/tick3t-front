@@ -11,7 +11,13 @@ export const useAuthStore = defineStore("auth", {
       resultCode: "",
     },
     token: window.sessionStorage.getItem("token") || "",
+    role: window.sessionStorage.getItem("role") || "",
   }),
+  getters: {
+    isAuthenticated() {
+      return this.token !== ""; // token이 존재하면 로그인된 것으로 판단
+    },
+  },
   actions: {
     signup(email, userPwd, name, birth, fanCd) {
       api
@@ -28,7 +34,9 @@ export const useAuthStore = defineStore("auth", {
         .login(email, userPwd)
         .then((res) => {
           this.token = res.data.data.accessToken;
+          this.role = res.data.data.role;
           window.sessionStorage.setItem("token", this.token);
+          window.sessionStorage.setItem("role", this.role);
         })
         .catch((err) => {
           console.log(err);
