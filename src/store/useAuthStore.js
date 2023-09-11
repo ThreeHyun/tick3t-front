@@ -11,7 +11,7 @@ export const useAuthStore = defineStore("auth", {
       resultCode: "",
     },
     token: window.sessionStorage.getItem("token") || "",
-    role: window.sessionStorage.getItem("role") || "",
+    role: "",
   }),
   getters: {
     isAuthenticated() {
@@ -36,7 +36,6 @@ export const useAuthStore = defineStore("auth", {
           this.token = res.data.data.accessToken;
           this.role = res.data.data.role;
           window.sessionStorage.setItem("token", this.token);
-          window.sessionStorage.setItem("role", this.role);
         })
         .catch((err) => {
           console.log(err);
@@ -63,6 +62,16 @@ export const useAuthStore = defineStore("auth", {
           console.log(res);
           this.auth.message = res.data.message;
           this.auth.resultCode = res.data.resultCode;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async checkAuth() {
+      return api
+        .checkAuth()
+        .then((res) => {
+          this.role = res.data.data.role;
         })
         .catch((err) => {
           console.log(err);

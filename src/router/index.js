@@ -80,22 +80,44 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const authStore = useAuthStore(); // useAuthStore를 사용
-  if (to.name === "main" && authStore.role === "ROLE_ADMIN") {
-    return next({ path: "/dashboard" });
+  const authStore = useAuthStore();
+  if (to.meta.requiresAuth) {
+    if (authStore.isAuthenticated) {
+      if (to.meta.role === "ROLE_ADMIN") {
+        await authStore.checkAuth().then(() => {
+          if (authStore.role === "ROLE_ADMIN") {
+            next();
+          } else {
+            window.alert("어드민 유저가 아니잖아요...");
+            next({ path: "/" });
+          }
+        });
+      } else if (to.meta.role === "ROLE_USER") {
+        await authStore.checkAuth().then(() => {
+          if (authStore.role === "ROLE_USER") {
+            next();
+          } else {
+            window.alert("유저가 아니잖아요...");
+            next({ path: "/" });
+          }
+        });
+      }
+    } else {
+      next("/login");
+    }
+  } else {
+    if (to.path === "/") {
+      await authStore.checkAuth().then(() => {
+        if (authStore.role === "ROLE_ADMIN") {
+          next({ path: "/dashboard" });
+        } else {
+          next();
+        }
+      });
+    } else {
+      next();
+    }
   }
-
-  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    // 로그인이 필요한 페이지인지 확인
-    return next({ path: "/login" }); // 로그인 페이지로 리다이렉트
-  }
-
-  if (to.meta.role && authStore.role !== to.meta.role) {
-    // 특정 역할이 필요한 경우
-    return next({ path: "/" }); // 권한이 없으면 unauthorized 페이지로 이동
-  }
-
-  next();
 });
 
 export default router;
