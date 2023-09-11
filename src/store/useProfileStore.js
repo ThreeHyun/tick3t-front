@@ -35,6 +35,8 @@ export const useProfileStore = defineStore("profile", {
         })
         .catch((err) => {
           console.log(err);
+          //console.log(err.response.data.message);
+          
         });
     },
     fetchUpdatePwd(oldPassword, newPassword, newPasswordCheck) {
@@ -50,10 +52,12 @@ export const useProfileStore = defineStore("profile", {
         })
         .catch((err) => {
           console.log(err);
+          //console.log(err.response.data.message);
+          alert("새 로그인 후 다시 시도해주세요.");
         });
     },
     fetchAuthFanId(fanId) {
-      api
+      return api
         .AuthFan(fanId)
         .then((res) => {
           console.log(res);
@@ -62,10 +66,11 @@ export const useProfileStore = defineStore("profile", {
         })
         .catch((err) => {
           console.log(err);
+          alert("새 로그인 후 다시 시도해주세요.");
         });
     },
     fetchWithdraw(password) {
-      api
+      return api
         .withdraw(password)
         .then((res) => {
           console.log(res);
@@ -74,16 +79,28 @@ export const useProfileStore = defineStore("profile", {
         })
         .catch((err) => {
           console.log(err);
+          alert("새 로그인 후 다시 시도해주세요.");
         });
     },
     setPwResultCode(code) { 
       this.PwResultCode = code;
     },
     setPwMessage(message) {
-      console.log("pwMessage 변경")
       this.PwMessage = message;
-      console.log(this.PwMessage)
     },
+    setFanResultCode(code) { 
+      this.FanResultCode = code;
+    },
+    setFanMessage(message) {
+      this.FanMessage = message;
+    },
+    setWDResultCode(code) { 
+      this.WDResultCode = code;
+    },
+    setWDMessage(message) {
+      this.WDMessage = message;
+    },
+
 
 
    

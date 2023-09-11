@@ -24,10 +24,10 @@ export default {
     });
   },
   AuthFan: function (fanId) {
-    return api.post(`profile/fanId`, { fanId: fanId });
+    return api.post(API_URL +`profile/fanId`, { fanId: fanId });
   },
   withdraw: function (password) {
-    return api.post(`profile/withdraw`, { password: password });
+    return api.post(API_URL +`profile/withdraw`, { password: password });
   },
   getMyorder: function (pageNo, category, word) {
     return api.get(

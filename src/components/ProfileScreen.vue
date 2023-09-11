@@ -1,6 +1,6 @@
 <template>
   <v-window-item :value="2">
-    <v-container class="d-flex justify-center">
+    <v-container class="d-flex justify-center mt-8">
       <v-table class="table" style="min-width: 60%">
         <tbody>
           <tr>
@@ -81,7 +81,7 @@
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="#000000" variant="text" @click="dialogFalse">
+                    <v-btn color="#000000" variant="text" @click="dialogFalse1">
                       취소
                     </v-btn>
                     <v-btn color="#ff5252" variant="text" @click="pwdCheck">
@@ -132,11 +132,7 @@
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn
-                      color="#000000"
-                      variant="text"
-                      @click="dialog2 = false"
-                    >
+                    <v-btn color="#000000" variant="text" @click="dialogFalse2">
                       취소
                     </v-btn>
                     <v-btn color="#ff5252" variant="text" @click="FanCheck">
@@ -204,11 +200,7 @@
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn
-                      color="#000000"
-                      variant="text"
-                      @click="dialog3 = false"
-                    >
+                    <v-btn color="#000000" variant="text" @click="dialogFalse3">
                       취소
                     </v-btn>
                     <v-btn
@@ -273,6 +265,10 @@ export default {
       "fetchWithdraw",
       "setPwResultCode",
       "setPwMessage",
+      "setFanResultCode",
+      "setFanMessage",
+      "setWDResultCode",
+      "setWDMessage",
     ]),
 
     onClick() {
@@ -284,7 +280,7 @@ export default {
       }, 2000);
     },
 
-    dialogFalse() {
+    dialogFalse1() {
       this.oldPassword = "";
       this.newPassword = "";
       this.newPasswordCheck = "";
@@ -294,15 +290,22 @@ export default {
 
       this.dialog1 = false;
     },
+    dialogFalse2() {
+      this.fanId = "";
 
-    // pwdCheck() {
-    //   this.fetchUpdatePwd(
-    //     this.oldPassword,
-    //     this.newPassword,
-    //     this.newPasswordCheck
-    //   );
-    //   this.dialogFalse();
-    // },
+      this.setFanResultCode(""); // PwResultCode 초기화
+      this.setFanMessage(""); //// PwMessage 초기화
+
+      this.dialog2 = false;
+    },
+    dialogFalse3() {
+      this.password = "";
+
+      this.setWDResultCode("");
+      this.setWDMessage("");
+
+      this.dialog3 = false;
+    },
 
     pwdCheck() {
       this.fetchUpdatePwd(
@@ -311,21 +314,32 @@ export default {
         this.newPasswordCheck
       ).then(() => {
         if (this.PwResultCode === "0000") {
-          setTimeout(() => this.dialogFalse(), 2000);
+          setTimeout(() => this.dialogFalse1(), 700);
         }
       });
     },
 
     FanCheck() {
-      this.fetchAuthFanId(this.fanId);
+      this.fetchAuthFanId(this.fanId).then(() => {
+        if (this.FanResultCode === "0000") {
+          setTimeout(() => this.dialogFalse2(), 700);
+        }
+      });
     },
     WithDrawCheck() {
-      this.fetchWithdraw(this.password);
+      this.fetchWithdraw(this.password).then(() => {
+        if (this.WDResultCode === "0000") {
+          setTimeout(() => this.dialogFalse3(), 700);
+        }
+      });
     },
   },
   mounted() {
     this.fetchUserData(this);
   },
+  // async mounted() {
+  //   await this.fetchUserData(this);
+  // },
 };
 </script>
 

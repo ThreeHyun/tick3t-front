@@ -22,8 +22,8 @@ export default {
   orderCheck: function (concertId) { 
     return api.get(API_URL+`order/check/${concertId}`);
   },
-  seatCheck: function (concertId,gradeId,totalSeat,price) { 
-    return api.post(API_URL+`order`,{concertId:concertId,gradeId:gradeId,totalSeat:totalSeat,price:price});
+  seatCheck: function (ticketId,concertId,gradeId,totalSeat,price) { 
+    return api.post(API_URL+`order`,{ticketId:ticketId,concertId:concertId,gradeId:gradeId,totalSeat:totalSeat,price:price});
   },
 
 };
