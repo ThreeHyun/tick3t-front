@@ -13,9 +13,16 @@ export const useProfileStore = defineStore("profile", {
       newPassword: "",
       newPasswordCheck: "",
       password: "",
-      message: "",
-      resultCode: "",
+
+   
     },
+    PwResultCode:"",
+    PwMessage:"",
+    FanResultCode:"",
+    FanMessage:"",
+    WDResultCode:"",
+    WDMessage:""
+
   }),
   actions: {
     fetchUserData(id) {
@@ -33,11 +40,12 @@ export const useProfileStore = defineStore("profile", {
       api
         .Password(oldPassword, newPassword, newPasswordCheck)
         .then((res) => {
-          console.log(res.status);
+          //console.log(res.status);
           // alert(res.data.resultCode);
           console.log(res);
-          this.user.message = res.data.message;
-          this.user.resultCode = res.data.resultCode;
+          this.PwResultCode=res.data.resultCode;
+          this.PwMessage=res.data.message;
+
         })
         .catch((err) => {
           console.log(err);
@@ -48,8 +56,8 @@ export const useProfileStore = defineStore("profile", {
         .AuthFan(fanId)
         .then((res) => {
           console.log(res);
-          this.user.message = res.data.message;
-          this.user.resultCode = res.data.resultCode;
+          this.FanMessage = res.data.message;
+          this.FanResultCode = res.data.resultCode;
         })
         .catch((err) => {
           console.log(err);
@@ -60,8 +68,8 @@ export const useProfileStore = defineStore("profile", {
         .withdraw(password)
         .then((res) => {
           console.log(res);
-          this.user.message = res.data.message;
-          this.user.resultCode = res.data.resultCode;
+          this.WDMessage = res.data.message;
+          this.WDResultCode = res.data.resultCode;
         })
         .catch((err) => {
           console.log(err);

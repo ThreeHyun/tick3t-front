@@ -10,17 +10,17 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { concertStore } from "@/store";
+import { useConcertStore } from "@/store";
 
 export default {
   data() {},
   computed: {
-    ...mapState(concertStore, ["concert"]),
+    ...mapState(useConcertStore, ["concert"]),
     // ...mapState(concertStore, ["resultCode"]),
     // ...mapState(concertStore, ["message"]),
   },
   methods: {
-    ...mapActions(concertStore, ["detailConcert"]),
+    ...mapActions(useConcertStore, ["detailConcert"]),
   },
   mounted() {
     this.detailConcert(this.$route.params.concertId);

@@ -11,7 +11,13 @@ export const useAuthStore = defineStore("auth", {
       resultCode: "",
     },
     token: window.sessionStorage.getItem("token") || "",
+    role: "",
   }),
+  getters: {
+    isAuthenticated() {
+      return this.token !== ""; // token이 존재하면 로그인된 것으로 판단
+    },
+  },
   actions: {
     signup(email, userPwd, name, birth, fanCd) {
       api
@@ -28,6 +34,7 @@ export const useAuthStore = defineStore("auth", {
         .login(email, userPwd)
         .then((res) => {
           this.token = res.data.data.accessToken;
+          this.role = res.data.data.role;
           window.sessionStorage.setItem("token", this.token);
         })
         .catch((err) => {
@@ -55,6 +62,16 @@ export const useAuthStore = defineStore("auth", {
           console.log(res);
           this.auth.message = res.data.message;
           this.auth.resultCode = res.data.resultCode;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async checkAuth() {
+      return api
+        .checkAuth()
+        .then((res) => {
+          this.role = res.data.data.role;
         })
         .catch((err) => {
           console.log(err);

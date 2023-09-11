@@ -36,4 +36,11 @@ export default {
       birth: birth,
     });
   },
+  checkAuth: function () {
+    return api.get("auth", {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+      },
+    });
+  },
 };
