@@ -87,9 +87,15 @@ export default {
     ...mapActions(useConcertStore, ["fetchSeatCheck"]),
 
     seatCheck(gradeId, totalSeat, price) {
-      this.fetchSeatCheck(this.concert.concertId, gradeId, totalSeat, price);
+      this.fetchSeatCheck(
+        this.concert.ticketId,
+        this.concert.concertId,
+        gradeId,
+        totalSeat,
+        price
+      );
       if (this.seatResultCode === "0000") {
-        this.$router.push("/reserved");
+        this.$router.push("/reserved/" + this.concert.ticketId);
       } else {
         this.seatDialog = true;
         console.log(this.seatMessage);

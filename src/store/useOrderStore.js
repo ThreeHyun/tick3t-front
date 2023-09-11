@@ -9,7 +9,9 @@ export const useOrderStore = defineStore("order", {
       datetime: "",
       location: "",
       payState: "",
-      
+      imgUrl:"",
+      hallName:""
+
       
     },
     orderList: [],
@@ -26,6 +28,7 @@ export const useOrderStore = defineStore("order", {
         })
         .catch((err) => {
           console.log(err);
+          alert("새 로그인 후 다시 시도해주세요.");
         });
     },
   },
