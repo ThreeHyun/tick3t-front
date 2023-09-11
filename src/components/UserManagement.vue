@@ -13,7 +13,7 @@
             label="검색" />
         </v-col>
         <v-col cols="12" sm="6" md="2">
-          <v-btn @click="hadleSearch" class="check" block rounded="lg" center size="large">조회하기</v-btn>
+          <v-btn @click="handleSearch" class="check" block rounded="lg" center size="large">조회하기</v-btn>
         </v-col>
       </v-row>
     </v-responsive>
@@ -44,7 +44,7 @@
   </v-container>
 
   <div class="text-center">
-    <v-pagination v-model="pageNo" :length="4" @click="handlePage"></v-pagination>
+    <v-pagination v-model="pageNo" :length="totalPage" @click="handlePage"></v-pagination>
   </div>
 </template>
 
@@ -76,7 +76,7 @@ export default {
     handlePage() {
       this.fetchUserList(this.pageNo, this.searchCategory, this.searchWord);
     },
-    hadleSearch() {
+    handleSearch() {
       this.pageNo = 1;
       this.fetchUserList(this.pageNo, this.searchCategory, this.searchWord);
     },

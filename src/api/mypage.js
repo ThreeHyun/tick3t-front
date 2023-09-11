@@ -8,7 +8,6 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
     Authorization: "Bearer " + sessionStorage.getItem("token"),
-    //Authorization: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwYXJrc2VyaW5fQG5hdmVyLmNvbSIsInVzZXJJZCI6NjAwMDEsInN0YXR1c0NkIjp0cnVlLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjkzODYxNjI4fQ.3v5KSiR8EYpCk8ewEN9h5r0IXRI0ANcLC52xh9m-FocS3jGcSadjbHSDxGRTGS_zvHKLbdxXHI0skpRAjz8GIQ",
   },
 });
 

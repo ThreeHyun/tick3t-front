@@ -46,19 +46,19 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { concertStore } from "@/store";
+import { useConcertStore } from "@/store";
 
 export default {
   data: () => ({
     orderDialog: false,
   }),
   computed: {
-    ...mapState(concertStore, ["concert"]),
-    ...mapState(concertStore, ["seats"]),
-    ...mapState(concertStore, ["orderResultCode"]),
-    ...mapState(concertStore, ["orderMessage"]),
-    ...mapState(concertStore, ["detailResultCode"]),
-    ...mapState(concertStore, ["detailMessage"]),
+    ...mapState(useConcertStore, ["concert"]),
+    ...mapState(useConcertStore, ["seats"]),
+    ...mapState(useConcertStore, ["orderResultCode"]),
+    ...mapState(useConcertStore, ["orderMessage"]),
+    ...mapState(useConcertStore, ["detailResultCode"]),
+    ...mapState(useConcertStore, ["detailMessage"]),
   },
   mounted() {
     this.detailConcert(this.$route.params.concertId);
@@ -69,8 +69,8 @@ export default {
   },
 
   methods: {
-    ...mapActions(concertStore, ["detailConcert"]),
-    ...mapActions(concertStore, ["fetchOrderCheck"]),
+    ...mapActions(useConcertStore, ["detailConcert"]),
+    ...mapActions(useConcertStore, ["fetchOrderCheck"]),
 
     orderCheck() {
       this.fetchOrderCheck(this.concert.concertId);

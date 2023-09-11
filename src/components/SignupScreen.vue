@@ -7,13 +7,13 @@
       <div class="text-subtitle-1 text-medium-emphasis"></div>
 
       <v-text-field v-model="email" density="compact" prepend-inner-icon="mdi-email-outline" variant="outlined"
-        placeholder="예) tick3t@tick-3t.com" label="이메일"></v-text-field>
+        placeholder="예) tick3t@tick-3t.com" label="이메일" type="email" required :rules="emailRules"></v-text-field>
 
-      <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
+      <!-- <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
         <a class="text-caption text-decoration-none text-blue" href="#" rel="noopener noreferrer" target="_blank"></a>
-      </div>
+      </div> -->
 
-      <div class="pb-2" v-if="!emailValid && email !== ''" style="color:red; font-size: 14px;">
+      <div class="pb-5" v-if="!emailValid && email !== ''" style="color:red; font-size: 14px;">
         이메일 : 올바르지 않은 이메일 형식입니다.
       </div>
 
@@ -88,21 +88,8 @@ export default {
       "채봉구",
       "한노아",
     ],
-    // data() {
-    //   return {
-
-    //     checkbox: false,
-    //   };
-    // },
-    // errorMessages: "",
-    // name: null,
-    // address: null,
-    // city: null,
-    // state: null,
-    // zip: null,
-    // star: null,
-    // formHasErrors: false,
   }),
+
   computed: {
     emailValid() {
       return /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/.test(this.email)
