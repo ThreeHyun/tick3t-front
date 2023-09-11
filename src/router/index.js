@@ -18,24 +18,6 @@ const routes = [
         component: () => import("@/views/ConcertView.vue"),
       },
       {
-        path: "/dashboard",
-        name: "dashboard",
-        component: () => import("@/views/DashboardView.vue"),
-        meta: { requiresAuth: true, role: "ROLE_ADMIN" },
-      },
-      {
-        path: "/usermgmt",
-        name: "usermgmt",
-        component: () => import("@/views/UserManagementView.vue"),
-        meta: { requiresAuth: true, role: "ROLE_ADMIN" },
-      },
-      {
-        path: "/usermgmt/:userId",
-        name: "userdetails",
-        component: () => import("@/views/UserDetailsView.vue"),
-        meta: { requiresAuth: true, role: "ROLE_ADMIN" },
-      },
-      {
         path: "/mypage",
         name: "mypage",
         component: () => import("@/views/MyPageView.vue"),
@@ -69,6 +51,30 @@ const routes = [
         path: "/signup",
         name: "signup",
         component: () => import("@/views/SignupView.vue"),
+      },
+    ],
+  },
+  {
+    path: "/",
+    component: () => import("@/layouts/default/Default.vue"),
+    children: [
+      {
+        path: "/dashboard",
+        name: "dashboard",
+        component: () => import("@/views/DashboardView.vue"),
+        meta: { requiresAuth: true, role: "ROLE_ADMIN" },
+      },
+      {
+        path: "/usermgmt",
+        name: "usermgmt",
+        component: () => import("@/views/UserManagementView.vue"),
+        meta: { requiresAuth: true, role: "ROLE_ADMIN" },
+      },
+      {
+        path: "/usermgmt/:userId",
+        name: "userdetails",
+        component: () => import("@/views/UserDetailsView.vue"),
+        meta: { requiresAuth: true, role: "ROLE_ADMIN" },
       },
     ],
   },

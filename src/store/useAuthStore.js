@@ -24,8 +24,11 @@ export const useAuthStore = defineStore("auth", {
         .signup(email, userPwd, name, birth, fanCd)
         .then(() => {
           console.log("회원가입 성공!!");
+          alert("회원가입이 완료되었습니다.");
+          location.href = "/login";
         })
         .catch((err) => {
+          alert(err.response.data.message);
           console.log(err);
         });
     },
@@ -38,7 +41,8 @@ export const useAuthStore = defineStore("auth", {
           window.sessionStorage.setItem("token", this.token);
         })
         .catch((err) => {
-          console.log(err);
+          alert(err.response.data.message);
+          console.log(err.response.data.message);
         });
     },
     logout() {

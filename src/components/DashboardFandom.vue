@@ -11,7 +11,7 @@
           </div>
         </v-col>
         <v-col cols="12" sm="6" md="2">
-          <v-btn class="check" block rounded="lg" center size="large" @click="handleSearch">조회하기</v-btn>
+          <v-btn class="checkFandom" block rounded="lg" center size="large" @click="handleSearch">조회하기</v-btn>
         </v-col>
       </v-row>
     </v-responsive>
@@ -47,7 +47,7 @@ import { useDashboardStore } from "@/store";
 export default {
   data() {
     return {
-      searchCategory: "",
+      searchCategory: "IU",
       categorieList: [
         { title: "IU", value: "IU" },
         { title: "규현", value: "규현" },

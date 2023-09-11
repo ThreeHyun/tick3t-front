@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-img class="mx-auto my-6" max-width="200" src="@/assets/logo.png"></v-img>
+    <v-img class="mx-auto my-6" max-width="200" src="@/assets/logo.png" @click="goToHomePage"
+      style="cursor: pointer;"></v-img>
 
     <v-card class="mx-auto pa-12 pb-8" elevation="8" max-width="530" rounded="lg">
       <div class="text-subtitle-1 text-medium-emphasis"></div>
@@ -12,12 +13,11 @@
         <a class="text-caption text-decoration-none text-blue" href="#" rel="noopener noreferrer" target="_blank"></a>
       </div>
 
-      <v-text-field v-model="userPwd" :type="visible ? 'text' : 'userPwd'" density="compact" label="비밀번호"
-        prepend-inner-icon="mdi-lock-outline" variant="outlined" :rules="[() => !!userPwd || '비밀번호를 입력해주세요.']"
-        @keyup.enter="login()" required></v-text-field>
+      <v-text-field v-model="userPwd" :type="visible ? 'text' : 'password'" density="compact" label="비밀번호"
+        prepend-inner-icon="mdi-lock-outline" variant="outlined" required></v-text-field>
 
       <v-btn @click="sendLogin" block class="text-white mb-8" color="primary" size="large" variant="flat"
-        :rules="[() => !!email || '이메일을 입력해주세요.']">
+        :disabled="email && userPwd === ''">
         로그인
       </v-btn>
 
@@ -126,6 +126,9 @@ export default {
           this.$router.push("/");
         }
       })
+    },
+    goToHomePage() {
+      this.$router.push("/");
     },
     getPwd() {
       this.findPwd(

@@ -11,7 +11,7 @@
           </div>
         </v-col>
         <v-col cols="12" sm="6" md="2">
-          <v-btn class="check" block rounded="lg" center size="large" @click="handleTicketClick">조회하기</v-btn>
+          <v-btn class="checkTicket" block rounded="lg" center size="large" @click="handleTicketClick">조회하기</v-btn>
         </v-col>
       </v-row>
     </v-responsive>
