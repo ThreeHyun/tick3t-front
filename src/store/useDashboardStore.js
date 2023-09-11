@@ -29,6 +29,7 @@ export const useDashboardStore = defineStore("dashboard", {
         })
         .catch((err) => {
           console.log(err);
+          alert(err.response.data.message);
         });
     },
     fetchTicketList() {
@@ -48,6 +49,7 @@ export const useDashboardStore = defineStore("dashboard", {
         .then((res) => {
           console.log(res);
           this.dashboard = { ...res.data.data };
+          alert(res.data.message);
         })
         .catch((err) => {
           console.log(err);

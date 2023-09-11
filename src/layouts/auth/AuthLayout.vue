@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <!-- <img src="@/assets/logo.png" alt="logo" class="logo-img" id="logo" @click="goToHomePage" /> -->
     <default-view />
   </v-app>
 </template>
