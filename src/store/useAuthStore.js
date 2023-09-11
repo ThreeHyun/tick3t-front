@@ -59,6 +59,7 @@ export const useAuthStore = defineStore("auth", {
       api
         .findPwd(email, name, birth)
         .then((res) => {
+          // console.log(res.status);
           console.log(res);
           this.auth.message = res.data.message;
           this.auth.resultCode = res.data.resultCode;

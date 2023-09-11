@@ -8,26 +8,24 @@ export const useConcertStore = defineStore("concert", {
       title: "",
       date: "",
       location: "",
-      hallName:"",
-      startDate:"",
+      hallName: "",
+      startDate: "",
       imgUrl: "",
 
-      grade:"",
-      gradeId:0,
-      price:0,
-      remainSeat:0,
-      totalSeat:0
+      grade: "",
+      gradeId: 0,
+      price: 0,
+      remainSeat: 0,
+      totalSeat: 0,
     },
     concertList: [],
-    seats:[],
-
+    seats: [],
     orderResultCode: "",
-    orderMessage:"",
-    detailResultCode: "", 
+    orderMessage: "",
+    detailResultCode: "",
     detailMessage: "",
-    seatMessage :"",
-    seatResultCode:""
-    
+    seatMessage: "",
+    seatResultCode: "",
   }),
   actions: {
     fetchConcertList() {
@@ -36,7 +34,6 @@ export const useConcertStore = defineStore("concert", {
         .then((res) => {
           console.log(res);
           this.concertList = [...res.data.data];
-          
         })
         .catch((err) => {
           console.log(err);
@@ -50,13 +47,13 @@ export const useConcertStore = defineStore("concert", {
           this.concert = { ...res.data.data };
           this.detailResultCode = res.data.resultCode;
           this.detailMessage = res.data.message;
-          this.seats={...res.data.data.seats}
+          this.seats = { ...res.data.data.seats };
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    fetchOrderCheck(concertId){
+    fetchOrderCheck(concertId) {
       api
         .orderCheck(concertId)
         .then((res) => {
@@ -67,10 +64,10 @@ export const useConcertStore = defineStore("concert", {
         .catch((err) => {
           console.log(err);
         });
-  },
-   fetchSeatCheck(concertId,gradeId,totalSeat,price){
+    },
+    fetchSeatCheck(concertId, gradeId, totalSeat, price) {
       api
-        .seatCheck(concertId,gradeId,totalSeat,price)
+        .seatCheck(concertId, gradeId, totalSeat, price)
         .then((res) => {
           console.log(res);
           this.seatMessage = res.data.message;
@@ -79,11 +76,11 @@ export const useConcertStore = defineStore("concert", {
         .catch((err) => {
           console.log(err);
         });
-  },
-  getters: {
-    getConcertDetails(state) {
-      return state.concert;
+    },
+    getters: {
+      getConcertDetails(state) {
+        return state.concert;
+      },
     },
   },
-}
 });

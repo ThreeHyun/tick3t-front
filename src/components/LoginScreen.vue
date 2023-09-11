@@ -17,7 +17,7 @@
         @keyup.enter="login()" required></v-text-field>
 
       <v-btn @click="sendLogin" block class="text-white mb-8" color="primary" size="large" variant="flat"
-        :rules="[() => !!email || '아이디를 입력해주세요.']">
+        :rules="[() => !!email || '이메일을 입력해주세요.']">
         로그인
       </v-btn>
 
@@ -28,7 +28,7 @@
         <a class="pr-3 pl-3">
           |
         </a>
-        <v-dialog v-model="dialog" persistent width="800">
+        <v-dialog v-model="dialog1" width="800">
           <template v-slot:activator="{ props }">
             <a v-bind="props" style="cursor: pointer; color: black">
               비밀번호 재발급
@@ -64,19 +64,34 @@
                     <v-text-field label="생년월일" variant="outlined" v-model="birth" placeholder="YYYYMMDD"></v-text-field>
                   </v-col>
                 </v-row>
-                <v-row v-if="auth.resultCode === '0000'" class="justify-end" style="color: blue">
-                  {{ auth.message }}</v-row>
-                <v-row v-else class="justify-end" style="color: red">
-                  {{ auth.message }}</v-row>
+
               </v-container>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="#000000" variant="text" @click="dialog = false">
+              <v-btn color="#000000" variant="text" @click="cancel">
                 취소
               </v-btn>
-              <v-btn color="#ff5252" variant="text" @click="findPwd">
+              <v-btn color="#ff5252" variant="text" @click="getPwd">
                 재발급
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-model="dialog2" width="auto">
+          <v-card>
+            <v-card-title>
+            </v-card-title>
+            <v-card-text class="pt-10 pr-10 pl-10 pb-10">
+              <v-row v-if="auth.resultCode === '0000'" class="justify-end" style="color: blue">
+                {{ auth.message }}</v-row>
+              <v-row v-else class="justify-end" style="color: red">
+                {{ auth.message }}</v-row>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="#000000" variant="text" @click="close">
+                닫기
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -97,7 +112,8 @@ export default {
     birth: "",
     userPwd: "",
     visible: false,
-    dialog: false,
+    dialog1: false,
+    dialog2: false,
   }),
   computed: {
     ...mapState(useAuthStore, ["token", "auth"]),
@@ -111,12 +127,29 @@ export default {
         }
       })
     },
-    findPwd() {
+    getPwd() {
       this.findPwd(
         this.email,
         this.name,
-        this.birth
+        this.birth,
+        this.email = "",
+        this.name = "",
+        this.birth = "",
       );
+      this.dialog2 = true
+    },
+    cancel() {
+      this.findPwd(
+        this.email = "",
+        this.name = "",
+        this.birth = "",
+      );
+      this.dialog1 = false
+    },
+    close() {
+      this.message = "";
+      this.dialog1 = false;
+      this.dialog2 = false;
     }
   },
   mounted() {

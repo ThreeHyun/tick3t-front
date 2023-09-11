@@ -13,11 +13,11 @@ import { mapActions, mapState } from "pinia";
 import { useConcertStore } from "@/store";
 
 export default {
-  data() {},
+  data() { },
   computed: {
     ...mapState(useConcertStore, ["concert"]),
-    // ...mapState(concertStore, ["resultCode"]),
-    // ...mapState(concertStore, ["message"]),
+    // ...mapState(useConcertStore, ["resultCode"]),
+    // ...mapState(useConcertStore, ["message"]),
   },
   methods: {
     ...mapActions(useConcertStore, ["detailConcert"]),
