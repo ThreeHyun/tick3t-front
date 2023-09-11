@@ -8,10 +8,9 @@ export const useConcertStore = defineStore("concert", {
       title: "",
       date: "",
       location: "",
-      hallName:"",
-      startDate:"",
+      hallName: "",
+      startDate: "",
       imgUrl: "",
-
       ticketId:"",
 
       grade:"",
@@ -21,15 +20,13 @@ export const useConcertStore = defineStore("concert", {
       totalSeat:0
     },
     concertList: [],
-    seats:[],
-
+    seats: [],
     orderResultCode: "",
-    orderMessage:"",
-    detailResultCode: "", 
+    orderMessage: "",
+    detailResultCode: "",
     detailMessage: "",
-    seatMessage :"",
-    seatResultCode:""
-    
+    seatMessage: "",
+    seatResultCode: "",
   }),
   actions: {
     fetchConcertList() {
@@ -38,7 +35,6 @@ export const useConcertStore = defineStore("concert", {
         .then((res) => {
           console.log(res);
           this.concertList = [...res.data.data];
-          
         })
         .catch((err) => {
           console.log(err);
@@ -52,13 +48,13 @@ export const useConcertStore = defineStore("concert", {
           this.concert = { ...res.data.data };
           this.detailResultCode = res.data.resultCode;
           this.detailMessage = res.data.message;
-          this.seats={...res.data.data.seats}
+          this.seats = { ...res.data.data.seats };
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    fetchOrderCheck(concertId){
+    fetchOrderCheck(concertId) {
       api
         .orderCheck(concertId)
         .then((res) => {
@@ -82,11 +78,11 @@ export const useConcertStore = defineStore("concert", {
         .catch((err) => {
           console.log(err);
         });
-  },
-  getters: {
-    getConcertDetails(state) {
-      return state.concert;
+    },
+    getters: {
+      getConcertDetails(state) {
+        return state.concert;
+      },
     },
   },
-}
 });

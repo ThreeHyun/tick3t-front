@@ -2,11 +2,7 @@
   <v-content>
     <v-container>
       <v-slide-group class="pa-15" center-active show-arrows>
-        <v-slide-item
-          v-for="concert in concertList"
-          :key="concert.concertId"
-          class="ma-8"
-        >
+        <v-slide-item v-for="concert in concertList" :key="concert.concertId" class="ma-8">
           <v-card elevation="5" width="400">
             <v-img :src="concert.imgUrl" height="400px"></v-img>
             <v-card-text>
@@ -19,15 +15,8 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer />
-              <v-btn
-                class="reserve"
-                block
-                rounded="lg"
-                center
-                size="x-large"
-                @click="goToConcert(concert.concertId)"
-                >상세보기</v-btn
-              >
+              <v-btn class="reserve" block rounded="lg" center size="x-large"
+                @click="goToConcert(concert.concertId)">상세보기</v-btn>
             </v-card-actions>
           </v-card>
         </v-slide-item>

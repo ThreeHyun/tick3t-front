@@ -17,7 +17,10 @@
     </v-responsive>
   </v-container>
   <v-container class="d-flex justify-center">
-    <v-progress-circular color="primary" model-value="60" :size="200" :width="30"></v-progress-circular>
+    <v-progress-circular color="primary" style="font-size: 30px;" :model-value="salesRate" :rotate="360" :size="200"
+      :width="30">{{
+        dashboard.salesRate
+      }}</v-progress-circular>
     <div class="space-between"></div>
     <v-table class="ticket-table">
       <tbody>
@@ -45,8 +48,14 @@ import { useDashboardStore } from "@/store";
 export default {
   data() {
     return {
-      concertId: ""
+      concertId: "",
+      interval: {},
+      value: 0,
+      salesRate: ""
     };
+  },
+  beforeUnmount() {
+    clearInterval(this.interval)
   },
   computed: {
     ...mapState(useDashboardStore, ["dashboard", "concerts"])
@@ -59,6 +68,13 @@ export default {
   },
   mounted() {
     this.fetchTicketList();
+    this.interval = setInterval(() => {
+      if (this.salesRate
+        === 100) {
+        return (this.salesRate = 0)
+      }
+      this.alesRate = this.salesRate
+    });
   },
 };
 </script>

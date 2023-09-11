@@ -8,7 +8,6 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
     Authorization: "Bearer " + sessionStorage.getItem("token"),
-   
   },
 });
 
