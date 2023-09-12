@@ -77,6 +77,12 @@
   background-color: #ff5252;
   color: white;
 }
+.checkUserList {
+  font-family: SpoqaHanSansNeo-Regular;
+  font-size: large;
+  background-color: #ff5252;
+  color: white;
+}
 .check2 {
   font-family: SpoqaHanSansNeo-Regular;
   font-size: small;
@@ -99,12 +105,15 @@
     height: 80px;
   }
 }
-
 .user-list-table {
   width: 100%;
   tr {
     cursor: pointer;
   }
+}
+.user-log-table {
+  min-width: max-content;
+  margin-bottom: 10px;
 }
 .v-toolbar__content {
   justify-content: space-between;
