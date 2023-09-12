@@ -25,7 +25,7 @@ export const useDashboardStore = defineStore("dashboard", {
         .getFanTable(fanCd)
         .then((res) => {
           console.log(res);
-          this.dashboard = { ...res.data.data };
+          this.dashboard = { ...this.dashboard, ...res.data.data };
         })
         .catch((err) => {
           console.log(err);
@@ -48,11 +48,11 @@ export const useDashboardStore = defineStore("dashboard", {
         .getTicketTable(concertId)
         .then((res) => {
           console.log(res);
-          this.dashboard = { ...res.data.data };
-          alert(res.data.message);
+          this.dashboard = { ...this.dashboard, ...res.data.data };
         })
         .catch((err) => {
           console.log(err);
+          alert(err.response.data.message);
         });
     },
   },

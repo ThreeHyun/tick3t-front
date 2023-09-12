@@ -30,7 +30,7 @@ export default {
     );
   },
   findPwd: function (email, name, birth) {
-    return api.post(API_URL + `reset-password`, {
+    return api.post(`reset-password`, {
       email: email,
       name: name,
       birth: birth,

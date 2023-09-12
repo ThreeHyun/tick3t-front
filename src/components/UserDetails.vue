@@ -37,14 +37,8 @@
       </tbody>
     </v-table>
   </v-container>
-  <v-container>
-    <v-table
-      fixed-header
-      height=""
-      hover
-      class="user-log-table"
-      style="font-size: 20px"
-    >
+  <v-container class="d-flex justify-center">
+    <v-table fixed-header hover class="user-log-table" style="font-size: 22px">
       <thead>
         <tr>
           <th class="text-center">ID</th>

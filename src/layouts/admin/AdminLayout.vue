@@ -48,7 +48,6 @@ export default {
       menuItems: [
         { name: "로그인", function: () => { this.$router.push("/login"); }, isMenu: () => !this.token },
         { name: "회원가입", function: () => { this.$router.push("/signup"); }, isMenu: () => !this.token },
-        { name: "대시보드", function: () => { this.$router.push("/dashboard"); }, isMenu: () => !!this.token },
         { name: "사용자 조회", function: () => { this.$router.push("/usermgmt"); }, isMenu: () => !!this.token },
         { name: "로그아웃", function: () => { this.confirmLogout(); }, isMenu: () => !!this.token },
       ]

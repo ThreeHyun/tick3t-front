@@ -1,15 +1,15 @@
-import axios from "axios";
+import { api } from "./instance";
 
-const API_URL = import.meta.env.VITE_API_URL;
+// const API_URL = import.meta.env.VITE_API_URL;
 
-// axios 인스턴스 생성
-const api = axios.create({
-  baseURL: API_URL,
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + sessionStorage.getItem("token"),
-  },
-});
+// // axios 인스턴스 생성
+// const api = axios.create({
+//   baseURL: API_URL,
+//   headers: {
+//     "Content-Type": "application/json",
+//     Authorization: "Bearer " + sessionStorage.getItem("token"),
+//   },
+// });
 
 export default {
   getUserList: function (pageNo, category, word) {
