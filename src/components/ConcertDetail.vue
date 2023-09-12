@@ -96,6 +96,9 @@ export default {
       this.fetchOrderCheck(this.concert.concertId);
       if (this.orderResultCode === "0000") {
         this.$router.push("/seat/" + this.concert.concertId);
+      } else if (this.orderResultCode === "8888") {
+        alert("로그인이 필요합니다.");
+        this.$router.push("/login");
       } else {
         this.orderDialog = true;
         console.log(this.orderMessage);

@@ -63,6 +63,8 @@ export const useConcertStore = defineStore("concert", {
           this.orderResultCode = res.data.resultCode;
         })
         .catch((err) => {
+          this.orderMessage = err.response.data.message;
+          this.orderResultCode=err.response.data.resultCode;
           console.log(err);
         });
   },
