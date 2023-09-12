@@ -13,10 +13,11 @@ export const useTicketStore = defineStore("ticket", {
       cancelDate: "",
       payDate: "",
       payState: 0,
-      imgUrl:""
+      imgUrl: "",
     },
     resultCode: "",
     message: "",
+    payResultCode: "",
   }),
   actions: {
     detailOrder(ticketId) {
@@ -42,18 +43,21 @@ export const useTicketStore = defineStore("ticket", {
         })
         .catch((err) => {
           console.log(err);
+          alert(err.response.data.message);
         });
     },
-    payment(ticketId) {
-      api
+    async payment(ticketId) {
+      await api
         .payment(ticketId)
         .then((res) => {
           console.log(res);
-          this.resultCode = res.data.resultCode;
+          this.payResultCode = res.data.resultCode;
           this.message = res.data.message;
         })
         .catch((err) => {
           console.log(err);
+          this.payResultCode = err.response.data.resultCode;
+          alert(err.response.data.message);
         });
     },
   },

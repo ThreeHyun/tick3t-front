@@ -13,7 +13,7 @@
             label="검색" />
         </v-col>
         <v-col cols="12" sm="6" md="2">
-          <v-btn @click="handleSearch" class="check" block rounded="lg" center size="large">조회하기</v-btn>
+          <v-btn @click="handleSearch" class="checkUserList" block rounded="lg" center size="large">조회하기</v-btn>
         </v-col>
       </v-row>
     </v-responsive>
