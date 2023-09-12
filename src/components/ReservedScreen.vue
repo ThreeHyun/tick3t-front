@@ -26,18 +26,13 @@
         <h4>수령 방법</h4>
         <br />
         <h4>결제 수단</h4>
-        <br /><br />
-        <h4>취소 가능 일시</h4>
-        <v-btn
-          class="check2"
-          size="small"
-          v-if="ticket.payState === '1' || ticket.payState == '0'"
-          @click="confirmCancel"
-        >
-          취소하기
-        </v-btn>
+        <br />
+        <h4>결제 기한</h4>
         <br />
         <h4>예매 상태</h4>
+        <br />
+        <h4>취소 가능 일시</h4>
+        <br />
       </div>
       <div class="flex-item3">
         <p>{{ ticket.ticketId }}</p>
@@ -53,18 +48,24 @@
         <p>현장 수령</p>
         <br />
         <p>카드 결제</p>
-        <div
-          style="background-color: lightgray; padding: 10px; margin-right: 40px"
-        >
-          <p style="padding-bottom: 5px">결제 기한 : {{ ticket.payDtm }}</p>
-        </div>
-        <hr style="border: 5px" />
-        <p>{{ ticket.cancelDate }}</p>
         <br />
-        <p v-if="ticket.payState === '0'">결제대기</p>
-        <p v-if="ticket.payState === '1'">예매완료</p>
-        <p v-if="ticket.payState === '2'">예매취소</p>
-        <p v-if="ticket.payState === '3'">결제취소</p>
+        <p>{{ ticket.payDtm }}</p>
+        <br />
+        <p>{{ paymentStatus }}</p>
+        <br />
+        <div style="display: flex; align-items: center">
+          <p style="margin-right: 1em">{{ ticket.cancelDate }}</p>
+          <v-btn
+            class="check"
+            size="small"
+            :disabled="isAfterCancelDtm"
+            v-if="ticket.payState === '1' || ticket.payState == '0'"
+            @click="confirmCancel"
+          >
+            취소하기
+          </v-btn>
+        </div>
+        <br />
       </div>
       <div class="flex-item4">
         <p>총 결제 금액</p>
@@ -79,6 +80,7 @@
           class="check"
           center
           size="large"
+          :disabled="isAfterPayDtm"
           @click="openPaymentDialog"
           v-if="ticket.payState === '0'"
         >
@@ -110,24 +112,32 @@
                   <td class="text-center" width="80%">
                     <div style="display: flex; justify-content: left">
                       <input
+                        v-model="firstPart"
                         style="width: 10%; border: 1px solid"
                         maxlength="4"
                         type="text"
+                        @keypress="isNumberKey"
                       />-
                       <input
+                        v-model="secondPart"
                         style="width: 10%; border: 1px solid"
                         maxlength="4"
                         type="text"
+                        @keypress="isNumberKey"
                       />-
                       <input
+                        v-model="thirdPart"
                         style="width: 10%; border: 1px solid"
                         maxlength="4"
                         type="text"
+                        @keypress="isNumberKey"
                       />-
                       <input
+                        v-model="fourthPart"
                         style="width: 10%; border: 1px solid"
                         maxlength="4"
                         type="text"
+                        @keypress="isNumberKey"
                       />
                     </div>
                   </td>
@@ -138,7 +148,13 @@
                 <v-btn color="blue darken-1" text @click="closePaymentDialog">
                   취소
                 </v-btn>
-                <v-btn color="blue darken-1" @click="goToPay"> 확인 </v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  @click="goToPay"
+                  :disabled="!isValid"
+                >
+                  확인
+                </v-btn>
               </v-card-actions>
             </v-card-text>
           </v-card>
@@ -156,6 +172,10 @@ export default {
   data() {
     return {
       paymentDialog: false,
+      firstPart: "",
+      secondPart: "",
+      thirdPart: "",
+      fourthPart: "",
     };
   },
   computed: {
@@ -163,6 +183,33 @@ export default {
     ...mapState(useTicketStore, ["ticket"]),
     ...mapState(useTicketStore, ["resultCode"]),
     ...mapState(useTicketStore, ["message"]),
+    isAfterPayDtm() {
+      const currentDateTime = new Date();
+      const payDateTime = new Date(this.ticket.payDtm);
+      return currentDateTime > payDateTime;
+    },
+    isAfterCancelDtm() {
+      const currentDateTime = new Date();
+      const cancelDateTime = new Date(this.ticket.cancelDate);
+      return currentDateTime > cancelDateTime;
+    },
+    paymentStatus() {
+      const statuses = {
+        0: "결제대기",
+        1: "예매완료",
+        2: "예매취소",
+        3: "결제취소",
+      };
+      return statuses[this.ticket.payState];
+    },
+    isValid() {
+      return [
+        this.firstPart,
+        this.secondPart,
+        this.thirdPart,
+        this.fourthPart,
+      ].every((num) => num.length === 4);
+    },
   },
   methods: {
     ...mapActions(useTicketStore, ["detailOrder", "cancel", "payment"]),
@@ -181,14 +228,25 @@ export default {
     closePaymentDialog() {
       this.paymentDialog = false;
     },
-    goToPay() {
-      this.payment(this.ticket.ticketId);
-      this.ticket.payState = "1";
+    async goToPay() {
+      await this.payment(this.ticket.ticketId);
+      if (this.payResultCode === "0000") {
+        console.log("0000");
+        this.ticket.payState = "1";
+      }
       this.paymentDialog = false;
     },
     goToCancel() {
       this.cancel(this.ticket.ticketId);
-      this.ticket.payState = "3";
+      if (this.payResultCode === "0000") {
+        this.ticket.payState = "3";
+      }
+    },
+    isNumberKey(evt) {
+      var charCode = evt.which ? evt.which : evt.keyCode;
+      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        evt.preventDefault();
+      }
     },
   },
   mounted() {
@@ -222,7 +280,7 @@ export default {
   text-align: center;
 }
 
-.clickButton {
+.check {
   background-color: #ff5252;
   color: white;
 }
