@@ -61,7 +61,7 @@
                     생년월일
                   </v-col>
                   <v-col cols="8">
-                    <v-text-field label="생년월일" variant="outlined" v-model="birth" placeholder="YYYYMMDD"></v-text-field>
+                    <v-text-field label="생년월일" variant="outlined" v-model="birth" placeholder="YYYY-MM-DD"></v-text-field>
                   </v-col>
                 </v-row>
 
