@@ -184,6 +184,7 @@
                         ><v-checkbox
                           style="color: red; margin-top: 5px"
                           label="안내 사항을 모두 확인하였으며, 정말 탈퇴하시겠습니까?"
+                          v-model="isChecked"
                         ></v-checkbox>
                       </v-row>
                       <v-row
@@ -230,6 +231,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { useProfileStore } from "@/store";
+import { useAuthStore } from "@/store";
 
 export default {
   data: () => ({
@@ -245,6 +247,7 @@ export default {
     fanId: "",
     password: "",
     page: 1,
+    isChecked: false,
   }),
   computed: {
     ...mapState(useProfileStore, [
@@ -270,6 +273,7 @@ export default {
       "setWDResultCode",
       "setWDMessage",
     ]),
+    ...mapActions(useAuthStore, ["logout"]),
 
     onClick() {
       this.loading = true;
@@ -293,8 +297,8 @@ export default {
     dialogFalse2() {
       this.fanId = "";
 
-      this.setFanResultCode(""); // PwResultCode 초기화
-      this.setFanMessage(""); //// PwMessage 초기화
+      this.setFanResultCode(""); // fanResultCode 초기화
+      this.setFanMessage(""); //// fanMessage 초기화
 
       this.dialog2 = false;
     },
@@ -303,6 +307,7 @@ export default {
 
       this.setWDResultCode("");
       this.setWDMessage("");
+      this.isChecked = false;
 
       this.dialog3 = false;
     },
@@ -314,7 +319,12 @@ export default {
         this.newPasswordCheck
       ).then(() => {
         if (this.PwResultCode === "0000") {
-          setTimeout(() => this.dialogFalse1(), 700);
+          setTimeout(
+            () => this.dialogFalse1(),
+            this.logout(),
+            this.$router.push("/"),
+            700
+          );
         }
       });
     },
@@ -327,11 +337,20 @@ export default {
       });
     },
     WithDrawCheck() {
-      this.fetchWithdraw(this.password).then(() => {
-        if (this.WDResultCode === "0000") {
-          setTimeout(() => this.dialogFalse3(), 700);
-        }
-      });
+      if (this.isChecked === false) {
+        this.setWDMessage("확인사항에 동의하셔야 탈퇴하실 수 있습니다.");
+      } else {
+        this.fetchWithdraw(this.password).then(() => {
+          if (this.WDResultCode === "0000" && this.isChecked === true) {
+            setTimeout(
+              () => this.dialogFalse3(),
+              this.logout(),
+              this.$router.push("/"),
+              700
+            );
+          }
+        });
+      }
     },
   },
   mounted() {
