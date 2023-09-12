@@ -1,14 +1,22 @@
 <template>
   <div :class="isMobile ? 'detail-container-moblie' : 'detail-container'">
     <div :class="!isMobile && 'fill-height'">
-      <div class="startTime">{{ concert.startDate }}</div>
+      <div class="startTime">
+        <b>예매 시작 : {{ concert.startDate }} </b>
+      </div>
       <v-img class="calendar" width="400px" src="@/assets/calendar.png" />
-      <div class="text2">{{ concert.date }}</div>
-      <v-row>
-        <v-col cols="12" sm="6" md="3">
-          <v-btn class="time" block rounded="0" size="small">17:00</v-btn>
-        </v-col>
-      </v-row>
+      <div
+        class="textdate"
+        style="
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 60px;
+        "
+      >
+        <p>공연 날짜</p>
+        <p>{{ concert.date }}</p>
+        <v-btn class="time" rounded="0" size="small">17:00</v-btn>
+      </div>
       <div class="text2 mb-3">잔여석</div>
       <div class="text3" v-for="seat in seats" :key="seat.grade">
         <span class="pr-5">{{ seat.grade }}석</span>
@@ -59,8 +67,12 @@
   color: white;
   padding: 5px;
 
-  font-size: x-large;
+  font-size: large;
   text-align: center;
+}
+.textdate {
+  font-family: SpoqaHanSansNeo-Medium;
+  font-size: x-large;
 }
 </style>
 
