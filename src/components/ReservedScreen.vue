@@ -17,6 +17,8 @@
         <br />
         <h4>상품명</h4>
         <br />
+        <h4>공연장 주소</h4>
+        <br />
         <h4>공연장</h4>
         <br />
         <h4>관람 일시</h4>
@@ -41,9 +43,11 @@
         <br />
         <p>{{ ticket.location }}</p>
         <br />
+        <p>{{ ticket.hallName }}</p>
+        <br />
         <p>{{ ticket.datetime }}</p>
         <br />
-        <p>{{ ticket.seat }}</p>
+        <p>{{ ticket.grade }}구역 {{ ticket.seat }}번</p>
         <br />
         <p>현장 수령</p>
         <br />
@@ -182,6 +186,7 @@ export default {
     ...mapState(useUserStore, ["user"]),
     ...mapState(useTicketStore, ["ticket"]),
     ...mapState(useTicketStore, ["resultCode"]),
+    ...mapState(useTicketStore, ["payResultCode"]),
     ...mapState(useTicketStore, ["message"]),
     isAfterPayDtm() {
       const currentDateTime = new Date();
@@ -231,7 +236,7 @@ export default {
     async goToPay() {
       await this.payment(this.ticket.ticketId);
       if (this.payResultCode === "0000") {
-        console.log("0000");
+        alert("결제에 성공하였습니다.");
         this.ticket.payState = "1";
       }
       this.paymentDialog = false;
@@ -239,6 +244,7 @@ export default {
     goToCancel() {
       this.cancel(this.ticket.ticketId);
       if (this.payResultCode === "0000") {
+        alert("취소에 성공하였습니다.");
         this.ticket.payState = "3";
       }
     },
