@@ -70,6 +70,9 @@ export const useAuthStore = defineStore("auth", {
         })
         .catch((err) => {
           console.log(err);
+          // alert(err.response.data.message);
+          this.auth.message = err.response.data.message;
+          this.auth.resultCode = err.response.data.resultCode;
         });
     },
     async checkAuth() {
