@@ -22,7 +22,7 @@ const routes = [
         name: "mypage",
         component: () => import("@/views/MyPageView.vue"),
         meta: { requiresAuth: true, role: "ROLE_USER" },
-        props: true,
+       
       },
       {
         path: "/reserved/:ticketId",
