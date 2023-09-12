@@ -53,7 +53,30 @@
                             variant="outlined"
                             type="password"
                             v-model="newPassword"
+                            @input="userPwdValid"
                           />
+                          <div
+                            class="pb-5"
+                            v-if="
+                              !userPwdValidFlag &&
+                              newPassword !== '' &&
+                              oldPassword !== newPassword
+                            "
+                            style="color: red; font-size: 14px"
+                          >
+                            8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해
+                            주세요.
+                          </div>
+
+                          <div
+                            class="pb-2"
+                            v-if="
+                              oldPassword !== '' && oldPassword === newPassword
+                            "
+                            style="color: red; font-size: 14px"
+                          >
+                            기존 비밀번호와 동일합니다.
+                          </div>
                         </v-col>
                       </v-row>
                       <v-row>
@@ -65,6 +88,24 @@
                             type="password"
                             v-model="newPasswordCheck"
                           ></v-text-field>
+                          <div
+                            class="pb-2"
+                            v-if="
+                              newPassword !== '' &&
+                              newPasswordCheck !== '' &&
+                              newPassword !== newPasswordCheck
+                            "
+                            style="color: red; font-size: 14px"
+                          >
+                            새 비밀번호와 일치하지않습니다.
+                          </div>
+                          <div
+                            class="pb-2"
+                            v-if="newPassword === '' && newPasswordCheck !== ''"
+                            style="color: red; font-size: 14px"
+                          >
+                            새 비밀번호를 먼저 설정해주세요.
+                          </div>
                         </v-col>
                       </v-row>
                       <v-row
@@ -116,6 +157,13 @@
                             label="회원번호를 입력해주세요."
                             v-model="fanId"
                           ></v-text-field>
+                          <div
+                            class="pb-2"
+                            v-if="fanId && !/^\d{8}$/.test(fanId)"
+                            style="color: red; font-size: 14px"
+                          >
+                            8자리 숫자 형식의 회원 번호로 입력해주세요.
+                          </div>
                         </v-col>
                       </v-row>
                       <v-row
@@ -176,8 +224,8 @@
                       >
                       <v-row
                         ><v-col style="font-weight: bolder"
-                          >탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두
-                          삭제됩니다.</v-col
+                          >개인정보 보호 법령에 의거하여 개인정보는 3개월 후
+                          영구히 파기됩니다.</v-col
                         ></v-row
                       >
                       <v-row
@@ -248,6 +296,8 @@ export default {
     password: "",
     page: 1,
     isChecked: false,
+
+    userPwdValidFlag: true,
   }),
   computed: {
     ...mapState(useProfileStore, [
@@ -261,6 +311,18 @@ export default {
     ]),
   },
   methods: {
+    userPwdValid() {
+      if (
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,16}$/.test(
+          this.newPassword
+        )
+      ) {
+        this.userPwdValidFlag = true;
+      } else {
+        this.userPwdValidFlag = false;
+      }
+    },
+
     ...mapActions(useProfileStore, [
       "fetchUserData",
       "fetchUpdatePwd",
