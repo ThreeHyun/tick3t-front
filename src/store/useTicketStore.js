@@ -18,6 +18,7 @@ export const useTicketStore = defineStore("ticket", {
     resultCode: "",
     message: "",
     payResultCode: "",
+    cancelResultCode: "",
   }),
   actions: {
     detailOrder(ticketId) {
@@ -33,16 +34,17 @@ export const useTicketStore = defineStore("ticket", {
           console.log(err);
         });
     },
-    cancel(ticketId) {
-      api
+    async cancel(ticketId) {
+      await api
         .cancel(ticketId)
         .then((res) => {
           console.log(res);
-          this.resultCode = res.data.resultCode;
+          this.cancelResultCode = res.data.resultCode;
           this.message = res.data.message;
         })
         .catch((err) => {
           console.log(err);
+          this.cancelResultCode = err.response.data.resultCode;
           alert(err.response.data.message);
         });
     },

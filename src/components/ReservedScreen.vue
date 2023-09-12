@@ -187,6 +187,7 @@ export default {
     ...mapState(useTicketStore, ["ticket"]),
     ...mapState(useTicketStore, ["resultCode"]),
     ...mapState(useTicketStore, ["payResultCode"]),
+    ...mapState(useTicketStore, ["cancelResultCode"]),
     ...mapState(useTicketStore, ["message"]),
     isAfterPayDtm() {
       const currentDateTime = new Date();
@@ -241,11 +242,15 @@ export default {
       }
       this.paymentDialog = false;
     },
-    goToCancel() {
-      this.cancel(this.ticket.ticketId);
-      if (this.payResultCode === "0000") {
+    async goToCancel() {
+      await this.cancel(this.ticket.ticketId);
+      if (this.cancelResultCode === "0000") {
         alert("취소에 성공하였습니다.");
-        this.ticket.payState = "3";
+        if (this.ticket.payState === "0") {
+          this.ticket.payState = "2";
+        } else if (this.ticket.payState === "1") {
+          this.ticket.payState = "3";
+        }
       }
     },
     isNumberKey(evt) {
