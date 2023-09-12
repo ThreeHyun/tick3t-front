@@ -82,7 +82,7 @@ export default {
   },
   mounted() {
     this.detailConcert(this.$route.params.concertId);
-    this.fetchOrderCheck(this.$route.params.concertId);
+    //this.fetchOrderCheck(this.$route.params.concertId);
   },
   props: {
     isMobile: Boolean,

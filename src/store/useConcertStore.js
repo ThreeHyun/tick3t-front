@@ -11,7 +11,8 @@ export const useConcertStore = defineStore("concert", {
       hallName: "",
       startDate: "",
       imgUrl: "",
-      ticketId:"",
+
+      ticketId:0,
 
       grade:"",
       gradeId:0,
@@ -68,12 +69,12 @@ export const useConcertStore = defineStore("concert", {
           console.log(err);
         });
   },
-   fetchSeatCheck(ticketId,concertId,gradeId,totalSeat,price){
-      api
+   async fetchSeatCheck(ticketId,concertId,gradeId,totalSeat,price){
+      await api
         .seatCheck(ticketId,concertId,gradeId,totalSeat,price)
         .then((res) => {
           console.log(res);
-          this.ticketId=res.data.data.ticketId;
+          this.concert.ticketId=res.data.data.ticketId;
           this.seatMessage = res.data.message;
           this.seatResultCode = res.data.resultCode;
         })

@@ -78,7 +78,7 @@ export default {
   },
   mounted() {
     this.detailConcert(this.$route.params.concertId);
-    this.fetchOrderCheck(this.$route.params.concertId);
+    //this.fetchOrderCheck(this.$route.params.concertId);
   },
 
   methods: {
@@ -86,8 +86,8 @@ export default {
     ...mapActions(useConcertStore, ["fetchOrderCheck"]),
     ...mapActions(useConcertStore, ["fetchSeatCheck"]),
 
-    seatCheck(gradeId, totalSeat, price) {
-      this.fetchSeatCheck(
+    async seatCheck(gradeId, totalSeat, price) {
+      await this.fetchSeatCheck(
         this.concert.ticketId,
         this.concert.concertId,
         gradeId,
