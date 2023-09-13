@@ -79,6 +79,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { useConcertStore } from "@/store";
+import { useAuthStore } from "@/store";
 
 export default {
   data: () => ({
@@ -105,15 +106,21 @@ export default {
     ...mapActions(useConcertStore, ["fetchOrderCheck"]),
 
     orderCheck() {
-      this.fetchOrderCheck(this.concert.concertId);
-      if (this.orderResultCode === "0000") {
-        this.$router.push("/seat/" + this.concert.concertId);
-      } else if (this.orderResultCode === "8888") {
+      const authStore = useAuthStore();
+      if (authStore.isAuthenticated) {
+        this.fetchOrderCheck(this.concert.concertId);
+        if (this.orderResultCode === "0000") {
+          this.$router.push("/seat/" + this.concert.concertId);
+        } else if (this.orderResultCode === "8888") {
+          alert("로그인이 필요합니다.");
+          this.$router.push("/login");
+        } else {
+          this.orderDialog = true;
+          console.log(this.orderMessage);
+        }
+      } else {
         alert("로그인이 필요합니다.");
         this.$router.push("/login");
-      } else {
-        this.orderDialog = true;
-        console.log(this.orderMessage);
       }
     },
     closeDialog() {
