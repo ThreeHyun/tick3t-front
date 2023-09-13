@@ -117,3 +117,17 @@
 .v-toolbar__content {
   justify-content: space-between;
 }
+
+// ConcertDetail.vue
+.startTime {
+  background-color: #ff5252;
+  color: white;
+  padding: 5px;
+
+  font-size: large;
+  text-align: center;
+}
+.textdate {
+  font-family: SpoqaHanSansNeo-Medium;
+  font-size: x-large;
+}
