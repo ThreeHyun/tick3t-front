@@ -51,18 +51,6 @@ export default {
       categorieList: [
         { title: "IU", value: "IU" },
         { title: "규현", value: "규현" },
-        { title: "김래빈", value: "김래빈" },
-        { title: "남예준", value: "남예준" },
-        { title: "도은호", value: "도은호" },
-        { title: "류청우", value: "류청우" },
-        { title: "박문대", value: "박문대" },
-        { title: "배세진", value: "배세진" },
-        { title: "선아현", value: "선아현" },
-        { title: "유하민", value: "유하민" },
-        { title: "이세진", value: "이세진" },
-        { title: "차유진", value: "차유진" },
-        { title: "채봉구", value: "채봉구" },
-        { title: "한노아", value: "한노아" },
       ]
     };
   },
