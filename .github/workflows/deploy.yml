@@ -32,8 +32,7 @@ jobs:
       run: |
         echo "VITE_API_URL=$VITE_API_URL" >> .env.local
       env:
-        REACT_APP_DOMAIN: ${{ secrets.VITE_API_URL }}
-        REACT_APP_DEBUG: ${{ secrets.VITE_API_URL }}
+        VITE_API_URL: ${{ secrets.VITE_API_URL }}
       
     - name: Build
       run: npm run build
