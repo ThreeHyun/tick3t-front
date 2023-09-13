@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import api from "@/api/concert";
+import api2 from "@/api/concert2";
 
 export const useConcertStore = defineStore("concert", {
   state: () => ({
@@ -31,7 +32,7 @@ export const useConcertStore = defineStore("concert", {
   }),
   actions: {
     fetchConcertList() {
-      api
+      api2
         .getConcert()
         .then((res) => {
           console.log(res);
@@ -42,7 +43,7 @@ export const useConcertStore = defineStore("concert", {
         });
     },
     detailConcert(concertId) {
-      api
+      api2
         .detailConcert(concertId)
         .then((res) => {
           console.log(res);

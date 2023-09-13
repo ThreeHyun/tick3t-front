@@ -17,7 +17,7 @@
         <p>{{ concert.date }}</p>
         <v-btn class="time" rounded="0" size="small">17:00</v-btn>
       </div>
-      <div class="text2 mb-3">잔여석</div>
+      <div class="text2 mb-3">좌석 정보</div>
       <div class="text3" v-for="seat in seats" :key="seat.grade">
         <span class="pr-5">{{ seat.grade }}석</span>
         <span class="pr-5">{{ seat.price }}원</span>
