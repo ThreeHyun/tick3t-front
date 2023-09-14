@@ -6,7 +6,7 @@
           <div class="d-flex align-start">
             <span class="text">티켓 판매율</span>
             <v-select v-model="concertId" :items="concerts" item-title="title" item-value="concertId" density="compact"
-              prepend-inner-icon="mdi-ticket-outline" variant="outlined" required>
+              prepend-inner-icon="mdi-ticket-outline" variant="outlined" label="콘서트명" required>
             </v-select>
           </div>
         </v-col>
@@ -71,10 +71,15 @@ export default {
     this.interval = setInterval(() => {
       if (this.salesRate
         === 100) {
-        return (this.salesRate = 0)
+        return (this.salesRate = 100)
       }
-      this.alesRate = this.salesRate
     });
+
+    if (this.concerts.length > 0) {
+      this.concertId = this.concerts[8].concertId;
+      this.handleTicketClick();
+    }
   },
-};
+
+}
 </script>

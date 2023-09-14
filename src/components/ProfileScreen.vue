@@ -37,44 +37,25 @@
                       <v-row>
                         <v-col class="pt-5" cols="4"> 기존 비밀번호 </v-col>
                         <v-col cols="8">
-                          <v-text-field
-                            label="Password"
-                            variant="outlined"
-                            type="password"
-                            v-model="oldPassword"
-                          ></v-text-field>
+                          <v-text-field label="Password" variant="outlined" type="password"
+                            v-model="oldPassword"></v-text-field>
                         </v-col>
                       </v-row>
                       <v-row>
                         <v-col class="pt-5" cols="4"> 새 비밀번호 </v-col>
                         <v-col cols="8">
-                          <v-text-field
-                            label="Password"
-                            variant="outlined"
-                            type="password"
-                            v-model="newPassword"
-                            @input="userPwdValid"
-                          />
-                          <div
-                            class="pb-5"
-                            v-if="
-                              !userPwdValidFlag &&
-                              newPassword !== '' &&
-                              oldPassword !== newPassword
-                            "
-                            style="color: red; font-size: 14px"
-                          >
+                          <v-text-field label="Password" variant="outlined" type="password" v-model="newPassword"
+                            @input="userPwdValid" />
+                          <div class="pb-5" v-if="!userPwdValidFlag &&
+                            newPassword !== '' &&
+                            oldPassword !== newPassword
+                            " style="color: red; font-size: 14px">
                             8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해
                             주세요.
                           </div>
 
-                          <div
-                            class="pb-2"
-                            v-if="
-                              oldPassword !== '' && oldPassword === newPassword
-                            "
-                            style="color: red; font-size: 14px"
-                          >
+                          <div class="pb-2" v-if="oldPassword !== '' && oldPassword === newPassword
+                            " style="color: red; font-size: 14px">
                             기존 비밀번호와 동일합니다.
                           </div>
                         </v-col>
@@ -82,42 +63,24 @@
                       <v-row>
                         <v-col class="pt-5" cols="4"> 새 비밀번호 확인 </v-col>
                         <v-col cols="8">
-                          <v-text-field
-                            label="Password"
-                            variant="outlined"
-                            type="password"
-                            v-model="newPasswordCheck"
-                          ></v-text-field>
-                          <div
-                            class="pb-2"
-                            v-if="
-                              newPassword !== '' &&
-                              newPasswordCheck !== '' &&
-                              newPassword !== newPasswordCheck
-                            "
-                            style="color: red; font-size: 14px"
-                          >
+                          <v-text-field label="Password" variant="outlined" type="password"
+                            v-model="newPasswordCheck"></v-text-field>
+                          <div class="pb-2" v-if="newPassword !== '' &&
+                            newPasswordCheck !== '' &&
+                            newPassword !== newPasswordCheck
+                            " style="color: red; font-size: 14px">
                             새 비밀번호와 일치하지않습니다.
                           </div>
-                          <div
-                            class="pb-2"
-                            v-if="newPassword === '' && newPasswordCheck !== ''"
-                            style="color: red; font-size: 14px"
-                          >
+                          <div class="pb-2" v-if="newPassword === '' && newPasswordCheck !== ''"
+                            style="color: red; font-size: 14px">
                             새 비밀번호를 먼저 설정해주세요.
                           </div>
                         </v-col>
                       </v-row>
-                      <v-row
-                        v-if="PwResultCode === '0000'"
-                        class="justify-end"
-                        style="color: blue"
-                      >
-                        {{ PwMessage }}</v-row
-                      >
+                      <v-row v-if="PwResultCode === '0000'" class="justify-end" style="color: blue">
+                        {{ PwMessage }}</v-row>
                       <v-row v-else class="justify-end" style="color: red">
-                        {{ PwMessage }}</v-row
-                      >
+                        {{ PwMessage }}</v-row>
                     </v-container>
                   </v-card-text>
                   <v-card-actions>
@@ -152,30 +115,16 @@
                       <v-row>
                         <v-col cols="4" class="pt-5"> 회원 번호 </v-col>
                         <v-col cols="8">
-                          <v-text-field
-                            variant="outlined"
-                            label="회원번호를 입력해주세요."
-                            v-model="fanId"
-                          ></v-text-field>
-                          <div
-                            class="pb-2"
-                            v-if="fanId && !/^\d{8}$/.test(fanId)"
-                            style="color: red; font-size: 14px"
-                          >
+                          <v-text-field variant="outlined" label="회원번호를 입력해주세요." v-model="fanId"></v-text-field>
+                          <div class="pb-2" v-if="fanId && !/^\d{8}$/.test(fanId)" style="color: red; font-size: 14px">
                             8자리 숫자 형식의 회원 번호로 입력해주세요.
                           </div>
                         </v-col>
                       </v-row>
-                      <v-row
-                        v-if="FanResultCode === '0000'"
-                        class="justify-end"
-                        style="color: blue"
-                      >
-                        {{ FanMessage }}</v-row
-                      >
+                      <v-row v-if="FanResultCode === '0000'" class="justify-end" style="color: blue">
+                        {{ FanMessage }}</v-row>
                       <v-row v-else class="justify-end" style="color: red">
-                        {{ FanMessage }}</v-row
-                      >
+                        {{ FanMessage }}</v-row>
                     </v-container>
                   </v-card-text>
                   <v-card-actions>
@@ -208,43 +157,21 @@
                       <v-row>
                         <v-col cols="4" class="pt-5">비밀번호 확인</v-col>
                         <v-col cols="8">
-                          <v-text-field
-                            variant="outlined"
-                            label="Password"
-                            type="password"
-                            v-model="password"
-                          ></v-text-field>
+                          <v-text-field variant="outlined" label="Password" type="password"
+                            v-model="password"></v-text-field>
                         </v-col>
                       </v-row>
-                      <v-row
-                        ><v-col style="font-weight: bolder"
-                          >사용하고 계신 이메일은 탈퇴할 경우 재사용 및 복구가
-                          불가능합니다.</v-col
-                        ></v-row
-                      >
-                      <v-row
-                        ><v-col style="font-weight: bolder"
-                          >개인정보 보호 법령에 의거하여 개인정보는 3개월 후
-                          영구히 파기됩니다.</v-col
-                        ></v-row
-                      >
-                      <v-row
-                        ><v-checkbox
-                          style="color: red; margin-top: 5px"
-                          label="안내 사항을 모두 확인하였으며, 정말 탈퇴하시겠습니까?"
-                          v-model="isChecked"
-                        ></v-checkbox>
+                      <v-row><v-col style="font-weight: bolder">사용하고 계신 이메일은 탈퇴할 경우 재사용 및 복구가
+                          불가능합니다.</v-col></v-row>
+                      <v-row><v-col style="font-weight: bolder">개인정보 보호 법령에 의거하여 개인정보는 3개월 후
+                          영구히 파기됩니다.</v-col></v-row>
+                      <v-row><v-checkbox style="color: red; margin-top: 5px" label="안내 사항을 모두 확인하였으며, 정말 탈퇴하시겠습니까?"
+                          v-model="isChecked"></v-checkbox>
                       </v-row>
-                      <v-row
-                        v-if="WDResultCode === '0000'"
-                        class="justify-end"
-                        style="color: blue"
-                      >
-                        {{ WDMessage }}</v-row
-                      >
+                      <v-row v-if="WDResultCode === '0000'" class="justify-end" style="color: blue">
+                        {{ WDMessage }}</v-row>
                       <v-row v-else class="justify-end" style="color: red">
-                        {{ WDMessage }}</v-row
-                      >
+                        {{ WDMessage }}</v-row>
                     </v-container>
                   </v-card-text>
                   <v-card-actions>
@@ -252,11 +179,7 @@
                     <v-btn color="#000000" variant="text" @click="dialogFalse3">
                       취소
                     </v-btn>
-                    <v-btn
-                      color="#ff5252"
-                      variant="text"
-                      @click="WithDrawCheck"
-                    >
+                    <v-btn color="#ff5252" variant="text" @click="WithDrawCheck">
                       탈퇴하기
                     </v-btn>
                   </v-card-actions>
@@ -313,7 +236,7 @@ export default {
   methods: {
     userPwdValid() {
       if (
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,16}$/.test(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,16}$/.test(
           this.newPassword
         )
       ) {
