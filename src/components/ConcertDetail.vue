@@ -104,8 +104,8 @@ export default {
     ...mapActions(useConcertStore, ["detailConcert"]),
     ...mapActions(useConcertStore, ["fetchOrderCheck"]),
 
-    orderCheck() {
-      this.fetchOrderCheck(this.concert.concertId);
+    async orderCheck() {
+      await this.fetchOrderCheck(this.concert.concertId);
       if (this.orderResultCode === "0000") {
         this.$router.push("/seat/" + this.concert.concertId);
       } else if (this.orderResultCode === "8888") {
