@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import api from "@/api/concert";
-
+import api2 from "@/api/concert2";
 export const useConcertStore = defineStore("concert", {
   state: () => ({
     concert: {
@@ -31,7 +31,7 @@ export const useConcertStore = defineStore("concert", {
   }),
   actions: {
     fetchConcertList() {
-      api
+      api2
         .getConcert()
         .then((res) => {
           console.log(res);
@@ -42,7 +42,7 @@ export const useConcertStore = defineStore("concert", {
         });
     },
     detailConcert(concertId) {
-      api
+      api2
         .detailConcert(concertId)
         .then((res) => {
           console.log(res);
@@ -55,8 +55,8 @@ export const useConcertStore = defineStore("concert", {
           console.log(err);
         });
     },
-    fetchOrderCheck(concertId) {
-      api
+    async fetchOrderCheck(concertId) {
+      await api
         .orderCheck(concertId)
         .then((res) => {
           console.log(res);
@@ -79,6 +79,8 @@ export const useConcertStore = defineStore("concert", {
           this.seatResultCode = res.data.resultCode;
         })
         .catch((err) => {
+          this.seatMessage = err.response.data.message;
+          this.seatResultCode=err.response.data.resultCode;
           console.log(err);
         });
     },

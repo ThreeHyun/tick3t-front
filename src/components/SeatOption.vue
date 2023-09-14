@@ -96,6 +96,9 @@ export default {
       );
       if (this.seatResultCode === "0000") {
         this.$router.push("/reserved/" + this.concert.ticketId);
+      } else if (this.seatResultCode === "6421") {
+        alert("잔여석이 존재하지 않습니다.");
+        this.$router.push("/concert/" + this.concert.concertId);
       } else {
         this.seatDialog = true;
         console.log(this.seatMessage);
