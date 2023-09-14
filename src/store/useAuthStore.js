@@ -48,6 +48,7 @@ export const useAuthStore = defineStore("auth", {
     logout() {
       sessionStorage.removeItem("token");
       this.token = "";
+      this.role = "";
       // return api
       //   .logout(this.token)
       //   .then(() => {

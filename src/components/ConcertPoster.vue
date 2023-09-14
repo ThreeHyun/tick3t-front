@@ -1,6 +1,6 @@
 <template>
   <div class="px-3 poster-container">
-    <v-img class="poster" width="600px" :src="concert.imgUrl" />
+    <v-img class="poster" width="500px" style="padding: 20px;" :src="concert.imgUrl" />
     <h1 class="title">{{ concert.title }}</h1>
 
     <div class="text1">{{ concert.hallName }}</div>
