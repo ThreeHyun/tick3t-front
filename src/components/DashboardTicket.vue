@@ -2,7 +2,7 @@
   <v-container class="" padding="60px">
     <v-responsive class="fill-height">
       <v-row class="justify-center pt-3">
-        <v-col cols="6">
+        <v-col cols="4">
           <div class="d-flex align-start">
             <span class="text">티켓 판매율</span>
             <v-select v-model="concertId" :items="concerts" item-title="title" item-value="concertId" density="compact"
@@ -10,15 +10,15 @@
             </v-select>
           </div>
         </v-col>
-        <v-col cols="12" sm="6" md="2">
+        <v-col md="1">
           <v-btn class="checkTicket" block rounded="lg" center size="large" @click="handleTicketClick">조회하기</v-btn>
         </v-col>
       </v-row>
     </v-responsive>
   </v-container>
-  <v-container class="d-flex justify-center">
-    <v-progress-circular color="primary" style="font-size: 30px;" :model-value="salesRate" :rotate="360" :size="200"
-      :width="30">{{
+  <v-container class="d-flex justify-center align-center">
+    <v-progress-circular color="primary" style="font-size: 30px;" :model-value="dashboard.salesRate" :rotate="360"
+      :size="200" :width="30">{{
         dashboard.salesRate
       }}</v-progress-circular>
     <div class="space-between"></div>
@@ -48,15 +48,12 @@ import { useDashboardStore } from "@/store";
 export default {
   data() {
     return {
-      concertId: "",
-      interval: {},
       value: 0,
+      concertId: "",
       salesRate: ""
     };
   },
-  beforeUnmount() {
-    clearInterval(this.interval)
-  },
+
   computed: {
     ...mapState(useDashboardStore, ["dashboard", "concerts"])
   },
@@ -68,18 +65,6 @@ export default {
   },
   mounted() {
     this.fetchTicketList();
-    this.interval = setInterval(() => {
-      if (this.salesRate
-        === 100) {
-        return (this.salesRate = 100)
-      }
-    });
-
-    if (this.concerts.length > 0) {
-      this.concertId = this.concerts[8].concertId;
-      this.handleTicketClick();
-    }
   },
-
 }
 </script>
