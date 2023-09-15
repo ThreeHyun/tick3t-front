@@ -16,7 +16,7 @@
       </v-row>
     </v-responsive>
   </v-container>
-  <v-container class="d-flex justify-center">
+  <v-container class="d-flex justify-center align-center">
     <v-progress-circular color="primary" style="font-size: 30px;" :model-value="dashboard.salesRate" :rotate="360"
       :size="200" :width="30">{{
         dashboard.salesRate
@@ -64,7 +64,7 @@ export default {
     }
   },
   mounted() {
-    this.fetchTicketList(this);
+    this.fetchTicketList();
   },
 }
 </script>
