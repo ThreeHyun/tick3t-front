@@ -5,7 +5,13 @@
         <v-select
           label="결제상태"
           density="compact"
-          :items="['결제 대기', '결제 완료', '예매 취소', '결제 취소']"
+          :items="[
+            '전체 조회',
+            '결제 대기',
+            '결제 완료',
+            '예매 취소',
+            '결제 취소',
+          ]"
           variant="outlined"
           v-model="category"
         ></v-select>
@@ -47,7 +53,7 @@
           </v-row>
           <v-row>
             <v-col cols="8">
-              <h1 style="font-size: 40px" class="concertTitle mb-8">
+              <h1 style="font-size: 30px" class="concertTitle mb-8">
                 {{ order.title }}
               </h1>
             </v-col>
@@ -59,10 +65,10 @@
           </v-row>
           <v-row class="justify-start">
             <v-col>
-              <p style="font-size: 30px" class="concertDate mt-3">
+              <p style="font-size: 20px" class="concertDate mt-3">
                 {{ order.datetime }}
               </p>
-              <p style="font-size: 20px">{{ order.hallName }}</p>
+              <p style="font-size: 15px">{{ order.hallName }}</p>
             </v-col>
           </v-row>
         </v-col>
@@ -136,6 +142,7 @@ export default {
   },
   mounted() {
     this.fetchOrderList(this.page);
+    this.category = "전체 조회";
   },
 };
 </script>
