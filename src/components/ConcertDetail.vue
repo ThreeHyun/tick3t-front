@@ -5,20 +5,6 @@
         <b>예매 시작 : {{ concert.startDate }} </b>
       </div>
       <v-img class="calendar" width="400px" :src="concert.calUrl" />
-      <div
-        class="textdate"
-        style="
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 60px;
-        ">
-          <div class="text2 mb-3">공연날짜</div>
-          <div class="text3">
-            <span class="pr-4">{{ concert.date }}</span>
-          </div>
-          <v-btn class="time" rounded="0" size="small">17:00</v-btn>
-        </div>
-
       <div class="text2 mb-3">공연 날짜</div>
       <div class="text3" style="margin-top: 20px; margin-bottom: 10px;">
         <span class="pr-5">
