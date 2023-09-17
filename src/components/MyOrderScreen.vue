@@ -133,6 +133,7 @@ export default {
       this.fetchOrderList(this.page, this.category, this.word);
     },
     handleSearch() {
+      this.page = 1;
       this.fetchOrderList(this.page, this.category, this.word);
     },
 
