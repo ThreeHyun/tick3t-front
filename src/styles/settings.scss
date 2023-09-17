@@ -59,10 +59,17 @@
   margin-top: 10px;
   margin-bottom: 40px;
 }
+.reserve2 {
+  font-family: SpoqaHanSansNeo-Medium;
+  font-size: large;
+  background-color: #ff5252;
+  color: white;
+  margin-top: 10px;
+}
 .text {
-  font-family: SpoqaHanSansNeo-Bold;
+  font-family: SpoqaHanSansNeo-Medium;
   margin-right: 20px;
-  font-size: 35px;
+  font-size: 30px;
 }
 .checkFandom {
   font-family: SpoqaHanSansNeo-Regular;
@@ -116,4 +123,18 @@
 }
 .v-toolbar__content {
   justify-content: space-between;
+}
+
+// ConcertDetail.vue
+.startTime {
+  background-color: #ff5252;
+  color: white;
+  padding: 5px;
+
+  font-size: large;
+  text-align: center;
+}
+.textdate {
+  font-family: SpoqaHanSansNeo-Medium;
+  font-size: x-large;
 }

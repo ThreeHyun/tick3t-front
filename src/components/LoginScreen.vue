@@ -7,14 +7,14 @@
       <div class="text-subtitle-1 text-medium-emphasis"></div>
 
       <v-text-field v-model="email" density="compact" prepend-inner-icon="mdi-email-outline" variant="outlined"
-        label="이메일" @keyup.enter="login()"></v-text-field>
+        label="이메일" @keyup.enter="sendLogin"></v-text-field>
 
       <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
         <a class="text-caption text-decoration-none text-blue" href="#" rel="noopener noreferrer" target="_blank"></a>
       </div>
 
       <v-text-field v-model="userPwd" :type="visible ? 'text' : 'password'" density="compact" label="비밀번호"
-        prepend-inner-icon="mdi-lock-outline" variant="outlined" required></v-text-field>
+        prepend-inner-icon="mdi-lock-outline" variant="outlined" @keyup.enter="sendLogin" required></v-text-field>
 
       <v-btn @click="sendLogin" block class="text-white mb-8" color="primary" size="large" variant="flat"
         :disabled="email && userPwd === ''">
@@ -28,7 +28,7 @@
         <a class="pr-3 pl-3">
           |
         </a>
-        <v-dialog v-model="dialog1" width="800">
+        <v-dialog v-model="dialog1" persistent width="800">
           <template v-slot:activator="{ props }">
             <a v-bind="props" style="cursor: pointer; color: black">
               비밀번호 재발급
@@ -135,22 +135,21 @@ export default {
         this.email,
         this.name,
         this.birth,
-        this.email = "",
-        this.name = "",
-        this.birth = "",
       );
-      this.dialog2 = true
+      setTimeout(() => {
+        this.dialog2 = true;
+      }, 1000);
     },
     cancel() {
-      this.findPwd(
-        this.email = "",
-        this.name = "",
-        this.birth = "",
-      );
+      this.email = "";
+      this.name = "";
+      this.birth = "";
       this.dialog1 = false
     },
     close() {
-      this.message = "";
+      this.email = "";
+      this.name = "";
+      this.birth = "";
       this.dialog1 = false;
       this.dialog2 = false;
     }
