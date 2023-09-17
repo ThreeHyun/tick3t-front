@@ -17,7 +17,7 @@
             <span class="pr-4">{{ concert.date }}</span>
           </div>
           <v-btn class="time" rounded="0" size="small">17:00</v-btn>
-        </div> -->
+        </div>
 
       <div class="text2 mb-3">공연 날짜</div>
       <div class="text3" style="margin-top: 20px; margin-bottom: 10px;">
