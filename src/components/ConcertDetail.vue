@@ -4,8 +4,9 @@
       <div class="startTime">
         <b>예매 시작 : {{ concert.startDate }} </b>
       </div>
-      <v-img class="calendar" width="400px" src="@/assets/calendar.png" />
-      <!-- <div class="textdate"
+      <v-img class="calendar" width="400px" :src="concert.calUrl" />
+      <div
+        class="textdate"
         style="
           display: flex;
           justify-content: space-between;
